@@ -13,6 +13,7 @@ const MainScreen = () => {
         backgroundColor: "#2176C9",
         position: "relative",
         zIndex: 0,
+        overflow: "hidden",
       }}
     >
       <Box

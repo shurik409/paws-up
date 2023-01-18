@@ -1,15 +1,29 @@
-import React, { useState } from "react";
-import { MainScreen } from "../../components";
+import React, { useState, useEffect } from "react";
+import { MainScreen, Place, About, Help } from "../../components";
 import { Box, Typography } from "@mui/material";
 
 const Main = () => {
   const [currentScreen, setCurrentScreen] = useState(0);
 
-  const screens = [MainScreen, MainScreen, MainScreen, MainScreen, MainScreen];
+  const screens = [MainScreen, Place, MainScreen, About, Help];
 
   const getCurrentScreen = () => {
     return React.createElement(screens[currentScreen]);
   };
+
+  const increaseScreen = () => {
+    console.log(currentScreen)
+    const newScreen = currentScreen !== 4 ? currentScreen + 1 : 0;
+    setCurrentScreen((prevScreen) => prevScreen !== 4 ? prevScreen + 1 : 0);
+    console.log(10, newScreen);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      increaseScreen();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -36,7 +50,7 @@ const Main = () => {
               borderRadius: "4px",
               background: "#EFEFEF",
               opacity: index === currentScreen ? 1 : 0.3,
-              cursor: 'pointer',
+              cursor: "pointer",
             }}
           ></Box>
         ))}
