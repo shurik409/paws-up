@@ -21,7 +21,7 @@ const Main = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       increaseScreen();
-    }, 1000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
