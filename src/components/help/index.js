@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
 import Noise from "../../img/noise.png";
 import HelpImage from "../../img/help.png";
 import Logo from "../../img/logo.svg";
@@ -131,7 +131,9 @@ const Help = () => {
         </Typography>
 
         <Box sx={{ marginTop: "64px" }}>
-          <img src={Logo} alt="logo"></img>
+          <Link href="https://www.instagram.com/hey.pawsup/" target="_blank">
+            <img src={Logo} alt="logo"></img>
+          </Link>
         </Box>
       </Box>
     </Box>

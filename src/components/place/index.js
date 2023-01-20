@@ -39,6 +39,11 @@ const Place = () => {
           flexDirection: "column",
           justifyContent: "center",
           minHeight: "100vh",
+          a: {
+            color: "#EFEFEF",
+            textDecoration: "none",
+            borderBottom: "2px solid #EFEFEF",
+          },
         }}
       >
         <Box sx={{ display: "flex", alignItems: "self-end" }}>
@@ -110,7 +115,15 @@ const Place = () => {
             lineHeight="100%"
             marginLeft="208px"
           >
-            Бар «Spin»
+            Бар «
+            <a
+              href="https://www.instagram.com/spinbarminsk/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Spin
+            </a>
+            »
           </Typography>
           <Typography
             fontFamily="Manrope"
@@ -147,7 +160,15 @@ const Place = () => {
           >
             Пожертвование для животных
             <br />
-            из приюта «Храброе сердце»
+            из приюта «
+            <a
+              href="https://www.instagram.com/brave_heart_minsk/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Храброе сердце
+            </a>
+            »
           </Typography>
         </Box>
       </Box>

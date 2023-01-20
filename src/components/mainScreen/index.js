@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Link } from "@mui/material";
 import Noise from "../../img/noise.png";
 import Logo from "../../img/logo.svg";
 import GirlWithDog from "../../img/girlWithDog.png";
@@ -64,7 +64,9 @@ const MainScreen = () => {
         </Typography>
       </Box>
       <Box sx={{ marginLeft: "87px", marginTop: "190px" }}>
-        <img src={Logo} alt="logo"></img>
+        <Link href="https://www.instagram.com/hey.pawsup/" target="_blank">
+          <img src={Logo} alt="logo"></img>
+        </Link>
       </Box>
       <Box
         sx={{
