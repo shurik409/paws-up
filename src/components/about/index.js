@@ -46,8 +46,8 @@ const About = () => {
           zIndex: -1,
         }}
       ></Box>
-      <Box>
-        <Box sx={{ marginLeft: "80px", marginTop: '100px' }}>
+      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+        <Box sx={{ marginLeft: "80px", marginTop: "100px", flexGrow: 1 }}>
           <Typography
             fontFamily="Manrope"
             fontWeight="700"
@@ -97,7 +97,7 @@ const About = () => {
               >
                 {item.text}
               </Typography>
-              <Box sx={{ position: "absolute", bottom: '-5px', zIndex: 0 }}>
+              <Box sx={{ position: "absolute", bottom: "-5px", zIndex: 0 }}>
                 <img src={item.img} alt="about" />
               </Box>
             </Box>

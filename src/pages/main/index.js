@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { MainScreen, Place, About, Help } from "../../components";
+import { MainScreen, Place, Food, About, Help } from "../../components";
 import { Box, Typography } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectFlip, Mousewheel } from "swiper";
+import "swiper/css";
+import "swiper/css/effect-flip";
 
 const Main = () => {
   const [currentScreen, setCurrentScreen] = useState(0);
 
-  const screens = [MainScreen, Place, MainScreen, About, Help];
+  const screens = [MainScreen, Place, Food, About, Help];
 
-  const getCurrentScreen = () => {
-    return React.createElement(screens[currentScreen]);
-  };
+  // const getCurrentScreen = () => {
+  //   return React.createElement(screens[currentScreen]);
+  // };
 
-  const increaseScreen = () => {
-    console.log(currentScreen)
-    const newScreen = currentScreen !== 4 ? currentScreen + 1 : 0;
-    setCurrentScreen((prevScreen) => prevScreen !== 4 ? prevScreen + 1 : 0);
-    console.log(10, newScreen);
-  };
+  // const increaseScreen = () => {
+  //   setCurrentScreen((prevScreen) => (prevScreen !== 4 ? prevScreen + 1 : 0));
+  // };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      increaseScreen();
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     increaseScreen();
+  //   }, 4000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -51,11 +52,29 @@ const Main = () => {
               background: "#EFEFEF",
               opacity: index === currentScreen ? 1 : 0.3,
               cursor: "pointer",
+              transition: 'opacity 0.4s ease-in-out',
             }}
           ></Box>
         ))}
       </Box>
-      <React.Fragment>{getCurrentScreen()}</React.Fragment>
+      <Swiper
+        grabCursor={false}
+        simulateTouch={false}
+        className="mySwiper"
+        slidesPerView={1}
+        mousewheel={true}
+        modules={[Mousewheel]}
+        draggable={false}
+        loop={true}
+        onSlideChange={({ activeIndex }) => setCurrentScreen(activeIndex - 1)}
+      >
+        {screens.map((Component, index) => (
+          <SwiperSlide>
+            <Component />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      {/* <React.Fragment>{getCurrentScreen()}</React.Fragment> */}
     </Box>
   );
 };
