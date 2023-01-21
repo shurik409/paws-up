@@ -22,7 +22,7 @@ const Main = () => {
     <Box sx={{ position: "relative" }}>
       <Box
         sx={{
-          display: "flex",
+          display: { xs: "none", lg: "flex" },
           gap: "40px",
           justifyContent: "center",
           position: "absolute",
@@ -86,24 +86,31 @@ const Main = () => {
           </Box>
         ))}
       </Box>
-      <Swiper
-        grabCursor={false}
-        simulateTouch={false}
-        className="mySwiper"
-        slidesPerView={1}
-        mousewheel={true}
-        modules={[Mousewheel]}
-        draggable={false}
-        loop={true}
-        onSlideChange={({ activeIndex }) => setCurrentScreen(activeIndex - 1)}
-        ref={swiperRef}
-      >
+      <Box sx={{ display: { xs: "none", lg: "block" } }}>
+        <Swiper
+          grabCursor={false}
+          simulateTouch={false}
+          className="mySwiper"
+          slidesPerView={1}
+          mousewheel={true}
+          modules={[Mousewheel]}
+          draggable={false}
+          loop={true}
+          onSlideChange={({ activeIndex }) => setCurrentScreen(activeIndex - 1)}
+          ref={swiperRef}
+        >
+          {screens.map(({ Component }, index) => (
+            <SwiperSlide>
+              <Component />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
+      <Box sx={{ display: { xs: "block", lg: "none" } }}>
         {screens.map(({ Component }, index) => (
-          <SwiperSlide>
-            <Component />
-          </SwiperSlide>
+          <Component />
         ))}
-      </Swiper>
+      </Box>
     </Box>
   );
 };

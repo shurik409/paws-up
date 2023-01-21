@@ -2,7 +2,8 @@ import React from "react";
 import { Box, Typography, Link } from "@mui/material";
 import Noise from "../../img/noise.png";
 import Logo from "../../img/logo.svg";
-import GirlWithDog from "../../img/girlWithDog.png";
+import GirlWithDog from "../../img/girlWithDog2.png";
+import GirlWithDogMobile from "../../img/girlWithDog_Mobile.png";
 
 const MainScreen = () => {
   return (
@@ -30,73 +31,113 @@ const MainScreen = () => {
           zIndex: -1,
         }}
       ></Box>
-      <Box sx={{ marginLeft: "80px", paddingTop: "110px" }}>
-        <Typography
-          fontFamily="Montserrat"
-          fontSize="32px"
-          lineHeight="110%"
-          marginLeft="16px"
-          marginBottom="16px"
-        >
-          БЛАГОТВОРИТЕЛЬНЫЙ
-        </Typography>
-        <Typography
-          fontFamily="Montserrat"
-          fontSize="320px"
-          lineHeight="74%"
-          letterSpacing="-0.05em"
-          marginBottom="16px"
-        >
-          КИНО
-          <br />
-          ВЕЧЕР
-        </Typography>
-        <Typography
-          fontFamily="Manrope"
-          fontWeight="600"
-          fontSize="40px"
-          lineHeight="100%"
-          marginLeft="16px"
-        >
-          Вход за пожертвование
-          <br />
-          для приюта «Храброе Сердце»
-        </Typography>
-      </Box>
-      <Box sx={{ marginLeft: "87px", marginTop: "190px" }}>
-        <Link href="https://www.instagram.com/hey.pawsup/" target="_blank">
-          <img src={Logo} alt="logo"></img>
-        </Link>
-      </Box>
       <Box
         sx={{
-          background: `url(${GirlWithDog})`,
-          width: 1138,
-          height: "100%",
-          position: "absolute",
-          right: 0,
-          top: 0,
+          display: "flex",
+          flexDirection: "column",
+          minHeight: { xs: "100vh", lg: "auto" },
         }}
       >
         <Box
           sx={{
-            position: "absolute",
-            top: "35%",
-            right: "170px",
-            padding: "12px 20px",
-            background: " #FA4701",
-            borderRadius: "0px 14px 14px 14px",
+            flexGrow: 1,
+            display: { xs: "block", lg: "flex" },
+            flexDirection: "column",
+            justifyContent: "space-between",
+            minHeight: { xs: "auto", lg: "100vh" },
           }}
         >
-          <Typography
-            fontFamily="Manrope"
-            fontWeight="500"
-            fontSize="24px"
-            lineHeight="120%"
+          <Box
+            sx={{
+              marginLeft: { xs: "12px", lg: "80px" },
+              paddingTop: { xs: "40px", lg: "110px" },
+              ".movie": {
+                fontSize: { xs: "80px", md: "160px", lg: "230px", xl: "320px" },
+              },
+              ".charity": {
+                marginLeft: { xs: "5px", md: "8px", lg: "16px" },
+                fontSize: { xs: "8px", md: "32px" },
+              },
+              ".entry": {
+                marginLeft: { xs: "5px", md: "8px", lg: "16px" },
+                fontSize: { xs: "14px", md: "40px" },
+              },
+            }}
           >
-            Ну пойдём на киновечер...
-          </Typography>
+            <Typography
+              fontFamily="Montserrat"
+              lineHeight="110%"
+              marginBottom="16px"
+              className="charity"
+            >
+              БЛАГОТВОРИТЕЛЬНЫЙ
+            </Typography>
+            <Typography
+              fontFamily="Montserrat"
+              lineHeight="74%"
+              letterSpacing="-0.05em"
+              marginBottom="16px"
+              className="movie"
+            >
+              КИНО
+              <br />
+              ВЕЧЕР
+            </Typography>
+            <Typography
+              fontFamily="Manrope"
+              fontWeight="600"
+              lineHeight="100%"
+              className="entry"
+            >
+              Вход за пожертвование
+              <br />
+              для приюта «Храброе Сердце»
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              marginLeft: { xs: "12px", lg: "87px" },
+              marginTop: { xs: "12px", lg: "0" },
+              "& img": {
+                width: { xs: "28px", lg: "auto" },
+              },
+              // marginBottom: { xs: "0", lg: "80px" },
+            }}
+          >
+            <Link href="https://www.instagram.com/hey.pawsup/" target="_blank">
+              <img src={Logo} alt="logo"></img>
+            </Link>
+          </Box>
         </Box>
+        <Box
+          sx={{
+            display: { xs: "flex", lg: "none" },
+            justifyContent: "end",
+            opacity: 0.45,
+            "& img": {
+              height: "100%",
+            },
+            zIndex: -1,
+          }}
+        >
+          <img src={GirlWithDogMobile} alt="girl with dog" />
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          position: "absolute",
+          display: { xs: "none", lg: "block" },
+          right: 0,
+          bottom: "-5px",
+          width: "50%",
+          "& img": {
+            height: "100%",
+          },
+          opacity: 0.45,
+          zIndex: -1,
+        }}
+      >
+        <img src={GirlWithDog} alt="girl with dog" />
       </Box>
     </Box>
   );

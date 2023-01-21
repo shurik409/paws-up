@@ -46,13 +46,33 @@ const About = () => {
           zIndex: -1,
         }}
       ></Box>
-      <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-        <Box sx={{ marginLeft: "80px", marginTop: "100px", flexGrow: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: { lg: "100vh" },
+        }}
+      >
+        <Box
+          sx={{
+            marginLeft: { xs: "16px", lg: "80px" },
+            marginTop: { xs: "40px", lg: "100px" },
+            flexGrow: { lg: 1 },
+            ".headline": {
+              fontSize: { xs: "24px", lg: "32px", bg: "80px" },
+            },
+            ".description": {
+              fontSize: { xs: "14px", lg: "32px", bg: "40px" },
+              marginTop: { xs: "24px", lg: "40px" },
+            },
+          }}
+        >
           <Typography
             fontFamily="Manrope"
             fontWeight="700"
             fontSize="80px"
             lineHeight="120%"
+            className="headline"
           >
             О нас
           </Typography>
@@ -63,41 +83,72 @@ const About = () => {
             lineHeight="120%"
             maxWidth="1500px"
             letterSpacing="0"
-            marginTop="40px"
+            className="description"
           >
             Мы хотим сделать 2023 год чуточку добрее и поэтому создали проект
             для помощи бездомным животным «Paws Up!». В нём мы попытаемся
             рассказать:
           </Typography>
         </Box>
-        <Box sx={{ display: "flex", gap: "24px", justifyContent: "center" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "row", lg: "row" },
+            gap: { xs: "12px", lg: "24px" },
+            justifyContent: "center",
+            marginTop: "20px",
+            paddingX: { xs: "16px", lg: "0" },
+            marginBottom: { xs: "77px", lg: 0 },
+            flexWrap: { xs: "wrap", lg: "nowrap" },
+          }}
+        >
           {aboutText.map((item, index) => (
             <Box
               sx={{
-                width: "calc((100% - 160px - 48px) / 3)",
-                height: 670,
-                border: "3px solid rgba(239, 239, 239, 0.45)",
-                borderRadius: "16px  16px 0 0",
+                width: { xs: "288px", lg: "calc((100% - 160px - 48px) / 3)" },
+                height: { xs: 285, lg: 670 },
+                border: {
+                  xs: "1px solid rgba(239, 239, 239, 0.45)",
+                  lg: "3px solid rgba(239, 239, 239, 0.45)",
+                },
+                borderRadius: { xs: "16px", lg: "16px  16px 0 0" },
                 background: "#FF7E4B",
                 overflow: "hidden",
                 position: "relative",
-                borderBottom: "none",
+                borderBottom: { lg: "none" },
+                ".text": {
+                  fontWeight: { xs: 500, bg: 700 },
+                  marginTop: { xs: "24px", lg: "56px" },
+                  fontSize: { xs: "16px", lg: "24px", bg: "32px" },
+                  paddingX: { lg: "20px", bg: "40px" },
+                  maxWidth: { xs: 246, lg: "unset" },
+                },
               }}
             >
               <Typography
                 fontFamily="Manrope"
                 fontWeight="700"
-                fontSize="32px"
                 lineHeight="120%"
-                maxWidth="491px"
                 letterSpacing="0"
                 marginTop="56px"
                 marginX="auto"
                 style={{ position: "relative", zIndex: 1 }}
+                className="text"
               >
                 {item.text}
               </Typography>
-              <Box sx={{ position: "absolute", bottom: "-5px", zIndex: 0 }}>
+              <Box
+                sx={{
+                  position: "absolute",
+                  right: "0",
+                  top: { xs: 0, lg: "unset" },
+                  bottom: { lg: "-150px", bg: "-5px" },
+                  zIndex: 0,
+                  img: {
+                    width: { xs: "100%", lg: "auto" },
+                  },
+                }}
+              >
                 <img src={item.img} alt="about" />
               </Box>
             </Box>
