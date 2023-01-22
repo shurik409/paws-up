@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { MainScreen, Place, Food, About, Help } from "../../components";
 import { Box, Typography } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,14 +9,25 @@ import "swiper/css/effect-flip";
 const Main = () => {
   const [currentScreen, setCurrentScreen] = useState(0);
   const swiperRef = useRef(null);
-
+  const helpRef = useRef(null);
+  console.log(helpRef);
   const screens = [
-    { Component: MainScreen, name: "Киновечер" },
-    { Component: Place, name: "Место" },
-    { Component: Food, name: "Что нужно?" },
-    { Component: About, name: "О нас" },
-    { Component: Help, name: "Помощь" },
+    { Component: MainScreen, name: "Киновечер", id: "main" },
+    { Component: Place, name: "Место", id: "place" },
+    { Component: Food, name: "Что нужно?", id: "food" },
+    { Component: About, name: "О нас", id: "about" },
+    { Component: Help, name: "Помощь", id: "help" },
   ];
+
+  useEffect(() => {
+    let hash = window.location.hash;
+    if (hash === "#help") {
+      setCurrentScreen(4);
+      swiperRef.current.swiper.slideTo(5);
+      const section = document.querySelector("#help");
+      section.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }
+  }, []);
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -107,8 +118,10 @@ const Main = () => {
         </Swiper>
       </Box>
       <Box sx={{ display: { xs: "block", lg: "none" } }}>
-        {screens.map(({ Component }, index) => (
-          <Component />
+        {screens.map(({ Component, id }, index) => (
+          <Box id={id}>
+            <Component />
+          </Box>
         ))}
       </Box>
     </Box>
