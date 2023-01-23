@@ -233,7 +233,7 @@ const Food = () => {
                     display: "flex",
                     marginLeft: activeFood === item.name ? "24px" : "0px",
                     gap: "24px",
-                    maxWidth: activeFood === item.name ? "510px" : "0px",
+                    maxWidth: activeFood === item.name ? "700px" : "0px",
                     maxHeight: "48px",
                     transition: "all 0.4s ease-in-out",
                     overflow: "hidden",
