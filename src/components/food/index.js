@@ -118,7 +118,7 @@ const Food = () => {
           marginLeft: { xs: "16px", lg: "80px" },
           display: "flex",
           flexWrap: "wrap",
-          gap: "20px",
+          gap: { xs: "8px", lg: "20px" },
           maxWidth: { lg: "auto", bg: "70%" },
         }}
       >
@@ -166,7 +166,8 @@ const Food = () => {
       <Box
         sx={{
           marginTop: { xs: "8px", lg: "20px" },
-          marginLeft: { xs: "16px", lg: "80px" },
+          marginLeft: { xs: "0", lg: "80px" },
+          paddingX: { xs: "16px", lg: 0 },
         }}
       >
         {foodWithDescription.map((item, index) => (
