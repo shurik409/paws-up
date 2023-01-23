@@ -6,7 +6,7 @@ import FoodImgMobile from "../../img/food_mobile.png";
 import Star from "../../img/star.svg";
 
 const Food = () => {
-  const [activeFood, setActiveFood] = useState("Консервы для собак");
+  const [activeFood, setActiveFood] = useState("");
   const foodsWithoutDescription = [
     {
       name: "Масло подсолнечное",
@@ -62,6 +62,7 @@ const Food = () => {
         position: "relative",
         zIndex: 0,
         overflow: "hidden",
+        paddingBottom: { xs: "60px", lg: 0 },
       }}
     >
       <Box
@@ -144,12 +145,12 @@ const Food = () => {
               marginLeft: { xs: index % 2 ? "auto" : "unset", lg: "0" },
               marginRight: { xs: index % 2 ? "16px" : "auto", lg: "0" },
             }}
-            onClick={() => setActiveFood(item.name)}
-            onMouseOver={(e) => {
-              e.preventDefault();
-              e.target.id !== "btn_line" && setActiveFood(item.name);
-            }}
-            onMouseLeave={() => setActiveFood("")}
+            // onClick={() => setActiveFood(item.name)}
+            // onMouseOver={(e) => {
+            //   e.preventDefault();
+            //   e.target.id !== "btn_line" && setActiveFood(item.name);
+            // }}
+            // onMouseLeave={() => setActiveFood("")}
           >
             <Typography
               fontFamily="Manrope"

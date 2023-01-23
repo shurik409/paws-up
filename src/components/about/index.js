@@ -26,7 +26,7 @@ const About = () => {
       sx={{
         width: "100%",
         minHeight: "100vh",
-        backgroundColor: "#FA4701",
+        backgroundColor: "#2176C9",
         position: "relative",
         zIndex: 0,
         overflow: "hidden",
@@ -112,7 +112,7 @@ const About = () => {
                   lg: "3px solid rgba(239, 239, 239, 0.45)",
                 },
                 borderRadius: { xs: "16px", lg: "16px  16px 0 0" },
-                background: "#FF7E4B",
+                background: "#2176C9",
                 overflow: "hidden",
                 position: "relative",
                 borderBottom: { lg: "none" },

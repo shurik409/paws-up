@@ -9,21 +9,19 @@ import "swiper/css/effect-flip";
 const Main = () => {
   const [currentScreen, setCurrentScreen] = useState(0);
   const swiperRef = useRef(null);
-  const helpRef = useRef(null);
-  console.log(helpRef);
   const screens = [
+    { Component: About, name: "О нас", id: "about" },
+    { Component: Help, name: "Помощь", id: "help" },
     { Component: MainScreen, name: "Киновечер", id: "main" },
     { Component: Place, name: "Место", id: "place" },
     { Component: Food, name: "Что нужно?", id: "food" },
-    { Component: About, name: "О нас", id: "about" },
-    { Component: Help, name: "Помощь", id: "help" },
   ];
 
   useEffect(() => {
     let hash = window.location.hash;
     if (hash === "#help") {
-      setCurrentScreen(4);
-      swiperRef.current.swiper.slideTo(5);
+      setCurrentScreen(1);
+      swiperRef.current.swiper.slideTo(2);
       const section = document.querySelector("#help");
       section.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
     }

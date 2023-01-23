@@ -11,7 +11,7 @@ const Help = () => {
       sx={{
         width: "100%",
         minHeight: "100vh",
-        backgroundColor: "#2176C9",
+        backgroundColor: "#FA4701",
         position: "relative",
         zIndex: 0,
         overflow: "hidden",
@@ -99,7 +99,7 @@ const Help = () => {
         <Box
           sx={{
             position: "relative",
-            backgroundColor: "#0F5190",
+            backgroundColor: "#F6822E",
             padding: { xs: "12px 24px", lg: "20px 40px" },
             borderRadius: { xs: "8px", lg: "20px" },
             marginTop: "32px",
