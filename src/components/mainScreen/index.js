@@ -121,6 +121,7 @@ const MainScreen = () => {
                   ":hover": {
                     background: "#FA4701",
                   },
+                  marginBottom: "15px",
                 }}
               >
                 <Typography

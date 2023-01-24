@@ -103,6 +103,7 @@ const Main = () => {
       </Box>
       <Box sx={{ display: { xs: "none", lg: "block" } }}>
         <Swiper
+          autoHeight={true}
           grabCursor={false}
           simulateTouch={false}
           className="mySwiper"
