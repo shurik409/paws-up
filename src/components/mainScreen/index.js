@@ -111,7 +111,7 @@ const MainScreen = () => {
                   alignItems: "center",
                   background: "#0F5190",
                   marginTop: { xs: "12px", lg: "30px" },
-                  marginLeft: { lg: "16px" },
+                  marginLeft: { xs: "5px", lg: "16px" },
                   borderRadius: { xs: "4px", lg: "12px" },
                   cursor: "pointer",
                   transition: "all 0.2s ease-in-out",
@@ -136,7 +136,7 @@ const MainScreen = () => {
           </Box>
           <Box
             sx={{
-              marginLeft: { xs: "12px", lg: "87px" },
+              marginLeft: { xs: "17px", lg: "87px" },
               marginTop: { xs: "12px", lg: "0" },
               "& img": {
                 width: { xs: "28px", lg: "auto" },
