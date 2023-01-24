@@ -93,6 +93,41 @@ const MainScreen = () => {
               <br />
               для приюта «Храброе Сердце»
             </Typography>
+            <Link href="https://forms.gle/kE7psUqEpJJqSjHK8" target="_blank" underline="none">
+              <Box
+                sx={{
+                  width: {
+                    xs: "134px",
+                    lg: "335px",
+                  },
+                  color: "#EFEFEF",
+                  height: { xs: "35px", lg: "88px" },
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  background: "#0F5190",
+                  marginTop: { xs: "12px", lg: "30px" },
+                  marginLeft: { lg: "16px" },
+                  borderRadius: "12px",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease-in-out",
+                  "& p": {
+                    fontSize: { xs: "16px", lg: "40px" },
+                  },
+                  ":hover": {
+                    background: "#FA4701",
+                  },
+                }}
+              >
+                <Typography
+                  fontFamily="Manrope"
+                  fontWeight="600"
+                  lineHeight="120%"
+                >
+                  Регистрация
+                </Typography>
+              </Box>
+            </Link>
           </Box>
           <Box
             sx={{
