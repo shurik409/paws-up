@@ -93,7 +93,11 @@ const MainScreen = () => {
               <br />
               для приюта «Храброе Сердце»
             </Typography>
-            <Link href="https://forms.gle/kE7psUqEpJJqSjHK8" target="_blank" underline="none">
+            <Link
+              href="https://forms.gle/kE7psUqEpJJqSjHK8"
+              target="_blank"
+              underline="none"
+            >
               <Box
                 sx={{
                   width: {
@@ -108,7 +112,7 @@ const MainScreen = () => {
                   background: "#0F5190",
                   marginTop: { xs: "12px", lg: "30px" },
                   marginLeft: { lg: "16px" },
-                  borderRadius: "12px",
+                  borderRadius: { xs: "4px", lg: "12px" },
                   cursor: "pointer",
                   transition: "all 0.2s ease-in-out",
                   "& p": {
