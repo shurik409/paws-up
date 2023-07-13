@@ -17,7 +17,7 @@ const Main = () => {
   const [maxValue, setMaxValue] = useState(0);
 
   const getMaxValue = async () => {
-    const response = await fetch("http://localhost:3001/api/maxvalue/1");
+    const response = await fetch("/api/maxvalue/1");
     const value = await response.json();
     console.log(value);
     if (value) {
@@ -74,7 +74,7 @@ const Main = () => {
       return;
     }
 
-    const request = new Request(`http://localhost:3001/api/auction`, {
+    const request = new Request(`/api/auction`, {
       method: "POST",
       headers: {
         Accept: "application/*",
