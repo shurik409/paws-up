@@ -1,133 +1,280 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MainScreen, Place, Food, About, Help } from "../../components";
-import { Box, Typography } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel } from "swiper";
+import { Box, Typography, TextField, InputAdornment } from "@mui/material";
+import InputMask from "react-input-mask";
+
 import "swiper/css";
 import "swiper/css/effect-flip";
+import Noise from "../../img/noise.png";
+import Lu from "../../img/lots/1.png";
 
 const Main = () => {
-  const [currentScreen, setCurrentScreen] = useState(0);
-  const swiperRef = useRef(null);
-  const screens = [
-    { Component: About, name: "О нас", id: "about" },
-    { Component: Help, name: "Помощь", id: "help" },
-    { Component: MainScreen, name: "Киновечер", id: "movie" },
-    { Component: Place, name: "Место", id: "place" },
-    { Component: Food, name: "Что нужно?", id: "food" },
-  ];
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [money, setMoney] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [moneyError, setMoneyError] = useState("");
+  const [maxValue, setMaxValue] = useState(0);
+
+  const getMaxValue = async () => {
+    const response = await fetch("http://localhost:3001/api/maxvalue/1");
+    const value = await response.json();
+    console.log(value);
+    if (value) {
+      setMaxValue(value.max);
+    }
+  };
 
   useEffect(() => {
-    let hash = window.location.hash;
-    if (hash === "#help") {
-      setCurrentScreen(1);
-      swiperRef.current.swiper.slideTo(2);
-      const section = document.querySelector("#help");
-      section.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-    }
-    if (hash === "#movie") {
-      setCurrentScreen(2);
-      swiperRef.current.swiper.slideTo(3);
-      const section = document.querySelector("#movie");
-      section.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-    }
+    getMaxValue();
   }, []);
+
+  const handleNameChange = (event) => {
+    const val = event.target.value;
+    const nameRegular =
+      /^[a-zA-Zа-яА-ЯёЁ]+([a-zA-Zа-яА-ЯёЁ\s'-]*[a-zA-Zа-яА-ЯёЁ])?$/;
+
+    if (val.match(nameRegular)) {
+      setNameError("");
+      setName(val);
+      return event.preventDefault();
+    }
+
+    setName(val);
+    setNameError("Некоректное имя");
+  };
+
+  const handleMoneyChange = (event) => {
+    const val = event.target.value;
+
+    if (val.match(/[^0-9]/)) {
+      return event.preventDefault();
+    }
+
+    setMoney(val);
+  };
+
+  const handleSubmit = async () => {
+    const nameRegexp =
+      /^[a-zA-Zа-яА-ЯёЁ]+([a-zA-Zа-яА-ЯёЁ\s'-]*[a-zA-Zа-яА-ЯёЁ])?$/;
+    const phoneRegexp = /^\+375\(\d{2}\)\d{3}-\d{2}-\d{2}$/;
+    const moneyRegexp = /^[1-9]\d*$/;
+    console.log(nameRegexp.test(name));
+    console.log(name);
+    if (!nameRegexp.test(name)) {
+      setNameError("Некоректное имя");
+      return;
+    }
+    if (!phoneRegexp.test(phone)) {
+      setPhoneError("Некоректный телефон");
+      return;
+    }
+    if (!moneyRegexp.test(money)) {
+      setMoneyError("Некоректная сумма");
+      return;
+    }
+
+    const request = new Request(`http://localhost:3001/api/auction`, {
+      method: "POST",
+      headers: {
+        Accept: "application/*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        money: +money,
+      }),
+    });
+    const response = await fetch(request);
+    if (!response.ok) {
+      const { errors } = await response.json();
+      console.log(errors);
+    }
+    getMaxValue();
+  };
 
   return (
     <Box sx={{ position: "relative" }}>
       <Box
         sx={{
-          display: { xs: "none", lg: "flex" },
-          gap: "40px",
-          justifyContent: "center",
-          position: "absolute",
-          top: "40px",
-          left: 0,
           width: "100%",
-          height: "8px",
-          zIndex: 100,
-          transition: "all 0.2s ease-in-out",
-          ".menu-name": {
-            transition: "all 0.2s ease-in-out",
-            maxHeight: "0",
-            overflow: "hidden",
-          },
-          ":hover": {
-            height: "40px",
-            ".menu": {
-              height: "40px",
-            },
-            ".menu-name": {
-              maxHeight: "25px",
-            },
-          },
+          minHeight: "100vh",
+          backgroundColor: "#2176C9",
+          position: "relative",
+          zIndex: 0,
         }}
       >
-        {screens.map(({ name }, index) => (
+        <Box
+          sx={{
+            background: `url(${Noise})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            mixBlendMode: "hard-light",
+            opacity: 0.16,
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: 0,
+            zIndex: -1,
+          }}
+        ></Box>
+        <Box
+          sx={{
+            paddingTop: { xs: "30px", md: "70px", lg: "140px" },
+            paddingLeft: { lg: "80px" },
+            display: "flex",
+            flexDirection: { lg: "row", xs: "column" },
+            alignItems: { xs: "center", lg: "normal" },
+            paddingBottom: "70px",
+          }}
+        >
           <Box
-            className="menu"
             sx={{
-              transition: "all 0.2s ease-in-out, opacity 0.4s ease-in-out",
-              width: `calc((100% - 160px - ${40 * (screens.length - 1)}px) / ${
-                screens.length
-              })`,
-              height: "8px",
-              borderRadius: "4px",
-              background: "#EFEFEF",
-              opacity: index === currentScreen ? 1 : 0.3,
-              cursor: "pointer",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              ":hover": {
-                opacity: 1,
-              },
+              width: { xs: 220, md: 400, xl: 540 },
+              height: { xs: 300, md: 540, xl: 710 },
+              background: `url(${Lu})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
             }}
-            onClick={() => {
-              setCurrentScreen(index);
-              swiperRef.current.swiper.slideTo(index + 1);
+          ></Box>
+          <Box
+            sx={{
+              textAlign: { xs: "center", lg: "left" },
+              paddingLeft: { lg: "100px" },
+              ".name": {
+                fontSize: { xs: "40px", md: "80px" },
+              },
+              ".money": {
+                fontSize: { xs: "20px", md: "30px", bg: "40px" },
+              },
+              "& label.Mui-focused": {
+                color: "#FA4701",
+              },
+              ".MuiInputBase-root": {
+                backgroundColor: "#FFF",
+                ":hover": {
+                  backgroundColor: "#FFF",
+                },
+                ":focus": {
+                  backgroundColor: "#FFF",
+                },
+                "MuiFilledInput-root": {
+                  "&:hover": {
+                    backgroundColor: "#FFF",
+                  },
+                },
+              },
+              "& .MuiFilledInput-root": {
+                backgroundColor: "#FFF",
+                // borderRadius: "20px 20px 0 0",
+                color: "#727272",
+                fontFamily: "Manrope",
+                "& fieldset": {
+                  borderColor: "#FFF",
+                },
+                "&:hover fieldset": {
+                  borderColor: "#FFF",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#FFF",
+                  backgroundColor: "#FFF",
+                },
+                "&.Mui-focused": {
+                  borderColor: "#FFF",
+                  backgroundColor: "#FFF",
+                },
+              },
             }}
           >
             <Typography
               fontFamily="Manrope"
-              fontWeight="500"
-              fontSize="20px"
-              lineHeight="120%"
-              color="rgba(7, 20, 33, 0.7);"
-              className="menu-name"
+              lineHeight="110%"
+              marginBottom="20px"
+              fontWeight={700}
+              className="name"
             >
-              {name}
+              «Лу»
             </Typography>
+            <Typography
+              fontFamily="Manrope"
+              lineHeight="110%"
+              marginBottom="40px"
+              fontWeight={700}
+              className="money"
+            >
+              Текущая ставка: {maxValue}BYN
+            </Typography>
+            <Box>
+              <Box>
+                <TextField
+                  sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                  id="name"
+                  label={nameError || "Ваше имя"}
+                  variant="filled"
+                  onChange={handleNameChange}
+                  error={nameError ? true : false}
+                />
+              </Box>
+              <Box>
+                <InputMask
+                  mask="+375(99)999-99-99"
+                  disabled={false}
+                  maskChar=" "
+                  onChange={(e) => setPhone(e.target.value)}
+                >
+                  <TextField
+                    sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                    id="phone"
+                    label={phoneError || "Ваш телефон"}
+                    variant="filled"
+                    type="phone"
+                    error={phoneError ? true : false}
+                  />
+                </InputMask>
+              </Box>
+              <Box>
+                <TextField
+                  sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                  id="money"
+                  label={moneyError || "Ваша ставка"}
+                  variant="filled"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">BYN</InputAdornment>
+                    ),
+                    inputMode: "numeric",
+                  }}
+                  value={money}
+                  onChange={handleMoneyChange}
+                  error={moneyError ? true : false}
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                padding: "24px 48px",
+                alignItems: "flex-start",
+                width: "fit-content",
+                gap: "10px",
+                borderRadius: "20px",
+                background: "#0F5190",
+                transition: "all 0.3s ease-in-out",
+                cursor: "pointer",
+                fontFamily: "Manrope",
+                margin: { xs: "auto", lg: "none" },
+                fontWeight: 700,
+                ":hover": {
+                  background: "#fff",
+                  color: "#0F5190",
+                },
+              }}
+              onClick={handleSubmit}
+            >
+              Сделать ставку
+            </Box>
           </Box>
-        ))}
-      </Box>
-      <Box sx={{ display: { xs: "none", lg: "block" } }}>
-        <Swiper
-          autoHeight={true}
-          grabCursor={false}
-          simulateTouch={false}
-          className="mySwiper"
-          slidesPerView={1}
-          mousewheel={true}
-          modules={[Mousewheel]}
-          draggable={false}
-          loop={true}
-          onSlideChange={({ activeIndex }) => setCurrentScreen(activeIndex - 1)}
-          ref={swiperRef}
-        >
-          {screens.map(({ Component }, index) => (
-            <SwiperSlide>
-              <Component />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Box>
-      <Box sx={{ display: { xs: "block", lg: "none" } }}>
-        {screens.map(({ Component, id }, index) => (
-          <Box id={id}>
-            <Component />
-          </Box>
-        ))}
+        </Box>
       </Box>
     </Box>
   );
