@@ -9,13 +9,13 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri =
   "mongodb+srv://shurik409:hTnzJd74uT8cQaRy@pawsupcluster.omeirb9.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    },
-  });
-  
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -40,32 +40,33 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + "/index.html");
 });
 
-client.connect()
-  .catch(err => console.error(err.stack))
-  .then(db => {
+client
+  .connect()
+  .catch((err) => console.error(err.stack))
+  .then((db) => {
     app.locals.db = db;
     app.listen(PORT, () => console.log("server is running on " + PORT));
   });
 
 app.get("/api/maxvalue/:id", async function (request, response) {
-    const users = await mongodb.getUsers(request, request.params.id);
-    console.log(users);
-    if(users.length){
-        const max = users.reduce(function(prev, current) {
-            return (prev.money > current.money) ? prev : current
-        })
-        response.status(200).json({ max: max.money });
-    } else {
-        response.status(200).json({ max: 0 });
-    }
-  })
+  const users = await mongodb.getUsers(request, request.params.id);
+  console.log(users);
+  if (users.length) {
+    const max = users.reduce(function (prev, current) {
+      return prev.money > current.money ? prev : current;
+    });
+    response.status(200).json({ max: max.money });
+  } else {
+    response.status(200).json({ max: 0 });
+  }
+});
 
 app.post("/api/auction", async function (request, response) {
   if (!request.body) {
     response.status(400).json({ message: "error" });
   } else {
     console.log(request.body);
-    await mongodb.addUser(request, request.body)
+    await mongodb.addUser(request, request.body);
     response.status(200).json({ message: "success" });
   }
 });

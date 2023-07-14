@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography, TextField, InputAdornment } from "@mui/material";
 import InputMask from "react-input-mask";
+
+import { useParams } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-flip";
@@ -16,8 +18,10 @@ const Main = () => {
   const [moneyError, setMoneyError] = useState("");
   const [maxValue, setMaxValue] = useState(0);
 
+  let { id } = useParams();
+
   const getMaxValue = async () => {
-    const response = await fetch("/api/maxvalue/1");
+    const response = await fetch(`/api/maxvalue/${id}`);
     const value = await response.json();
     console.log(value);
     if (value) {
@@ -84,6 +88,7 @@ const Main = () => {
         name,
         phone,
         money: +money,
+        paint: +id,
       }),
     });
     const response = await fetch(request);

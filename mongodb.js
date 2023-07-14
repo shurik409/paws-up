@@ -1,4 +1,3 @@
-
 async function addUser(req, user) {
   try {
     // Connect the client to the server	(optional starting in v4.7)
@@ -11,7 +10,7 @@ async function addUser(req, user) {
     await client
       .db("PawsUpAuction")
       .collection("Auction")
-      .replaceOne({ paint: 1 }, paint);
+      .replaceOne({ paint: user.id }, paint);
   } catch (err) {
     console.log(err);
   }
