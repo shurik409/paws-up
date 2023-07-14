@@ -42,7 +42,15 @@ app.get("/", function (request, response) {
 
 app.get("/auction/lot/:id", function (request, response) {
   const ids = ["1", "2", "3", "4", "5"];
-  console.log(request.params.id, ids.includes(request.params.id));
+  if (ids.includes(request.params.id)) {
+    response.sendFile(path.join(__dirname + "/build/index.html"));
+    return;
+  }
+  response.sendStatus(404);
+});
+
+app.get("/auction/results/:id", function (request, response) {
+  const ids = ["1", "2", "3", "4", "5"];
   if (ids.includes(request.params.id)) {
     response.sendFile(path.join(__dirname + "/build/index.html"));
     return;
@@ -70,11 +78,16 @@ app.get("/api/maxvalue/:id", async function (request, response) {
   }
 });
 
+app.get("/api/info/:id", async function (request, response) {
+  const results = await mongodb.getUsers(request, request.params.id);
+
+  response.status(200).json(results);
+});
+
 app.post("/api/auction", async function (request, response) {
   if (!request.body) {
     response.status(400).json({ message: "error" });
   } else {
-    console.log(request.body);
     await mongodb.addUser(request, request.body);
     response.status(200).json({ message: "success" });
   }

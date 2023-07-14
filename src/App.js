@@ -1,14 +1,9 @@
 import React from "react";
 import "./App.css";
 import { Box } from "@mui/material";
-import { Main } from "./pages";
+import { Main, Admin } from "./pages";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const theme = createTheme({
   breakpoints: {
@@ -31,6 +26,7 @@ function App() {
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
             <Route path="/auction/lot/:id" element={<Main />} />
+            <Route path="/auction/results/:id" element={<Admin />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

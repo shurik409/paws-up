@@ -2,13 +2,11 @@ async function addUser(req, user) {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     const client = req.app.locals.db;
-    console.log(user.paint);
     let paint = await client
       .db("PawsUpAuction")
       .collection("Auction")
       .findOne({ paint: user.paint });
     paint.users.push(user);
-    console.log(paint);
     await client
       .db("PawsUpAuction")
       .collection("Auction")
@@ -32,4 +30,15 @@ async function getUsers(req, paintNumber) {
   }
 }
 
-module.exports = { addUser, getUsers };
+async function getAll(req) {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    const client = req.app.locals.db;
+    let data = await client.db("PawsUpAuction").collection("Auction").find({}).toArray();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+module.exports = { addUser, getUsers, getAll };

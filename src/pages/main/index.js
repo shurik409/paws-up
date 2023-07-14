@@ -107,8 +107,6 @@ const Main = () => {
       /^[a-zA-Zа-яА-ЯёЁ]+([a-zA-Zа-яА-ЯёЁ\s'-]*[a-zA-Zа-яА-ЯёЁ])?$/;
     const phoneRegexp = /^\+375\(\d{2}\)\d{3}-\d{2}-\d{2}$/;
     const moneyRegexp = /^[1-9]\d*$/;
-    console.log(nameRegexp.test(name));
-    console.log(name);
     if (!nameRegexp.test(name)) {
       setNameError("Некоректное имя");
       return;
