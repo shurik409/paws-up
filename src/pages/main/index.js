@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Box, Typography, TextField, InputAdornment } from "@mui/material";
 import InputMask from "react-input-mask";
 
@@ -8,6 +8,42 @@ import "swiper/css";
 import "swiper/css/effect-flip";
 import Noise from "../../img/noise.png";
 import Lu from "../../img/lots/1.png";
+import Chacha from "../../img/lots/2.png";
+import Rio from "../../img/lots/3.png";
+import Kio from "../../img/lots/4.png";
+import Top from "../../img/lots/5.png";
+
+const info = [
+  {
+    id: 1,
+    name: "Лу",
+    img: Lu,
+  },
+  {
+    id: 2,
+    name: "Чача",
+    img: Chacha,
+  },
+  {
+    id: 3,
+    name: "Рио",
+    img: Rio,
+  },
+  {
+    id: 4,
+    name: "Кио",
+    img: Kio,
+  },
+  {
+    id: 5,
+    name: "Топ",
+    img: Top,
+  },
+];
+
+const getInfoById = (id) => {
+  return info.find((item) => item.id === +id);
+};
 
 const Main = () => {
   const [name, setName] = useState("");
@@ -20,10 +56,11 @@ const Main = () => {
 
   let { id } = useParams();
 
+  const data = getInfoById(id);
+
   const getMaxValue = async () => {
     const response = await fetch(`/api/maxvalue/${id}`);
     const value = await response.json();
-    console.log(value);
     if (value) {
       setMaxValue(value.max);
     }
@@ -32,6 +69,13 @@ const Main = () => {
   useEffect(() => {
     getMaxValue();
   }, []);
+
+  const cleanForm = () => {
+    setName("");
+    setPhone("");
+    setMoney("");
+    // nameRef.current.target.value = "";
+  };
 
   const handleNameChange = (event) => {
     const val = event.target.value;
@@ -78,6 +122,11 @@ const Main = () => {
       return;
     }
 
+    if (+money < maxValue) {
+      setMoneyError("Сумма должна быть больше текущей ставки");
+      return;
+    }
+
     const request = new Request(`/api/auction`, {
       method: "POST",
       headers: {
@@ -96,6 +145,7 @@ const Main = () => {
       const { errors } = await response.json();
       console.log(errors);
     }
+    cleanForm();
     getMaxValue();
   };
 
@@ -138,7 +188,7 @@ const Main = () => {
             sx={{
               width: { xs: 220, md: 400, xl: 540 },
               height: { xs: 300, md: 540, xl: 710 },
-              background: `url(${Lu})`,
+              background: `url(${data.img})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "contain",
             }}
@@ -199,7 +249,7 @@ const Main = () => {
               fontWeight={700}
               className="name"
             >
-              «Лу»
+              {`«${data.name}»`}
             </Typography>
             <Typography
               fontFamily="Manrope"
@@ -219,6 +269,7 @@ const Main = () => {
                   variant="filled"
                   onChange={handleNameChange}
                   error={nameError ? true : false}
+                  value={name}
                 />
               </Box>
               <Box>
@@ -227,6 +278,7 @@ const Main = () => {
                   disabled={false}
                   maskChar=" "
                   onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
                 >
                   <TextField
                     sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
@@ -235,6 +287,7 @@ const Main = () => {
                     variant="filled"
                     type="phone"
                     error={phoneError ? true : false}
+                    value={phone}
                   />
                 </InputMask>
               </Box>
@@ -279,6 +332,34 @@ const Main = () => {
               Сделать ставку
             </Box>
           </Box>
+        </Box>
+        <Box
+          sx={{
+            marginLeft: { xs: "auto", md: "80px" },
+            marginRight: { xs: "auto", md: 0 },
+            textAlign: { xs: "center", md: "left" },
+          }}
+        >
+          <Typography
+            fontFamily="Manrope"
+            fontWeight={400}
+            sx={{
+              a: {
+                cursor: "pointer",
+                color: "#FFF",
+                textDecoration: "none",
+                ":hover": {
+                  color: "#FA4701",
+                },
+              },
+            }}
+          >
+            * Деньги пойдут на прямую приюту «Огонёк» через платформу{" "}
+            <a href="https://saveus.by/projects/1003">Save Us</a>
+          </Typography>
+          <Typography fontFamily="Manrope" fontWeight={400}>
+            ** Аукцион закроется 16 июля в 22:00
+          </Typography>
         </Box>
       </Box>
     </Box>

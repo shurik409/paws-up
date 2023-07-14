@@ -4,9 +4,10 @@ import { Box } from "@mui/material";
 import { Main } from "./pages";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import {
-  BrowserRouter as Router,
-  Switch,
+  BrowserRouter,
+  Routes,
   Route,
+  Link,
 } from "react-router-dom";
 
 const theme = createTheme({
@@ -26,11 +27,12 @@ function App() {
   return (
     <Box>
       <ThemeProvider theme={theme}>
-        <Router>
-          <Switch>
-            <Route path="auction/lot/:id" children={<Main />} />
-          </Switch>
-        </Router>
+        <BrowserRouter>
+          <Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/auction/lot/:id" element={<Main />} />
+          </Routes>
+        </BrowserRouter>
       </ThemeProvider>
     </Box>
   );

@@ -37,7 +37,17 @@ app.use(bodyParser.json());
 // });
 
 app.get("/", function (request, response) {
-  response.sendFile(__dirname + "/index.html");
+  response.sendFile(path.join(__dirname + "/build/index.html"));
+});
+
+app.get("/auction/lot/:id", function (request, response) {
+  const ids = ["1", "2", "3", "4", "5"];
+  console.log(request.params.id, ids.includes(request.params.id));
+  if (ids.includes(request.params.id)) {
+    response.sendFile(path.join(__dirname + "/build/index.html"));
+    return;
+  }
+  response.sendStatus(404);
 });
 
 client
@@ -50,7 +60,6 @@ client
 
 app.get("/api/maxvalue/:id", async function (request, response) {
   const users = await mongodb.getUsers(request, request.params.id);
-  console.log(users);
   if (users.length) {
     const max = users.reduce(function (prev, current) {
       return prev.money > current.money ? prev : current;
