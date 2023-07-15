@@ -352,7 +352,7 @@ const Main = () => {
               },
             }}
           >
-            * Деньги пойдут на прямую приюту «Огонёк» через платформу{" "}
+            * Деньги пойдут на прямую приюту «Островок» через платформу{" "}
             <a href="https://saveus.by/projects/1003">Save Us</a>
           </Typography>
           <Typography fontFamily="Manrope" fontWeight={400}>
