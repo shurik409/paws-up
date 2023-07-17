@@ -72,9 +72,9 @@ app.get("/api/maxvalue/:id", async function (request, response) {
     const max = users.reduce(function (prev, current) {
       return prev.money > current.money ? prev : current;
     });
-    response.status(200).json({ max: max.money });
+    response.status(200).json({ max: max });
   } else {
-    response.status(200).json({ max: 0 });
+    response.status(200).json({ max: {name: '', money: 0} });
   }
 });
 
