@@ -110,19 +110,29 @@ const Main = () => {
     if (!nameRegexp.test(name)) {
       setNameError("Некоректное имя");
       return;
+    } else {
+      setNameError("");
     }
+
     if (!phoneRegexp.test(phone)) {
       setPhoneError("Некоректный телефон");
       return;
+    } else {
+      setPhoneError("");
     }
+
     if (!moneyRegexp.test(money)) {
       setMoneyError("Некоректная сумма");
       return;
+    } else {
+      setMoneyError("");
     }
 
-    if (+money < maxValue) {
-      setMoneyError("Сумма должна быть больше текущей ставки");
+    if (+money -  maxValue < 5) {
+      setMoneyError("Сумма должна быть больше текущей ставки минимум на 5 рублей");
       return;
+    } else {
+      setMoneyError("");
     }
 
     const request = new Request(`/api/auction`, {
@@ -352,11 +362,11 @@ const Main = () => {
               },
             }}
           >
-            * Деньги пойдут на прямую приюту «Островок» через платформу{" "}
-            <a href="https://saveus.by/projects/1003">Save Us</a>
+            * Деньги пойдут на прямую приюту «Доброта» через{" "}
+            <a href="https://www.instagram.com/p/CxDrP06IJxp/?img_index=3">ЕРИП</a>
           </Typography>
           <Typography fontFamily="Manrope" fontWeight={400}>
-            ** Аукцион закроется 16 июля в 22:00
+            ** Аукцион закроется 15 сентября в 14:00
           </Typography>
         </Box>
       </Box>
