@@ -62,7 +62,7 @@ const Main = () => {
     const response = await fetch(`/api/maxvalue/${id}`);
     const value = await response.json();
     if (value) {
-      setMaxValue(value.max);
+      setMaxValue(value.max.money);
     }
   };
 
