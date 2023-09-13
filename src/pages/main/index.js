@@ -49,8 +49,10 @@ const Main = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [money, setMoney] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+  const [moneyError, setMoneyError] = useState("");
   const [maxValue, setMaxValue] = useState(0);
-  const [winner, setWinner] = useState('');
 
   let { id } = useParams();
 
@@ -60,15 +62,101 @@ const Main = () => {
     const response = await fetch(`/api/maxvalue/${id}`);
     const value = await response.json();
     if (value) {
-      setMaxValue(value.max.money);
-      setWinner(value.max.name);
+      setMaxValue(value.max);
     }
   };
 
   useEffect(() => {
     getMaxValue();
   }, []);
- 
+
+  const cleanForm = () => {
+    setName("");
+    setPhone("");
+    setMoney("");
+    // nameRef.current.target.value = "";
+  };
+
+  const handleNameChange = (event) => {
+    const val = event.target.value;
+    const nameRegular =
+      /^[a-zA-Zа-яА-ЯёЁ]+([a-zA-Zа-яА-ЯёЁ\s'-]*[a-zA-Zа-яА-ЯёЁ])?$/;
+
+    if (val.match(nameRegular)) {
+      setNameError("");
+      setName(val);
+      return event.preventDefault();
+    }
+
+    setName(val);
+    setNameError("Некоректное имя");
+  };
+
+  const handleMoneyChange = (event) => {
+    const val = event.target.value;
+
+    if (val.match(/[^0-9]/)) {
+      return event.preventDefault();
+    }
+
+    setMoney(val);
+  };
+
+  const handleSubmit = async () => {
+    const nameRegexp =
+      /^[a-zA-Zа-яА-ЯёЁ]+([a-zA-Zа-яА-ЯёЁ\s'-]*[a-zA-Zа-яА-ЯёЁ])?$/;
+    const phoneRegexp = /^\+375\(\d{2}\)\d{3}-\d{2}-\d{2}$/;
+    const moneyRegexp = /^[1-9]\d*$/;
+    if (!nameRegexp.test(name)) {
+      setNameError("Некоректное имя");
+      return;
+    } else {
+      setNameError("");
+    }
+
+    if (!phoneRegexp.test(phone)) {
+      setPhoneError("Некоректный телефон");
+      return;
+    } else {
+      setPhoneError("");
+    }
+
+    if (!moneyRegexp.test(money)) {
+      setMoneyError("Некоректная сумма");
+      return;
+    } else {
+      setMoneyError("");
+    }
+
+    if (+money -  maxValue < 5) {
+      setMoneyError("Сумма должна быть больше текущей ставки минимум на 5 рублей");
+      return;
+    } else {
+      setMoneyError("");
+    }
+
+    const request = new Request(`/api/auction`, {
+      method: "POST",
+      headers: {
+        Accept: "application/*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        money: +money,
+        paint: +id,
+      }),
+    });
+    const response = await fetch(request);
+    if (!response.ok) {
+      const { errors } = await response.json();
+      console.log(errors);
+    }
+    cleanForm();
+    getMaxValue();
+  };
+
   return (
     <Box sx={{ position: "relative" }}>
       <Box
@@ -178,18 +266,108 @@ const Main = () => {
               fontWeight={700}
               className="money"
             >
-              Финальная ставка: {maxValue}BYN
+              Текущая ставка: {maxValue}BYN
             </Typography>
-            <Typography
-              fontFamily="Manrope"
-              lineHeight="110%"
-              marginBottom="40px"
-              fontWeight={700}
-              className="money"
+            <Box>
+              <Box>
+                <TextField
+                  sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                  id="name"
+                  label={nameError || "Ваше имя"}
+                  variant="filled"
+                  onChange={handleNameChange}
+                  error={nameError ? true : false}
+                  value={name}
+                />
+              </Box>
+              <Box>
+                <InputMask
+                  mask="+375(99)999-99-99"
+                  disabled={false}
+                  maskChar=" "
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
+                >
+                  <TextField
+                    sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                    id="phone"
+                    label={phoneError || "Ваш телефон"}
+                    variant="filled"
+                    type="phone"
+                    error={phoneError ? true : false}
+                    value={phone}
+                  />
+                </InputMask>
+              </Box>
+              <Box>
+                <TextField
+                  sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                  id="money"
+                  label={moneyError || "Ваша ставка"}
+                  variant="filled"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">BYN</InputAdornment>
+                    ),
+                    inputMode: "numeric",
+                  }}
+                  value={money}
+                  onChange={handleMoneyChange}
+                  error={moneyError ? true : false}
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                padding: "24px 48px",
+                alignItems: "flex-start",
+                width: "fit-content",
+                gap: "10px",
+                borderRadius: "20px",
+                background: "#0F5190",
+                transition: "all 0.3s ease-in-out",
+                cursor: "pointer",
+                fontFamily: "Manrope",
+                margin: { xs: "auto", lg: "none" },
+                fontWeight: 700,
+                ":hover": {
+                  background: "#fff",
+                  color: "#0F5190",
+                },
+              }}
+              onClick={handleSubmit}
             >
-              Победитель: {winner}
-            </Typography>
+              Сделать ставку
+            </Box>
           </Box>
+        </Box>
+        <Box
+          sx={{
+            marginLeft: { xs: "auto", md: "80px" },
+            marginRight: { xs: "auto", md: 0 },
+            textAlign: { xs: "center", md: "left" },
+          }}
+        >
+          <Typography
+            fontFamily="Manrope"
+            fontWeight={400}
+            sx={{
+              a: {
+                cursor: "pointer",
+                color: "#FFF",
+                textDecoration: "none",
+                ":hover": {
+                  color: "#FA4701",
+                },
+              },
+            }}
+          >
+            * Деньги пойдут на прямую приюту «Доброта» через{" "}
+            <a href="https://www.instagram.com/p/CxDrP06IJxp/?img_index=3">ЕРИП</a>
+          </Typography>
+          <Typography fontFamily="Manrope" fontWeight={400}>
+            ** Аукцион закроется 15 сентября в 14:00
+          </Typography>
         </Box>
       </Box>
     </Box>
