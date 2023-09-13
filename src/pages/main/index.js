@@ -104,7 +104,7 @@ const Main = () => {
 
   const handleSubmit = async () => {
     const nameRegexp =
-      /^[a-zA-Zа-яА-ЯёЁ]+([a-zA-Zа-яА-ЯёЁ\s'-]*[a-zA-Zа-яА-ЯёЁ])?$/;
+    /^[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ]+([a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ\s'-]*[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ])?$/;
     const phoneRegexp = /^\+375\(\d{2}\)\d{3}-\d{2}-\d{2}$/;
     const moneyRegexp = /^[1-9]\d*$/;
     if (!nameRegexp.test(name)) {
@@ -127,35 +127,19 @@ const Main = () => {
     } else {
       setMoneyError("");
     }
-
     if (+money -  maxValue < 5) {
       setMoneyError("Сумма должна быть больше текущей ставки минимум на 5 рублей");
       return;
     } else {
       setMoneyError("");
     }
-
-    const request = new Request(`/api/auction`, {
-      method: "POST",
-      headers: {
-        Accept: "application/*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        phone,
-        money: +money,
-        paint: +id,
-      }),
-    });
-    const response = await fetch(request);
-    if (!response.ok) {
-      const { errors } = await response.json();
-      console.log(errors);
+    if (+money -  maxValue > 200) {
+      setMoneyError("Слишком большая разовая ставка");
+      return;
+    } else {
+      setMoneyError("");
     }
-    cleanForm();
-    getMaxValue();
-  };
+  }
 
   return (
     <Box sx={{ position: "relative" }}>
