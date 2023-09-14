@@ -16,27 +16,27 @@ import Top from "../../img/lots/5.png";
 const info = [
   {
     id: 1,
-    name: "Лу",
+    name: "Утро",
     img: Lu,
   },
   {
     id: 2,
-    name: "Чача",
+    name: "Принцесса",
     img: Chacha,
   },
   {
     id: 3,
-    name: "Рио",
+    name: "Счастье",
     img: Rio,
   },
   {
     id: 4,
-    name: "Кио",
+    name: "Биба",
     img: Kio,
   },
   {
     id: 5,
-    name: "Топ",
+    name: "Любовь",
     img: Top,
   },
 ];
