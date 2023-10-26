@@ -12,6 +12,8 @@ import Chacha from "../../img/lots/2.png";
 import Rio from "../../img/lots/3.png";
 import Kio from "../../img/lots/4.png";
 import Top from "../../img/lots/5.png";
+import Six from "../../img/lots/6.png";
+import Seven from "../../img/lots/7.png";
 
 const info = [
   {
@@ -39,6 +41,16 @@ const info = [
     name: "Любовь",
     img: Top,
   },
+  {
+    id: 6,
+    name: "Любовь",
+    img: Six,
+  },
+  {
+    id: 7,
+    name: "Любовь",
+    img: Seven,
+  },
 ];
 
 const getInfoById = (id) => {
@@ -53,7 +65,7 @@ const Main = () => {
   const [phoneError, setPhoneError] = useState("");
   const [moneyError, setMoneyError] = useState("");
   const [maxValue, setMaxValue] = useState(0);
-  const [winner, setWinner] = useState('');
+  // const [winner, setWinner] = useState('');
 
   let { id } = useParams();
 
@@ -64,7 +76,7 @@ const Main = () => {
     const value = await response.json();
     if (value) {
       setMaxValue(value.max.money);
-      setWinner(value.max.name);
+      // setWinner(value.max.name);
     }
   };
 
@@ -275,18 +287,110 @@ const Main = () => {
               fontWeight={700}
               className="money"
             >
-              Финальная ставка: {maxValue}BYN
+              Текущая ставка: {maxValue}BYN
             </Typography>
-            <Typography
-              fontFamily="Manrope"
-              lineHeight="110%"
-              marginBottom="40px"
-              fontWeight={700}
-              className="money"
+            <Box>
+              <Box>
+                <TextField
+                  sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                  id="name"
+                  label={nameError || "Ваше имя"}
+                  variant="filled"
+                  onChange={handleNameChange}
+                  error={nameError ? true : false}
+                  value={name}
+                />
+              </Box>
+              <Box>
+                <InputMask
+                  mask="+375(99)999-99-99"
+                  disabled={false}
+                  maskChar=" "
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
+                >
+                  <TextField
+                    sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                    id="phone"
+                    label={phoneError || "Ваш телефон"}
+                    variant="filled"
+                    type="phone"
+                    error={phoneError ? true : false}
+                    value={phone}
+                  />
+                </InputMask>
+              </Box>
+              <Box>
+                <TextField
+                  sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                  id="money"
+                  label={moneyError || "Ваша ставка"}
+                  variant="filled"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">BYN</InputAdornment>
+                    ),
+                    inputMode: "numeric",
+                  }}
+                  value={money}
+                  onChange={handleMoneyChange}
+                  error={moneyError ? true : false}
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                padding: "24px 48px",
+                alignItems: "flex-start",
+                width: "fit-content",
+                gap: "10px",
+                borderRadius: "20px",
+                background: "#0F5190",
+                transition: "all 0.3s ease-in-out",
+                cursor: "pointer",
+                fontFamily: "Manrope",
+                margin: { xs: "auto", lg: "none" },
+                fontWeight: 700,
+                ":hover": {
+                  background: "#fff",
+                  color: "#0F5190",
+                },
+              }}
+              onClick={handleSubmit}
             >
-              Победитель: {winner}
-            </Typography>
+              Сделать ставку
+            </Box>
           </Box>
+        </Box>
+        <Box
+          sx={{
+            marginLeft: { xs: "auto", md: "80px" },
+            marginRight: { xs: "auto", md: 0 },
+            textAlign: { xs: "center", md: "left" },
+          }}
+        >
+          <Typography
+            fontFamily="Manrope"
+            fontWeight={400}
+            sx={{
+              a: {
+                cursor: "pointer",
+                color: "#FFF",
+                textDecoration: "none",
+                ":hover": {
+                  color: "#FA4701",
+                },
+              },
+            }}
+          >
+            * Деньги пойдут на прямую приюту «Право на Жизнь» через{" "}
+            <a href="https://www.instagram.com/p/CylNUgYNiMi/?img_index=4">
+              Пополнение «Горячего» номера МТС
+            </a>
+          </Typography>
+          <Typography fontFamily="Manrope" fontWeight={400}>
+            ** Аукцион закроется 28 октября в 16:00
+          </Typography>
         </Box>
       </Box>
     </Box>

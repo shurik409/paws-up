@@ -41,7 +41,7 @@ app.get("/", function (request, response) {
 });
 
 app.get("/auction/lot/:id", function (request, response) {
-  const ids = ["1", "2", "3", "4", "5"];
+  const ids = ["1", "2", "3", "4", "5", "6", "7"];
   if (ids.includes(request.params.id)) {
     response.sendFile(path.join(__dirname + "/build/index.html"));
     return;
@@ -50,7 +50,7 @@ app.get("/auction/lot/:id", function (request, response) {
 });
 
 app.get("/auction/results/:id", function (request, response) {
-  const ids = ["1", "2", "3", "4", "5"];
+  const ids = ["1", "2", "3", "4", "5", "6", "7"];
   if (ids.includes(request.params.id)) {
     response.sendFile(path.join(__dirname + "/build/index.html"));
     return;
@@ -74,7 +74,7 @@ app.get("/api/maxvalue/:id", async function (request, response) {
     });
     response.status(200).json({ max: max });
   } else {
-    response.status(200).json({ max: {name: '', money: 0} });
+    response.status(200).json({ max: { name: "", money: 0 } });
   }
 });
 
