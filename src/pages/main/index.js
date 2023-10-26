@@ -33,7 +33,7 @@ const info = [
   },
   {
     id: 4,
-    name: "Боба",
+    name: "Бандит",
     img: Kio,
   },
   {
@@ -48,7 +48,7 @@ const info = [
   },
   {
     id: 7,
-    name: "Сметанка",
+    name: "Доброе утро",
     img: Seven,
   },
 ];
