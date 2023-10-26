@@ -7,13 +7,13 @@ import { useParams } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/effect-flip";
 import Noise from "../../img/noise.png";
-import Lu from "../../img/lots/1.webp";
-import Chacha from "../../img/lots/2.webp";
-import Rio from "../../img/lots/3.webp";
-import Kio from "../../img/lots/4.webp";
-import Top from "../../img/lots/5.webp";
-import Six from "../../img/lots/6.webp";
-import Seven from "../../img/lots/7.webp";
+import Lu from "../../img/lots/1.jpg";
+import Chacha from "../../img/lots/2.jpg";
+import Rio from "../../img/lots/3.jpg";
+import Kio from "../../img/lots/4.jpg";
+import Top from "../../img/lots/5.jpg";
+import Six from "../../img/lots/6.jpg";
+import Seven from "../../img/lots/7.jpg";
 
 const info = [
   {
