@@ -37,12 +37,12 @@ const info = [
   },
   {
     id: 5,
-    name: "Любовь",
+    name: "Bad Bat",
     img: Top,
   },
   {
     id: 6,
-    name: "Любовь",
+    name: "Witch Bitch",
     img: Six,
   },
   {
