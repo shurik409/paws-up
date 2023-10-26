@@ -40,6 +40,12 @@ app.get("/", function (request, response) {
   response.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
+app.get("/auction/", function (request, response) {
+  response.sendFile(path.join(__dirname + "/build/index.html"));
+
+  // response.sendStatus(404);
+});
+
 app.get("/auction/lot/:id", function (request, response) {
   const ids = ["1", "2", "3", "4", "5", "6", "7"];
   if (ids.includes(request.params.id)) {
