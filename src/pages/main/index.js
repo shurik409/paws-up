@@ -18,7 +18,7 @@ import Seven from "../../img/lots/7.png";
 const info = [
   {
     id: 1,
-    name: "Утро",
+    name: "Карнавал",
     img: Lu,
   },
   {
@@ -33,7 +33,7 @@ const info = [
   },
   {
     id: 4,
-    name: "Биба",
+    name: "Боба",
     img: Kio,
   },
   {
@@ -48,7 +48,7 @@ const info = [
   },
   {
     id: 7,
-    name: "Любовь",
+    name: "Сметанка",
     img: Seven,
   },
 ];
