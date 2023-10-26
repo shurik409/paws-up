@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-flip";
-import Noise from "../../img/noise.png";
+// import Noise from "../../img/noise.png";
 import Lu from "../../img/lots/1.jpg";
 import Chacha from "../../img/lots/2.jpg";
 import Rio from "../../img/lots/3.jpg";
@@ -189,7 +189,7 @@ const Main = () => {
           zIndex: 0,
         }}
       >
-        <Box
+        {/* <Box
           sx={{
             background: `url(${Noise})`,
             backgroundRepeat: "no-repeat",
@@ -202,7 +202,7 @@ const Main = () => {
             top: 0,
             zIndex: -1,
           }}
-        ></Box>
+        ></Box> */}
         <Box
           sx={{
             paddingTop: { xs: "30px", md: "70px", lg: "140px" },

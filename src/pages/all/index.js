@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-flip";
-import Noise from "../../img/noise.png";
+// import Noise from "../../img/noise.png";
 import Lu from "../../img/lots/1.jpg";
 import Chacha from "../../img/lots/2.jpg";
 import Rio from "../../img/lots/3.jpg";
