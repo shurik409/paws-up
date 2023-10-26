@@ -23,12 +23,12 @@ const info = [
   },
   {
     id: 2,
-    name: "Принцесса",
+    name: "Пушок",
     img: Chacha,
   },
   {
     id: 3,
-    name: "Счастье",
+    name: "Хорошая примета",
     img: Rio,
   },
   {
