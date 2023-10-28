@@ -149,7 +149,7 @@ const Main = () => {
     } else {
       setMoneyError("");
     }
-    if (+money - maxValue > 200) {
+    if (+money - maxValue > 1000) {
       setMoneyError("Слишком большая разовая ставка");
       return;
     } else {
