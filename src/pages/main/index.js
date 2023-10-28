@@ -369,7 +369,7 @@ const Main = () => {
             textAlign: { xs: "center", md: "left" },
           }}
         >
-          <Typography
+          {/* <Typography
             fontFamily="Manrope"
             fontWeight={400}
             sx={{
@@ -387,9 +387,9 @@ const Main = () => {
             <a href="https://www.instagram.com/p/CylNUgYNiMi/?img_index=4">
               Пополнение «Горячего» номера МТС
             </a>
-          </Typography>
+          </Typography> */}
           <Typography fontFamily="Manrope" fontWeight={400}>
-            ** Аукцион закроется 28 октября в 16:00
+            * Аукцион закроется 29 октября в 16:00
           </Typography>
         </Box>
       </Box>
