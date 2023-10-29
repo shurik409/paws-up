@@ -65,7 +65,7 @@ const Main = () => {
   const [phoneError, setPhoneError] = useState("");
   const [moneyError, setMoneyError] = useState("");
   const [maxValue, setMaxValue] = useState(0);
-  // const [winner, setWinner] = useState('');
+  const [winner, setWinner] = useState('');
 
   let { id } = useParams();
 
@@ -76,7 +76,7 @@ const Main = () => {
     const value = await response.json();
     if (value) {
       setMaxValue(value.max.money);
-      // setWinner(value.max.name);
+      setWinner(value.max.name);
     }
   };
 
@@ -287,9 +287,18 @@ const Main = () => {
               fontWeight={700}
               className="money"
             >
-              Текущая ставка: {maxValue}BYN
+              Финальная ставка: {maxValue}BYN
             </Typography>
-            <Box>
+            <Typography
+              fontFamily="Manrope"
+              lineHeight="110%"
+              marginBottom="40px"
+              fontWeight={700}
+              className="money"
+            >
+              Победитель: {winner}
+            </Typography>
+            {/* <Box>
               <Box>
                 <TextField
                   sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
@@ -359,17 +368,17 @@ const Main = () => {
               onClick={handleSubmit}
             >
               Сделать ставку
-            </Box>
+            </Box> */}
           </Box>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             marginLeft: { xs: "auto", md: "80px" },
             marginRight: { xs: "auto", md: 0 },
             textAlign: { xs: "center", md: "left" },
           }}
         >
-          {/* <Typography
+          <Typography
             fontFamily="Manrope"
             fontWeight={400}
             sx={{
@@ -387,11 +396,11 @@ const Main = () => {
             <a href="https://www.instagram.com/p/CylNUgYNiMi/?img_index=4">
               Пополнение «Горячего» номера МТС
             </a>
-          </Typography> */}
+          </Typography>
           <Typography fontFamily="Manrope" fontWeight={400}>
             * Аукцион закроется 29 октября в 16:00
           </Typography>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

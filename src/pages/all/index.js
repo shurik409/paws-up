@@ -241,7 +241,7 @@ const All = () => {
                     }}
                     // onClick={handleSubmit}
                   >
-                    Сделать ставку
+                    Узнать победителя
                   </Box>
                 </Link>
               </Box>
