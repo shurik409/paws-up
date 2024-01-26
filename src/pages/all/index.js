@@ -17,37 +17,37 @@ import Seven from "../../img/lots/7.webp";
 const info = [
   {
     id: 1,
-    name: "Карнавал",
+    name: "Праздник",
     img: Lu,
   },
   {
     id: 2,
-    name: "Пушок",
+    name: "Проказник",
     img: Chacha,
   },
   {
     id: 3,
-    name: "Хорошая примета",
+    name: "В засаде",
     img: Rio,
   },
   {
     id: 4,
-    name: "Бандит",
+    name: "Что?",
     img: Kio,
   },
   {
     id: 5,
-    name: "Bad Bat",
+    name: "Лапы вверх",
     img: Top,
   },
   {
     id: 6,
-    name: "Witch Bitch",
+    name: "Котик ждет бенто-тортик",
     img: Six,
   },
   {
     id: 7,
-    name: "Доброе утро",
+    name: "Предсказания котика сбываются",
     img: Seven,
   },
 ];
