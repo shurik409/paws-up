@@ -325,7 +325,7 @@ const Main = () => {
                 <TextField
                   sx={{ width: { xs: 300, md: 400, bg: 600 }, minHeight: 70 }}
                   id="money"
-                  label={`Ваша ставка (min ${money + 5} BYN)`}
+                  label={`Ваша ставка (min ${maxValue + 5} BYN)`}
                   helperText={moneyError}
                   variant="filled"
                   InputProps={{
