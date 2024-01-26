@@ -7,13 +7,13 @@ import { useParams } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/effect-flip";
 // import Noise from "../../img/noise.png";
-import Lu from "../../img/lots/1.jpg";
-import Chacha from "../../img/lots/2.jpg";
-import Rio from "../../img/lots/3.jpg";
-import Kio from "../../img/lots/4.jpg";
-import Top from "../../img/lots/5.jpg";
-import Six from "../../img/lots/6.jpg";
-import Seven from "../../img/lots/7.jpg";
+import Lu from "../../img/lots/1.webp";
+import Chacha from "../../img/lots/2.webp";
+import Rio from "../../img/lots/3.webp";
+import Kio from "../../img/lots/4.webp";
+import Top from "../../img/lots/5.webp";
+import Six from "../../img/lots/6.webp";
+import Seven from "../../img/lots/7.webp";
 
 const info = [
   {
@@ -142,9 +142,7 @@ const Main = () => {
       setMoneyError("");
     }
     if (+money - maxValue < 5) {
-      setMoneyError(
-        "Сумма должна быть больше текущей ставки минимум на 5 рублей"
-      );
+      setMoneyError("Ставка должна превышать предыдущую минимум на 5 рублей");
       return;
     } else {
       setMoneyError("");
@@ -235,6 +233,9 @@ const Main = () => {
               "& label.Mui-focused": {
                 color: "#FA4701",
               },
+              ".MuiFormHelperText-root.Mui-error": {
+                color: "#FFF",
+              },
               ".MuiInputBase-root": {
                 backgroundColor: "#FFF",
                 ":hover": {
@@ -322,9 +323,10 @@ const Main = () => {
               </Box>
               <Box>
                 <TextField
-                  sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                  sx={{ width: { xs: 300, md: 400, bg: 600 }, minHeight: 70 }}
                   id="money"
-                  label={moneyError || "Ваша ставка"}
+                  label={"Ваша ставка"}
+                  helperText={moneyError}
                   variant="filled"
                   InputProps={{
                     endAdornment: (
@@ -383,13 +385,13 @@ const Main = () => {
               },
             }}
           >
-            * Деньги пойдут на прямую приюту «Право на Жизнь» через{" "}
-            <a href="https://www.instagram.com/p/CylNUgYNiMi/?img_index=4">
-              Пополнение «Горячего» номера МТС
+            * Деньги пойдут на прямую приюту «Шанс» через платформу{" "}
+            <a href="https://bypet.by/projects/1050">
+              ByPet
             </a>
           </Typography> */}
           <Typography fontFamily="Manrope" fontWeight={400}>
-            * Аукцион закроется 29 октября в 16:00
+            * Аукцион закроется 28 января в 17:00
           </Typography>
         </Box>
       </Box>
