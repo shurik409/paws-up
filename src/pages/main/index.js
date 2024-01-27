@@ -185,6 +185,7 @@ const Main = () => {
           backgroundColor: "#2176C9",
           position: "relative",
           zIndex: 0,
+          paddingBottom: "45px",
         }}
       >
         {/* <Box
@@ -208,7 +209,7 @@ const Main = () => {
             display: "flex",
             flexDirection: { lg: "row", xs: "column" },
             alignItems: { xs: "center", lg: "normal" },
-            paddingBottom: "70px",
+            paddingBottom: "35px",
           }}
         >
           <Box
