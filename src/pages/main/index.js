@@ -65,7 +65,7 @@ const Main = () => {
   const [phoneError, setPhoneError] = useState("");
   const [moneyError, setMoneyError] = useState("");
   const [maxValue, setMaxValue] = useState(0);
-  // const [winner, setWinner] = useState('');
+  const [winner, setWinner] = useState('');
 
   let { id } = useParams();
 
@@ -76,7 +76,7 @@ const Main = () => {
     const value = await response.json();
     if (value) {
       setMaxValue(value.max.money);
-      // setWinner(value.max.name);
+      setWinner(value.max.name);
     }
   };
 
@@ -289,9 +289,18 @@ const Main = () => {
               fontWeight={700}
               className="money"
             >
-              Текущая ставка: {maxValue}BYN
-            </Typography>
-            <Box>
+            Финальная ставка: {maxValue}BYN
+          </Typography>
+          <Typography
+            fontFamily="Manrope"
+            lineHeight="110%"
+            marginBottom="40px"
+            fontWeight={700}
+            className="money"
+          >
+            Победитель: {winner}
+          </Typography>
+            {/* <Box>
               <Box>
                 <TextField
                   sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
@@ -340,8 +349,8 @@ const Main = () => {
                   error={moneyError ? true : false}
                 />
               </Box>
-            </Box>
-            <Box
+            </Box> */}
+            {/* <Box
               sx={{
                 padding: "24px 48px",
                 alignItems: "flex-start",
@@ -362,7 +371,7 @@ const Main = () => {
               onClick={handleSubmit}
             >
               Сделать ставку
-            </Box>
+            </Box> */}
           </Box>
         </Box>
         <Box
@@ -391,9 +400,9 @@ const Main = () => {
               ByPet
             </a>
           </Typography> */}
-          <Typography fontFamily="Manrope" fontWeight={400}>
+          {/* <Typography fontFamily="Manrope" fontWeight={400}>
             * Аукцион закроется 28 января в 17:00
-          </Typography>
+          </Typography> */}
         </Box>
       </Box>
     </Box>
