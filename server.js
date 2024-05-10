@@ -17,7 +17,7 @@ const client = new MongoClient(uri, {
 });
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 
 const endtime = "2024-05-10T17:48+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
