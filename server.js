@@ -17,7 +17,9 @@ const client = new MongoClient(uri, {
 });
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
+
+const endtime = "2024-05-10T17:48+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
 const reactBuild = path.join(__dirname, "build");
 app.use(express.static(reactBuild));
@@ -82,6 +84,15 @@ app.get("/api/maxvalue/:id", async function (request, response) {
   } else {
     response.status(200).json({ max: { name: "", money: 0 } });
   }
+});
+
+app.get("/api/auction/open", async function (request, response) {
+  const endDate = new Date(endtime);
+  const currentDate = new Date();
+
+  const isAuctionEnd = endDate - currentDate < 0;
+
+  response.status(200).json({ isAuctionEnd, endDate });
 });
 
 app.get("/api/info/:id", async function (request, response) {

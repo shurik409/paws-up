@@ -12,7 +12,7 @@ import Rio from "../../img/lots/3.webp";
 import Kio from "../../img/lots/4.webp";
 import Top from "../../img/lots/5.webp";
 import Six from "../../img/lots/6.webp";
-import Seven from "../../img/lots/7.webp";
+import CountdownTimer from "../../components/timer";
 
 const info = [
   {
@@ -45,15 +45,11 @@ const info = [
     name: "Котик ждет бенто-тортик",
     img: Six,
   },
-  {
-    id: 7,
-    name: "Предсказания котика сбываются",
-    img: Seven,
-  },
 ];
 
 const All = () => {
   const [maxValue, setMaxValue] = useState([]);
+  const [auctionInfo, setAuctionInfo] = useState(null);
   // const [winner, setWinner] = useState('');
 
   const getMaxValue = async (id) => {
@@ -65,14 +61,36 @@ const All = () => {
 
   const getAllValue = async () => {
     const all = await Promise.all(
-      [1, 2, 3, 4, 5, 6, 7].map((id) => getMaxValue(id))
+      Array.from({ length: info.length }, (_, i) => i + 1).map((id) =>
+        getMaxValue(id)
+      )
     );
     setMaxValue(all);
   };
 
+  const getAuctionInfo = async () => {
+    const response = await fetch(`/api/auction/open`);
+    const value = await response.json();
+
+    setAuctionInfo(value);
+  };
+
   useEffect(() => {
     getAllValue();
+    getAuctionInfo();
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const endDate = new Date(auctionInfo.endDate);
+      const currentDate = new Date();
+
+      const isAuctionEnd = endDate - currentDate < 0;
+      setAuctionInfo({ isAuctionEnd, endDate });
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  });
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -119,14 +137,45 @@ const All = () => {
             Текущие лоты
           </Typography>
         </Box>
+
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(auto-fill, minmax(220px, 1fr))",
-              md: "repeat(auto-fill, minmax(270px, 1fr))",
+            ".timerHeading": {
+              fontSize: "55px",
+              textAlign: "center",
             },
-            gridGap: "70px",
+            display: { xs: "block", lg: "flex" },
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "15px",
+            marginY: "15px",
+          }}
+        >
+          <Typography
+            fontFamily="Manrope"
+            lineHeight="110%"
+            fontWeight={700}
+            className="timerHeading"
+            marginY="15px"
+          >
+            {auctionInfo?.isAuctionEnd
+              ? `Аукцион закрыт`
+              : `До конца аукциона:`}
+          </Typography>
+          {!auctionInfo?.isAuctionEnd && (
+            <CountdownTimer endTime={auctionInfo?.endDate} />
+          )}
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            columnGap: "100px",
+            rowGap: "50px",
+            maxWidth: "1440px",
+            margin: "auto",
+            justifyContent: "center",
+            padding: "24px",
           }}
         >
           {info.map((data, index) => (
@@ -135,8 +184,7 @@ const All = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: { xs: "center", lg: "center" },
-                maxWidth: 315,
-                margin: "auto",
+                maxWidth: { xs: 220, md: 270 },
               }}
               key={`lot-${index}`}
             >
@@ -218,7 +266,10 @@ const All = () => {
                 >
                   {maxValue[index]} BYN
                 </Typography>
-                <Link to={`/auction/lot/${index+1}`} style={{textDecoration: 'none'}}>
+                <Link
+                  to={`/auction/lot/${index + 1}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <Box
                     sx={{
                       padding: "12px 34px",
@@ -233,7 +284,7 @@ const All = () => {
                       margin: { xs: "auto", lg: "none" },
                       fontWeight: 700,
                       color: "#FFF",
-                      textDecoration: 'none',
+                      textDecoration: "none",
                       ":hover": {
                         background: "#fff",
                         color: "#0F5190",
@@ -241,7 +292,9 @@ const All = () => {
                     }}
                     // onClick={handleSubmit}
                   >
-                    Узнать победителя
+                    {auctionInfo?.isAuctionEnd
+                      ? "Узнать победителя"
+                      : "Сделать ставку"}
                   </Box>
                 </Link>
               </Box>

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Box, Typography, TextField, InputAdornment } from "@mui/material";
 import InputMask from "react-input-mask";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-flip";
@@ -14,6 +14,7 @@ import Kio from "../../img/lots/4.webp";
 import Top from "../../img/lots/5.webp";
 import Six from "../../img/lots/6.webp";
 import Seven from "../../img/lots/7.webp";
+import CountdownTimer from "../../components/timer";
 
 const info = [
   {
@@ -58,6 +59,7 @@ const getInfoById = (id) => {
 };
 
 const Main = () => {
+  const [auctionInfo, setAuctionInfo] = useState(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [money, setMoney] = useState("");
@@ -65,11 +67,18 @@ const Main = () => {
   const [phoneError, setPhoneError] = useState("");
   const [moneyError, setMoneyError] = useState("");
   const [maxValue, setMaxValue] = useState(0);
-  const [winner, setWinner] = useState('');
+  const [winner, setWinner] = useState("");
 
   let { id } = useParams();
 
   const data = getInfoById(id);
+
+  const getAuctionInfo = async () => {
+    const response = await fetch(`/api/auction/open`);
+    const value = await response.json();
+
+    setAuctionInfo(value);
+  };
 
   const getMaxValue = async () => {
     const response = await fetch(`/api/maxvalue/${id}`);
@@ -82,7 +91,20 @@ const Main = () => {
 
   useEffect(() => {
     getMaxValue();
+    getAuctionInfo();
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const endDate = new Date(auctionInfo.endDate);
+      const currentDate = new Date();
+
+      const isAuctionEnd = endDate - currentDate < 0;
+      setAuctionInfo({ isAuctionEnd, endDate });
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  });
 
   const cleanForm = () => {
     setName("");
@@ -93,17 +115,21 @@ const Main = () => {
 
   const handleNameChange = (event) => {
     const val = event.target.value;
-    const nameRegular =
-      /^[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ]+([a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ\s'-]*[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ])?$/;
+    // const nameRegular =
+    //   /^[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ]+([a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ\s'-]*[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ])?$/;
 
-    if (val.match(nameRegular)) {
-      setNameError("");
-      setName(val);
-      return event.preventDefault();
-    }
+    // if (val.match(nameRegular)) {
+    //   setNameError("");
+    //   setName(val);
+    //   return event.preventDefault();
+    // }
 
+    setNameError("");
     setName(val);
-    setNameError("Некоректное имя");
+    // return event.preventDefault();
+
+    // setName(val);
+    // setNameError("Некоректное имя");
   };
 
   const handleMoneyChange = (event) => {
@@ -117,16 +143,16 @@ const Main = () => {
   };
 
   const handleSubmit = async () => {
-    const nameRegexp =
-      /^[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ]+([a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ\s'-]*[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ])?$/;
+    // const nameRegexp =
+    //   /^[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ]+([a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ\s'-]*[a-zA-Zа-яА-ЯёЁґҐўЎіІїЇ])?$/;
     const phoneRegexp = /^\+375\(\d{2}\)\d{3}-\d{2}-\d{2}$/;
     const moneyRegexp = /^[1-9]\d*$/;
-    if (!nameRegexp.test(name)) {
-      setNameError("Некоректное имя");
-      return;
-    } else {
-      setNameError("");
-    }
+    // if (!nameRegexp.test(name)) {
+    //   setNameError("Некоректное имя");
+    //   return;
+    // } else {
+    //   setNameError("");
+    // }
 
     if (!phoneRegexp.test(phone)) {
       setPhoneError("Некоректный телефон");
@@ -202,11 +228,71 @@ const Main = () => {
             zIndex: -1,
           }}
         ></Box> */}
+
+        <Box
+          sx={{
+            ".timerHeading": {
+              fontSize: "55px",
+              textAlign: "center",
+            },
+            display: { xs: "block", lg: "flex" },
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "15px",
+            marginY: "15px",
+          }}
+        >
+          <Typography
+            fontFamily="Manrope"
+            lineHeight="110%"
+            fontWeight={700}
+            className="timerHeading"
+            marginY="15px"
+          >
+            {auctionInfo?.isAuctionEnd
+              ? `Аукцион закрыт`
+              : `До конца аукциона:`}
+          </Typography>
+          {!auctionInfo?.isAuctionEnd && (
+            <CountdownTimer endTime={auctionInfo?.endDate} />
+          )}
+        </Box>
+        <Box>
+          <Box
+            sx={{
+              a: {
+                display: "block",
+                padding: "24px 48px",
+                alignItems: "flex-start",
+                width: "fit-content",
+                gap: "10px",
+                borderRadius: "20px",
+                background: "#0F5190",
+                transition: "all 0.3s ease-in-out",
+                cursor: "pointer",
+                fontFamily: "Manrope",
+                margin: { xs: "auto", lg: "none" },
+                fontWeight: 700,
+                color: "#FFF",
+                textDecoration: "none",
+              },
+              ":hover": {
+                a: {
+                  background: "#fff",
+                  color: "#0F5190",
+                },
+              },
+            }}
+          >
+            <Link to={"/auction"}>Просмотреть все лоты</Link>
+          </Box>
+        </Box>
         <Box
           sx={{
             paddingTop: { xs: "30px", md: "70px", lg: "140px" },
             paddingLeft: { lg: "80px" },
             display: "flex",
+            justifyContent: "center",
             flexDirection: { lg: "row", xs: "column" },
             alignItems: { xs: "center", lg: "normal" },
             paddingBottom: "35px",
@@ -289,89 +375,107 @@ const Main = () => {
               fontWeight={700}
               className="money"
             >
-            Финальная ставка: {maxValue}BYN
-          </Typography>
-          <Typography
-            fontFamily="Manrope"
-            lineHeight="110%"
-            marginBottom="40px"
-            fontWeight={700}
-            className="money"
-          >
-            Победитель: {winner}
-          </Typography>
-            {/* <Box>
+              {auctionInfo?.isAuctionEnd
+                ? `Финальная ставка: ${maxValue}BYN`
+                : `Текущая ставка: ${maxValue}BYN`}
+            </Typography>
+            {auctionInfo?.isAuctionEnd ? (
+              <Typography
+                fontFamily="Manrope"
+                lineHeight="110%"
+                marginBottom="40px"
+                fontWeight={700}
+                className="money"
+              >
+                Победитель: {winner}
+              </Typography>
+            ) : (
+              <></>
+            )}
+            {!auctionInfo?.isAuctionEnd ? (
               <Box>
-                <TextField
-                  sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
-                  id="name"
-                  label={nameError || "Ваше имя"}
-                  variant="filled"
-                  onChange={handleNameChange}
-                  error={nameError ? true : false}
-                  value={name}
-                />
-              </Box>
-              <Box>
-                <InputMask
-                  mask="+375(99)999-99-99"
-                  disabled={false}
-                  maskChar=" "
-                  onChange={(e) => setPhone(e.target.value)}
-                  value={phone}
-                >
-                  <TextField
-                    sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
-                    id="phone"
-                    label={phoneError || "Ваш телефон"}
-                    variant="filled"
-                    type="phone"
-                    error={phoneError ? true : false}
-                    value={phone}
-                  />
-                </InputMask>
-              </Box>
-              <Box>
-                <TextField
-                  sx={{ width: { xs: 300, md: 400, bg: 600 }, minHeight: 70 }}
-                  id="money"
-                  label={`Ваша ставка (min ${maxValue + 5} BYN)`}
-                  helperText={moneyError}
-                  variant="filled"
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">BYN</InputAdornment>
-                    ),
-                    inputMode: "numeric",
+                <Box>
+                  <Box>
+                    <TextField
+                      sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                      id="name"
+                      label={nameError || "Ваше имя или ник в instagram"}
+                      variant="filled"
+                      onChange={handleNameChange}
+                      error={nameError ? true : false}
+                      value={name}
+                    />
+                  </Box>
+                  <Box>
+                    <InputMask
+                      mask="+375(99)999-99-99"
+                      disabled={false}
+                      maskChar=" "
+                      onChange={(e) => setPhone(e.target.value)}
+                      value={phone}
+                    >
+                      <TextField
+                        sx={{
+                          width: { xs: 300, md: 400, bg: 600 },
+                          height: 70,
+                        }}
+                        id="phone"
+                        label={phoneError || "Ваш телефон"}
+                        variant="filled"
+                        type="phone"
+                        error={phoneError ? true : false}
+                        value={phone}
+                      />
+                    </InputMask>
+                  </Box>
+                  <Box>
+                    <TextField
+                      sx={{
+                        width: { xs: 300, md: 400, bg: 600 },
+                        minHeight: 70,
+                      }}
+                      id="money"
+                      label={`Ваша ставка (min ${maxValue + 5} BYN)`}
+                      helperText={moneyError}
+                      variant="filled"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">BYN</InputAdornment>
+                        ),
+                        inputMode: "numeric",
+                      }}
+                      value={money}
+                      onChange={handleMoneyChange}
+                      error={moneyError ? true : false}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    padding: "24px 48px",
+                    alignItems: "flex-start",
+                    width: "fit-content",
+                    gap: "10px",
+                    borderRadius: "20px",
+                    background: "#0F5190",
+                    transition: "all 0.3s ease-in-out",
+                    cursor: "pointer",
+                    fontFamily: "Manrope",
+                    margin: { xs: "auto", lg: "none" },
+                    fontWeight: 700,
+                    ":hover": {
+                      background: "#fff",
+                      color: "#0F5190",
+                    },
                   }}
-                  value={money}
-                  onChange={handleMoneyChange}
-                  error={moneyError ? true : false}
-                />
+                  onClick={handleSubmit}
+                >
+                  Сделать ставку
+                </Box>
               </Box>
-            </Box> */}
-            {/* <Box
-              sx={{
-                padding: "24px 48px",
-                alignItems: "flex-start",
-                width: "fit-content",
-                gap: "10px",
-                borderRadius: "20px",
-                background: "#0F5190",
-                transition: "all 0.3s ease-in-out",
-                cursor: "pointer",
-                fontFamily: "Manrope",
-                margin: { xs: "auto", lg: "none" },
-                fontWeight: 700,
-                ":hover": {
-                  background: "#fff",
-                  color: "#0F5190",
-                },
-              }}
-              onClick={handleSubmit}
-            >
-              Сделать ставку
-            </Box> */}
+            ) : (
+              <></>
+            )}
           </Box>
         </Box>
         <Box
