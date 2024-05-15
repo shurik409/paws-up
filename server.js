@@ -7,7 +7,7 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 const WebSocket = require('ws');
 const http = require('http');
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 // Создаем HTTP сервер

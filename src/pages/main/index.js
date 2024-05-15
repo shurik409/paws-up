@@ -96,7 +96,7 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    const rws = new ReconnectingWebSocket('wss://local.paswsup.com:3003');
+    const rws = new ReconnectingWebSocket('wss://heypawsup.com');
 
     rws.onopen = () => {
         console.log('WebSocket connection opened');
