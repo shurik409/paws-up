@@ -4,6 +4,28 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongodb = require("./mongodb");
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const WebSocket = require('ws');
+const http = require('http');
+
+const PORT = process.env.PORT || 3003;
+
+const app = express();
+// Создаем HTTP сервер
+const server = http.createServer(app);
+
+// Настраиваем WebSocket сервер на основе HTTP сервера
+const wss = new WebSocket.Server({ server });
+
+wss.on('connection', (ws) => {
+  console.log(123);
+    console.log('Client connected');
+    ws.on('message', (message) => {
+        console.log('received: %s', message);
+    });
+    ws.on('close', () => {
+        console.log('Client disconnected');
+    });
+});
 
 // URL-адрес кластера MongoDB
 const uri =
@@ -16,10 +38,30 @@ const client = new MongoClient(uri, {
   },
 });
 
-const app = express();
-const PORT = process.env.PORT || 3001;
 
-const endtime = "2024-05-10T17:48+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
+client
+  .connect()
+  .catch((err) => console.error(err.stack))
+  .then((mongoClient) => {
+    app.locals.db = mongoClient;
+    const db = client.db('PawsUpAuction');
+    const collection = db.collection('Auction');
+
+    // Использование Change Streams для отслеживания изменений
+    const changeStream = collection.watch();
+    changeStream.on('change', (change) => {
+        console.log('Document changed: ', change);
+        // Отправка изменений всем подключенным клиентам
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(JSON.stringify(change));
+            }
+        });
+    });
+    app.listen(PORT, () => console.log("server is running on " + PORT));
+  });
+
+const endtime = "2024-05-17T17:48+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
 const reactBuild = path.join(__dirname, "build");
 app.use(express.static(reactBuild));
@@ -65,14 +107,6 @@ app.get("/auction/results/:id", function (request, response) {
   }
   response.sendStatus(404);
 });
-
-client
-  .connect()
-  .catch((err) => console.error(err.stack))
-  .then((db) => {
-    app.locals.db = db;
-    app.listen(PORT, () => console.log("server is running on " + PORT));
-  });
 
 app.get("/api/maxvalue/:id", async function (request, response) {
   const users = await mongodb.getUsers(request, request.params.id);

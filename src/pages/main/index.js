@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Box, Typography, TextField, InputAdornment } from "@mui/material";
 import InputMask from "react-input-mask";
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
 import { Link, useParams } from "react-router-dom";
 
@@ -93,6 +94,28 @@ const Main = () => {
     getMaxValue();
     getAuctionInfo();
   }, []);
+
+  useEffect(() => {
+    const rws = new ReconnectingWebSocket('wss://local.paswsup.com:3003');
+
+    rws.onopen = () => {
+        console.log('WebSocket connection opened');
+    };
+
+    rws.onmessage = (message) => {
+        const parsedData = JSON.parse(message.data);
+        console.log('Received data: ', parsedData);
+        // setData(parsedData);  // обновляем состояние компонента
+    };
+
+    rws.onclose = () => {
+        console.log('WebSocket connection closed');
+    };
+
+    return () => {
+        rws.close();
+    };
+}, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
