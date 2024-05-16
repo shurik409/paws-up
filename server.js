@@ -6,6 +6,7 @@ const mongodb = require("./mongodb");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const WebSocket = require("ws");
 const http = require("http");
+const { decrypt } = require("./utils/crypt");
 
 const PORT = process.env.PORT || 3000;
 
@@ -50,7 +51,6 @@ const client = new MongoClient(uri, {
 
 client
   .connect()
-  .catch((err) => console.error(err.stack))
   .then((mongoClient) => {
     app.locals.db = mongoClient;
     const db = client.db("PawsUpAuction");
@@ -69,7 +69,8 @@ client
         }
       });
     });
-  });
+  })
+  .catch((err) => console.error(err.stack));
 
 const endtime = "2024-05-17T17:48+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
@@ -131,6 +132,25 @@ app.get("/api/info/:id", async function (request, response) {
   const results = await mongodb.getUsers(request, request.params.id);
 
   response.status(200).json(results);
+});
+
+app.post("/api/auction/:id/user/", async function (request, response) {
+  if (!request.body) {
+    response.status(400).json({ message: "error" });
+  } else {
+    const users = await mongodb.getUsers(request, request.params.id);
+    const decName = request.body.name && decrypt(request.body.name);
+    const decPhone = request.body.phone && decrypt(request.body.phone);
+    let max = 0;
+    if (users?.length && decName && decPhone) {
+      max = users
+        .filter((user) => user.name === decName && user.phone === decPhone)
+        .reduce(function (prev, current) {
+          return prev.money > current.money ? prev : current;
+        });
+    }
+    response.status(200).json({ max: max });
+  }
 });
 
 app.post("/api/auction", async function (request, response) {

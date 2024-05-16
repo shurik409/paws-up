@@ -17,6 +17,12 @@ import Six from "../../img/lots/6.webp";
 import Seven from "../../img/lots/7.webp";
 import CountdownTimer from "../../components/timer";
 
+import {
+  getEncryptedCookie,
+  setEncryptedCookie,
+  getCookie,
+} from "../../utils/cookies";
+
 const info = [
   {
     id: 1,
@@ -69,6 +75,7 @@ const Main = () => {
   const [moneyError, setMoneyError] = useState("");
   const [maxValue, setMaxValue] = useState(0);
   const [winner, setWinner] = useState("");
+  const [cookieUser, setCookieUser] = useState("");
 
   let { id } = useParams();
 
@@ -91,9 +98,38 @@ const Main = () => {
   };
 
   useEffect(() => {
+    const userName = getEncryptedCookie("Name");
+    const userPhone = getEncryptedCookie("Phone");
+    const cookieName = getCookie("Name");
+    const cookiePhone = getCookie("Phone");
+    setName(userName);
+    setPhone(userPhone);
     getMaxValue();
     getAuctionInfo();
+    getUserByInfo(cookieName, cookiePhone);
   }, []);
+
+  const getUserByInfo = async (name, phone) => {
+    const request = new Request(`/api/auction/${id}/user`, {
+      method: "POST",
+      headers: {
+        Accept: "application/*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+      }),
+    });
+    const response = await fetch(request);
+    if (!response.ok) {
+      const { errors } = await response.json();
+      console.log(errors);
+    } else {
+      let maxCookieValue = await response.json();
+      maxCookieValue.max && setCookieUser(maxCookieValue.max);
+    }
+  };
 
   useEffect(() => {
     const rws = new ReconnectingWebSocket("wss:/heypawsup.com/ws");
@@ -135,8 +171,8 @@ const Main = () => {
   });
 
   const cleanForm = () => {
-    setName("");
-    setPhone("");
+    // setName("");
+    // setPhone("");
     setMoney("");
     // nameRef.current.target.value = "";
   };
@@ -226,6 +262,8 @@ const Main = () => {
       const { errors } = await response.json();
       console.log(errors);
     }
+    setEncryptedCookie("Name", name);
+    setEncryptedCookie("Phone", phone);
     cleanForm();
     getMaxValue();
   };
@@ -345,6 +383,9 @@ const Main = () => {
               ".money": {
                 fontSize: { xs: "20px", md: "30px", bg: "40px" },
               },
+              ".cookieMoney": {
+                fontSize: { xs: "15px", md: "20px", bg: "30px" },
+              },
               "& label.Mui-focused": {
                 color: "#FA4701",
               },
@@ -399,7 +440,7 @@ const Main = () => {
             <Typography
               fontFamily="Manrope"
               lineHeight="110%"
-              marginBottom="40px"
+              marginBottom="20px"
               fontWeight={700}
               className="money"
             >
@@ -407,6 +448,17 @@ const Main = () => {
                 ? `Финальная ставка: ${maxValue}BYN`
                 : `Текущая ставка: ${maxValue}BYN`}
             </Typography>
+            {cookieUser && (
+              <Typography
+                fontFamily="Manrope"
+                lineHeight="110%"
+                marginBottom="40px"
+                fontWeight={700}
+                className="cookieMoney"
+              >
+                Ваша последняя ставка: {cookieUser.money}BYN
+              </Typography>
+            )}
             {auctionInfo?.isAuctionEnd ? (
               <Typography
                 fontFamily="Manrope"
@@ -456,7 +508,13 @@ const Main = () => {
                       />
                     </InputMask>
                   </Box>
-                  <Box>
+                  <Box
+                    sx={{
+                      ".warning": {
+                        fontSize: { xs: "15px", md: "20px" },
+                      },
+                    }}
+                  >
                     <TextField
                       sx={{
                         width: { xs: 300, md: 400, bg: 600 },
@@ -476,6 +534,15 @@ const Main = () => {
                       onChange={handleMoneyChange}
                       error={moneyError ? true : false}
                     />
+                    <Typography
+                      fontFamily="Manrope"
+                      lineHeight="110%"
+                      marginBottom="20px"
+                      fontWeight={500}
+                      className="warning"
+                    >
+                      *Минимальная ставка 5 BYN
+                    </Typography>
                   </Box>
                 </Box>
                 <Box
