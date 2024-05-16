@@ -8,7 +8,7 @@ const WebSocket = require("ws");
 const http = require("http");
 const { decrypt } = require("./utils/crypt");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 

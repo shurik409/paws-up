@@ -100,12 +100,12 @@ const Main = () => {
   useEffect(() => {
     const userName = getEncryptedCookie("Name");
     const userPhone = getEncryptedCookie("Phone");
-    const cookieName = getCookie("Name");
-    const cookiePhone = getCookie("Phone");
     setName(userName);
     setPhone(userPhone);
     getMaxValue();
     getAuctionInfo();
+    const cookieName = getCookie("Name");
+    const cookiePhone = getCookie("Phone");
     getUserByInfo(cookieName, cookiePhone);
   }, []);
 
@@ -266,6 +266,9 @@ const Main = () => {
     setEncryptedCookie("Phone", phone);
     cleanForm();
     getMaxValue();
+    const cookieName = getCookie("Name");
+    const cookiePhone = getCookie("Phone");
+    getUserByInfo(cookieName, cookiePhone);
   };
 
   return (
