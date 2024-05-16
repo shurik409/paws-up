@@ -4,27 +4,37 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongodb = require("./mongodb");
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const WebSocket = require('ws');
-const http = require('http');
+const WebSocket = require("ws");
+const http = require("http");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
+
+// Middleware для разрешения CORS
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Разрешить доступ с любых источников
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // Создаем HTTP сервер
 const server = http.createServer(app);
 
 // Настраиваем WebSocket сервер на основе HTTP сервера
 const wss = new WebSocket.Server({ server });
 
-wss.on('connection', (ws) => {
-  console.log(123);
-    console.log('Client connected');
-    ws.on('message', (message) => {
-        console.log('received: %s', message);
-    });
-    ws.on('close', () => {
-        console.log('Client disconnected');
-    });
+wss.on("connection", (ws) => {
+  console.log("Client connected");
+  ws.on("message", (message) => {
+    console.log("received: %s", message);
+  });
+  ws.on("close", () => {
+    console.log("Client disconnected");
+  });
 });
 
 // URL-адрес кластера MongoDB
@@ -38,27 +48,27 @@ const client = new MongoClient(uri, {
   },
 });
 
-
 client
   .connect()
   .catch((err) => console.error(err.stack))
   .then((mongoClient) => {
     app.locals.db = mongoClient;
-    const db = client.db('PawsUpAuction');
-    const collection = db.collection('Auction');
+    const db = client.db("PawsUpAuction");
+    const collection = db.collection("Auction");
 
     // Использование Change Streams для отслеживания изменений
     const changeStream = collection.watch();
-    changeStream.on('change', (change) => {
-        console.log('Document changed: ', change);
-        // Отправка изменений всем подключенным клиентам
-        wss.clients.forEach((client) => {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send(JSON.stringify(change));
-            }
-        });
+    changeStream.on("change", (change) => {
+      // console.log("Document changed: ", change);
+      // Отправка изменений всем подключенным клиентам
+      wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+          if (change.fullDocument.paint) {
+            client.send(JSON.stringify(change.fullDocument.paint));
+          }
+        }
+      });
     });
-    app.listen(PORT, () => console.log("server is running on " + PORT));
   });
 
 const endtime = "2024-05-17T17:48+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
@@ -66,19 +76,9 @@ const endtime = "2024-05-17T17:48+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 const reactBuild = path.join(__dirname, "build");
 app.use(express.static(reactBuild));
 
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
 app.use(bodyParser.json());
-
-// app.get("/", async (req, res) => {
-//   res.sendFile(path.join(reactBuild, "index.html"));
-// });
 
 app.get("/", function (request, response) {
   response.sendFile(path.join(__dirname + "/build/index.html"));
@@ -86,8 +86,6 @@ app.get("/", function (request, response) {
 
 app.get("/auction/", function (request, response) {
   response.sendFile(path.join(__dirname + "/build/index.html"));
-
-  // response.sendStatus(404);
 });
 
 app.get("/auction/lot/:id", function (request, response) {
@@ -110,7 +108,7 @@ app.get("/auction/results/:id", function (request, response) {
 
 app.get("/api/maxvalue/:id", async function (request, response) {
   const users = await mongodb.getUsers(request, request.params.id);
-  if (users.length) {
+  if (users?.length) {
     const max = users.reduce(function (prev, current) {
       return prev.money > current.money ? prev : current;
     });
@@ -144,4 +142,5 @@ app.post("/api/auction", async function (request, response) {
   }
 });
 
-// app.listen(PORT, () => console.log("server is running on " + PORT));
+// Запуск сервера на заданном порту
+server.listen(PORT, () => console.log("server is running on " + PORT));

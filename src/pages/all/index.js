@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReconnectingWebSocket from "reconnecting-websocket";
 import { Box, Typography } from "@mui/material";
 
 import { Link } from "react-router-dom";
@@ -68,6 +69,16 @@ const All = () => {
     setMaxValue(all);
   };
 
+  const getVallueById = async (id) => {
+    const maxValueById = await getMaxValue(id);
+    setMaxValue((prevMaxValue) => {
+      const newArray = [...prevMaxValue];
+      newArray[id - 1] = maxValueById;
+      return newArray;
+    });
+  };
+
+
   const getAuctionInfo = async () => {
     const response = await fetch(`/api/auction/open`);
     const value = await response.json();
@@ -91,6 +102,31 @@ const All = () => {
 
     return () => clearTimeout(timer);
   });
+
+  useEffect(() => {
+    const rws = new ReconnectingWebSocket("wss:/heypawsup.com/ws");
+
+    rws.onopen = () => {
+      console.log("WebSocket connection opened");
+    };
+
+    rws.onerror = (error) => {
+      console.error("WebSocket error:", error);
+    };
+
+    rws.onmessage = (message) => {
+      const parsedData = JSON.parse(message.data);
+      getVallueById(parsedData);
+    };
+
+    rws.onclose = () => {
+      console.log("WebSocket connection closed");
+    };
+
+    return () => {
+      rws.close();
+    };
+  }, []);
 
   return (
     <Box sx={{ position: "relative" }}>

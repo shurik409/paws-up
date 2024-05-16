@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Box, Typography, TextField, InputAdornment } from "@mui/material";
 import InputMask from "react-input-mask";
-import ReconnectingWebSocket from 'reconnecting-websocket';
+import ReconnectingWebSocket from "reconnecting-websocket";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -96,26 +96,31 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    const rws = new ReconnectingWebSocket('wss://heypawsup.com');
+    const rws = new ReconnectingWebSocket("wss:/heypawsup.com/ws");
 
     rws.onopen = () => {
-        console.log('WebSocket connection opened');
+      console.log("WebSocket connection opened");
+    };
+
+    rws.onerror = (error) => {
+      console.error("WebSocket error:", error);
     };
 
     rws.onmessage = (message) => {
-        const parsedData = JSON.parse(message.data);
-        console.log('Received data: ', parsedData);
-        // setData(parsedData);  // обновляем состояние компонента
+      const parsedData = JSON.parse(message.data);
+      if (`${parsedData}` === `${id}`) {
+        getMaxValue();
+      }
     };
 
     rws.onclose = () => {
-        console.log('WebSocket connection closed');
+      console.log("WebSocket connection closed");
     };
 
     return () => {
-        rws.close();
+      rws.close();
     };
-}, []);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
