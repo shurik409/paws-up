@@ -143,11 +143,14 @@ app.post("/api/auction/:id/user/", async function (request, response) {
     const decPhone = request.body.phone && decrypt(request.body.phone);
     let max = 0;
     if (users?.length && decName && decPhone) {
-      max = users
-        .filter((user) => user.name === decName && user.phone === decPhone)
-        .reduce(function (prev, current) {
+      const decUser = users.filter(
+        (user) => user.name === decName && user.phone === decPhone
+      );
+      if (decUser.length) {
+        max = decUser.reduce(function (prev, current) {
           return prev.money > current.money ? prev : current;
         });
+      }
     }
     response.status(200).json({ max: max });
   }
