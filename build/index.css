@@ -47,6 +47,12 @@
   font-weight: 400;
 }
 
+@font-face {
+  font-family: "Tahoma";
+  src: url("./fonts/Tahoma.ttf") format("truetype");
+  font-weight: 400;
+}
+
 body {
   background-color: #2176C9;
   color: #EFEFEF;

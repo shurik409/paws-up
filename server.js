@@ -107,6 +107,16 @@ app.get("/auction/results/:id", function (request, response) {
   response.sendStatus(404);
 });
 
+
+app.get("/music/:id", function (request, response) {
+  const ids = ["momy"];
+  if (ids.includes(request.params.id)) {
+    response.sendFile(path.join(__dirname + "/build/index.html"));
+    return;
+  }
+  response.sendStatus(404);
+});
+
 app.get("/api/maxvalue/:id", async function (request, response) {
   const users = await mongodb.getUsers(request, request.params.id);
   if (users?.length) {

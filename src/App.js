@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Box } from "@mui/material";
-import { Main, Admin, All } from "./pages";
+import { Main, Admin, All, Music } from "./pages";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -28,6 +28,7 @@ function App() {
             <Route path="/auction/lot/:id" element={<Main />} />
             <Route path="/auction/results/:id" element={<Admin />} />
             <Route path="/auction/" element={<All />} />
+            <Route path="/music/:id" element={<Music />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
