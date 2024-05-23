@@ -361,9 +361,10 @@ const Music = () => {
                 fontFamily={"Tahoma"}
                 sx={{
                   fontSize: { xs: "16px", md: "22px", lg: "30px" },
+                  maxWidth: { xs: "330px", md: "500px", lg: "800px" },
                 }}
               >
-                Скачать крутецкий рингтон...
+                Скачать крутецкий рингтон {music[id].name}
               </Typography>
             </a>
           </Box>
