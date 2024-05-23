@@ -159,6 +159,7 @@ const Music = () => {
               background: `url(${Exit})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "contain",
+              cursor: "pointer",
             }}
             onClick={() => handleClickOpen("error")}
           ></Box>
@@ -288,6 +289,7 @@ const Music = () => {
                       border: "2px solid #000",
                       borderRadius: "10px",
                       marginBottom: "16px",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleClickOpen("like")}
                   >
@@ -311,6 +313,7 @@ const Music = () => {
                       backgroundColor: "#fff",
                       border: "2px solid #000",
                       borderRadius: "10px",
+                      cursor: "pointer",
                     }}
                     onClick={() => handleClickOpen("klass")}
                   >
@@ -384,6 +387,7 @@ const Music = () => {
                 border: "2px solid #000",
                 borderRadius: "10px",
                 marginBottom: "16px",
+                cursor: "pointer",
               }}
               onClick={() => handleClickOpen("ok")}
             >
@@ -408,6 +412,7 @@ const Music = () => {
                 border: "2px solid #000",
                 borderRadius: "10px",
                 marginBottom: "16px",
+                cursor: "pointer",
               }}
               onClick={() => handleClickOpen("cancel")}
             >
@@ -432,6 +437,7 @@ const Music = () => {
                 border: "2px solid #000",
                 borderRadius: "10px",
                 marginBottom: "16px",
+                cursor: "pointer",
               }}
               onClick={() => handleClickOpen("help")}
             >
@@ -487,6 +493,7 @@ const Music = () => {
               border: "2px solid #000",
               borderRadius: "10px",
               marginBottom: "16px",
+              cursor: "pointer",
             }}
             onClick={handleClose}
           >
