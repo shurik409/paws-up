@@ -107,9 +107,19 @@ app.get("/auction/results/:id", function (request, response) {
   response.sendStatus(404);
 });
 
-
 app.get("/music/:id", function (request, response) {
-  const ids = ["momy"];
+  const ids = [
+    "momy",
+    "astronomia",
+    "blue",
+    "budilnik",
+    "crazy_frog",
+    "freestyler",
+    "one_desire",
+    "soobshhenie",
+    "telefon_govorit",
+    "zabud",
+  ];
   if (ids.includes(request.params.id)) {
     response.sendFile(path.join(__dirname + "/build/index.html"));
     return;
