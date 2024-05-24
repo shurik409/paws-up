@@ -2,5 +2,6 @@ import Main from "./main";
 import Admin from "./admin";
 import All from "./all";
 import Music from "./music";
+import Count from "./count";
 
-export { Main, Admin, All, Music };
+export { Main, Admin, All, Music, Count };

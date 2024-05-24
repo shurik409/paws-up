@@ -55,9 +55,11 @@ client
     app.locals.db = mongoClient;
     const db = client.db("PawsUpAuction");
     const collection = db.collection("Auction");
+    const counterCollection = db.collection("Counter");
 
     // Использование Change Streams для отслеживания изменений
     const changeStream = collection.watch();
+    const counterChangeStream = counterCollection.watch();
     changeStream.on("change", (change) => {
       // console.log("Document changed: ", change);
       // Отправка изменений всем подключенным клиентам
@@ -66,6 +68,21 @@ client
           if (change.fullDocument.paint) {
             client.send(JSON.stringify(change.fullDocument.paint));
           }
+        }
+      });
+    });
+
+    counterChangeStream.on("change", (change) => {
+      // console.log("Document changed: ", change);
+      // Отправка изменений всем подключенным клиентам
+      wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(
+            JSON.stringify({
+              count: change.fullDocument.count,
+              type: "counter",
+            })
+          );
         }
       });
     });
@@ -86,6 +103,10 @@ app.get("/", function (request, response) {
 });
 
 app.get("/auction/", function (request, response) {
+  response.sendFile(path.join(__dirname + "/build/index.html"));
+});
+
+app.get("/count/", function (request, response) {
   response.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
@@ -183,6 +204,24 @@ app.post("/api/auction", async function (request, response) {
     await mongodb.addUser(request, request.body);
     response.status(200).json({ message: "success" });
   }
+});
+
+app.get("/api/count", async function (request, response) {
+  const results = await mongodb.getCount(request);
+
+  response.status(200).json(results);
+});
+
+app.get("/api/count/plus", async function (request, response) {
+  const results = await mongodb.plusCount(request);
+
+  response.status(200).json(results);
+});
+
+app.get("/api/count/minus", async function (request, response) {
+  const results = await mongodb.minusCount(request);
+
+  response.status(200).json(results);
 });
 
 // Запуск сервера на заданном порту
