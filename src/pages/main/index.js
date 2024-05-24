@@ -249,6 +249,7 @@ const Main = () => {
         phone,
         money: +money,
         paint: +id,
+        time: `${new Date()}`,
       }),
     });
     const response = await fetch(request);
