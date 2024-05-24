@@ -54,14 +54,57 @@ const Count = () => {
   }, []);
 
   return (
-    <Box>
-      <Typography>Количество поситителей: {count} </Typography>
-      <Button onClick={handlePlus} sx={{ color: "#FFF" }}>
-        Прибавить
-      </Button>
-      <Button onClick={handleMinus} sx={{ color: "#FFF" }}>
-        Отнять
-      </Button>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
+      <Box>
+        <Typography
+          sx={{ fontSize: { xs: "24px", md: "32px" }, textAlign: "center", fontWeight: 'bold' }}
+        >
+          Количество поситителей: {count}{" "}
+        </Typography>
+        <Box
+          sx={{
+            marginTop: "32px",
+            display: "flex",
+            gap: "16px",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            onClick={handlePlus}
+            sx={{
+              display: "flex",
+              width: { xs: "120px", md: "170px" },
+              height: "40px",
+              border: "2px solid #FFF",
+              color: "#FFF",
+              fontSize: { xs: "16px", md: "20px" },
+            }}
+          >
+            Прибавить
+          </Button>
+          <Button
+            onClick={handleMinus}
+            sx={{
+              display: "flex",
+              width: { xs: "120px", md: "170px" },
+              height: "40px",
+              border: "2px solid #FFF",
+              color: "#FFF",
+              fontSize: { xs: "16px", md: "20px" },
+            }}
+          >
+            Отнять
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 };
