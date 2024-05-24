@@ -48,16 +48,20 @@ const CountdownTimer = ({ endTime }) => {
         },
       }}
     >
-      <Typography
-        fontFamily="Manrope"
-        lineHeight="110%"
-        fontWeight={700}
-        className="timer"
-      >
-        {`${hours < 10 ? 0 : ""}${hours}`} :{" "}
-        {`${minutes < 10 ? 0 : ""}${minutes}`} :{" "}
-        {`${seconds < 10 ? 0 : ""}${seconds}`}
-      </Typography>
+      {endTime ? (
+        <Typography
+          fontFamily="Manrope"
+          lineHeight="110%"
+          fontWeight={700}
+          className="timer"
+        >
+          {`${hours < 10 ? 0 : ""}${hours}`} :{" "}
+          {`${minutes < 10 ? 0 : ""}${minutes}`} :{" "}
+          {`${seconds < 10 ? 0 : ""}${seconds}`}
+        </Typography>
+      ) : (
+        <></>
+      )}
     </Box>
   );
 };

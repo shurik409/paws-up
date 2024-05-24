@@ -14,7 +14,6 @@ import Rio from "../../img/lots/3.webp";
 import Kio from "../../img/lots/4.webp";
 import Top from "../../img/lots/5.webp";
 import Six from "../../img/lots/6.webp";
-import Seven from "../../img/lots/7.webp";
 import CountdownTimer from "../../components/timer";
 
 import {
@@ -26,38 +25,33 @@ import {
 const info = [
   {
     id: 1,
-    name: "Праздник",
+    name: "kot.gif",
     img: Lu,
   },
   {
     id: 2,
-    name: "Проказник",
+    name: "Бритни спирс",
     img: Chacha,
   },
   {
     id: 3,
-    name: "В засаде",
+    name: "Сознание",
     img: Rio,
   },
   {
     id: 4,
-    name: "Что?",
+    name: "I’m free",
     img: Kio,
   },
   {
     id: 5,
-    name: "Лапы вверх",
+    name: "This is fine",
     img: Top,
   },
   {
     id: 6,
-    name: "Котик ждет бенто-тортик",
+    name: "Дверь мне запили",
     img: Six,
-  },
-  {
-    id: 7,
-    name: "Предсказания котика сбываются",
-    img: Seven,
   },
 ];
 
@@ -322,7 +316,7 @@ const Main = () => {
               ? `Аукцион закрыт`
               : `До конца аукциона:`}
           </Typography>
-          {!auctionInfo?.isAuctionEnd && (
+          {!auctionInfo?.isAuctionEnd && auctionInfo?.endDate && (
             <CountdownTimer endTime={auctionInfo?.endDate} />
           )}
         </Box>

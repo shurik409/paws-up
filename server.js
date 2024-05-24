@@ -72,7 +72,7 @@ client
   })
   .catch((err) => console.error(err.stack));
 
-const endtime = "2024-05-17T17:48+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
+const endtime = "2024-05-25T16:00+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
 const reactBuild = path.join(__dirname, "build");
 app.use(express.static(reactBuild));
@@ -90,7 +90,7 @@ app.get("/auction/", function (request, response) {
 });
 
 app.get("/auction/lot/:id", function (request, response) {
-  const ids = ["1", "2", "3", "4", "5", "6", "7"];
+  const ids = ["1", "2", "3", "4", "5", "6"];
   if (ids.includes(request.params.id)) {
     response.sendFile(path.join(__dirname + "/build/index.html"));
     return;
@@ -99,7 +99,7 @@ app.get("/auction/lot/:id", function (request, response) {
 });
 
 app.get("/auction/results/:id", function (request, response) {
-  const ids = ["1", "2", "3", "4", "5", "6", "7"];
+  const ids = ["1", "2", "3", "4", "5", "6"];
   if (ids.includes(request.params.id)) {
     response.sendFile(path.join(__dirname + "/build/index.html"));
     return;

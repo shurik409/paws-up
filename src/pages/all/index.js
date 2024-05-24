@@ -18,32 +18,32 @@ import CountdownTimer from "../../components/timer";
 const info = [
   {
     id: 1,
-    name: "Праздник",
+    name: "kot.gif",
     img: Lu,
   },
   {
     id: 2,
-    name: "Проказник",
+    name: "Бритни спирс",
     img: Chacha,
   },
   {
     id: 3,
-    name: "В засаде",
+    name: "Сознание",
     img: Rio,
   },
   {
     id: 4,
-    name: "Что?",
+    name: "I’m free",
     img: Kio,
   },
   {
     id: 5,
-    name: "Лапы вверх",
+    name: "This is fine",
     img: Top,
   },
   {
     id: 6,
-    name: "Котик ждет бенто-тортик",
+    name: "Дверь мне запили",
     img: Six,
   },
 ];
@@ -77,7 +77,6 @@ const All = () => {
       return newArray;
     });
   };
-
 
   const getAuctionInfo = async () => {
     const response = await fetch(`/api/auction/open`);
@@ -198,7 +197,7 @@ const All = () => {
               ? `Аукцион закрыт`
               : `До конца аукциона:`}
           </Typography>
-          {!auctionInfo?.isAuctionEnd && (
+          {!auctionInfo?.isAuctionEnd && auctionInfo?.endDate && (
             <CountdownTimer endTime={auctionInfo?.endDate} />
           )}
         </Box>
