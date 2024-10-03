@@ -8,27 +8,27 @@ import Six from "../src/img/lots/6.webp";
 export const LotsInfo = [
   {
     id: 1,
-    name: "kot.gif",
+    name: "Начинка",
     img: First,
   },
   {
     id: 2,
-    name: "Бритни спирс",
+    name: "Don't touch",
     img: Second,
   },
   {
     id: 3,
-    name: "Сознание",
+    name: "Моё!",
     img: Third,
   },
   {
     id: 4,
-    name: "I’m free",
+    name: "Ароматерапия",
     img: Fourth,
   },
   {
     id: 5,
-    name: "This is fine",
+    name: "Утро",
     img: Fifth,
   },
   {
