@@ -3,50 +3,14 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import { Box, Typography } from "@mui/material";
 
 import { Link } from "react-router-dom";
+import CountdownTimer from '../../components/timer/index'
 
 import "swiper/css";
 import "swiper/css/effect-flip";
 // import Noise from "../../img/noise.png";
-import Lu from "../../img/lots/1.webp";
-import Chacha from "../../img/lots/2.webp";
-import Rio from "../../img/lots/3.webp";
-import Kio from "../../img/lots/4.webp";
-import Top from "../../img/lots/5.webp";
-import Six from "../../img/lots/6.webp";
-import CountdownTimer from "../../components/timer";
 
-const info = [
-  {
-    id: 1,
-    name: "kot.gif",
-    img: Lu,
-  },
-  {
-    id: 2,
-    name: "Бритни спирс",
-    img: Chacha,
-  },
-  {
-    id: 3,
-    name: "Сознание",
-    img: Rio,
-  },
-  {
-    id: 4,
-    name: "I’m free",
-    img: Kio,
-  },
-  {
-    id: 5,
-    name: "This is fine",
-    img: Top,
-  },
-  {
-    id: 6,
-    name: "Дверь мне запили",
-    img: Six,
-  },
-];
+import { LotsInfo } from "../../lotsInfo";
+
 
 const All = () => {
   const [maxValue, setMaxValue] = useState([]);
@@ -62,7 +26,7 @@ const All = () => {
 
   const getAllValue = async () => {
     const all = await Promise.all(
-      Array.from({ length: info.length }, (_, i) => i + 1).map((id) =>
+      Array.from({ length: LotsInfo.length }, (_, i) => i + 1).map((id) =>
         getMaxValue(id)
       )
     );
@@ -213,7 +177,7 @@ const All = () => {
             padding: "24px",
           }}
         >
-          {info.map((data, index) => (
+          {LotsInfo.map((data, index) => (
             <Box
               sx={{
                 display: "flex",
