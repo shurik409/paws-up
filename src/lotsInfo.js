@@ -33,7 +33,7 @@ export const LotsInfo = [
   },
   {
     id: 6,
-    name: "Дверь мне запили",
+    name: "Я тебя жду",
     img: Six,
   },
 ];
