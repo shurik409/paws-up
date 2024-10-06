@@ -84,7 +84,7 @@ const All = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const endDate = new Date(auctionInfo.endDate);
+      const endDate = new Date(mainInfo.endDate);
       const currentDate = new Date();
 
       const isAuctionEnd = endDate - currentDate < 0;
