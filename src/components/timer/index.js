@@ -35,7 +35,7 @@ const CountdownTimer = ({ endTime }) => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  });
+  }, [endTime]);
 
   const { days, hours, minutes, seconds } = timeLeft;
 

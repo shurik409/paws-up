@@ -32,6 +32,7 @@ const Main = () => {
   const [maxValue, setMaxValue] = useState(0);
   const [winner, setWinner] = useState("");
   const [cookieUser, setCookieUser] = useState("");
+  const [lastTime, setLastTime] = useState("");
 
   let { id } = useParams();
 
@@ -47,11 +48,17 @@ const Main = () => {
   const getMaxValue = async () => {
     const response = await fetch(`/api/maxvalue/${id}`);
     const value = await response.json();
+    console.log(value);
     if (value) {
       setMaxValue(value.max.money);
       setWinner(value.max.name);
+      setLastTime(value.max.time);
     }
   };
+
+  useEffect(() => {
+    shouldAuctionContinue(auctionInfo?.endDate, lastTime);
+  }, [auctionInfo, lastTime]);
 
   useEffect(() => {
     const userName = getEncryptedCookie("Name");
@@ -228,6 +235,23 @@ const Main = () => {
     getUserByInfo(cookieName, cookiePhone);
   };
 
+  const shouldAuctionContinue = (auctionEndTime, lotLastTime) => {
+    if ((auctionEndTime, lotLastTime)) {
+      const time1 = new Date(auctionEndTime);
+      const time2 = new Date(lotLastTime);
+      const isAuctionContinue = time1 - time2 <= 60 * 1000;
+      if (isAuctionContinue) {
+        time1.setMinutes(time1.getMinutes() + 1);
+        setAuctionInfo({
+          endDate: time1,
+          isAuctionEnd: false,
+        });
+      }
+      const difference = +time1 - +new Date();
+      return difference > 0;
+    }
+  };
+
   return (
     <Box sx={{ position: "relative" }}>
       <Box
@@ -279,9 +303,11 @@ const Main = () => {
               ? `Аукцион закрыт`
               : `До конца аукциона:`}
           </Typography>
-          {!auctionInfo?.isAuctionEnd && auctionInfo?.endDate && (
-            <CountdownTimer endTime={auctionInfo?.endDate} />
-          )}
+          {!auctionInfo?.isAuctionEnd &&
+            auctionInfo?.endDate &&
+            shouldAuctionContinue(auctionInfo?.endDate, lastTime) && (
+              <CountdownTimer endTime={auctionInfo?.endDate} />
+            )}
         </Box>
         <Box>
           <Box
@@ -432,7 +458,8 @@ const Main = () => {
             ) : (
               <></>
             )}
-            {!auctionInfo?.isAuctionEnd ? (
+            {!auctionInfo?.isAuctionEnd &&
+            shouldAuctionContinue(auctionInfo?.endDate, lastTime) ? (
               <Box>
                 <Box>
                   <Box>

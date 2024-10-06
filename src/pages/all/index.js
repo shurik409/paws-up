@@ -3,7 +3,7 @@ import ReconnectingWebSocket from "reconnecting-websocket";
 import { Box, Typography } from "@mui/material";
 
 import { Link } from "react-router-dom";
-import CountdownTimer from '../../components/timer/index'
+import CountdownTimer from "../../components/timer/index";
 
 import "swiper/css";
 import "swiper/css/effect-flip";
@@ -11,17 +11,17 @@ import "swiper/css/effect-flip";
 
 import { LotsInfo } from "../../lotsInfo";
 
-
 const All = () => {
   const [maxValue, setMaxValue] = useState([]);
-  const [auctionInfo, setAuctionInfo] = useState(null);
+  const [auctionInfo, setAuctionInfo] = useState([]);
+  const [mainInfo, setMainInfo] = useState(null);
   // const [winner, setWinner] = useState('');
 
   const getMaxValue = async (id) => {
     const response = await fetch(`/api/maxvalue/${id}`);
     const value = await response.json();
 
-    return value.max.money;
+    return value;
   };
 
   const getAllValue = async () => {
@@ -45,8 +45,8 @@ const All = () => {
   const getAuctionInfo = async () => {
     const response = await fetch(`/api/auction/open`);
     const value = await response.json();
-
-    setAuctionInfo(value);
+    setMainInfo(value);
+    setAuctionInfo(new Array(LotsInfo.length).fill(value));
   };
 
   useEffect(() => {
@@ -55,16 +55,47 @@ const All = () => {
   }, []);
 
   useEffect(() => {
+    if (auctionInfo.length === maxValue.length && maxValue.length > 0) {
+      shouldAuctionContinue();
+    }
+  }, [auctionInfo, maxValue]);
+
+  const shouldAuctionContinue = () => {
+    const newInfo = auctionInfo.map((auctionInfoLot, index) => {
+      const time1 = new Date(auctionInfoLot.endDate);
+      const time2 = new Date(maxValue[index].max.time);
+      const difference = +time1 - +new Date();
+      const isAuctionContinue = time1 - time2 <= 60 * 1000;
+      if (isAuctionContinue) {
+        time1.setMinutes(time1.getMinutes() + 1);
+        return {
+          endDate: time1,
+          isAuctionEnd: false,
+        };
+      } else {
+        return {
+          endDate: auctionInfoLot.endDate,
+          isAuctionEnd: difference > 0 ? auctionInfoLot.isAuctionEnd : true,
+        };
+      }
+    });
+    setAuctionInfo(newInfo);
+  };
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       const endDate = new Date(auctionInfo.endDate);
       const currentDate = new Date();
 
       const isAuctionEnd = endDate - currentDate < 0;
-      setAuctionInfo({ isAuctionEnd, endDate });
+      setMainInfo({ isAuctionEnd, endDate });
+      setAuctionInfo(
+        new Array(LotsInfo.length).fill({ isAuctionEnd, endDate })
+      );
     }, 1000);
 
     return () => clearTimeout(timer);
-  });
+  }, [mainInfo]);
 
   useEffect(() => {
     const rws = new ReconnectingWebSocket("wss:/heypawsup.com/ws");
@@ -157,12 +188,18 @@ const All = () => {
             className="timerHeading"
             marginY="15px"
           >
-            {auctionInfo?.isAuctionEnd
-              ? `Аукцион закрыт`
-              : `До конца аукциона:`}
+            {mainInfo?.isAuctionEnd ? (
+              <>
+                {auctionInfo?.filter((info) => !info.isAuctionEnd).length === 0
+                  ? `Аукцион закрыт`
+                  : `Аукцион закрыт, но не для всех картин`}
+              </>
+            ) : (
+              `До конца аукциона:`
+            )}
           </Typography>
-          {!auctionInfo?.isAuctionEnd && auctionInfo?.endDate && (
-            <CountdownTimer endTime={auctionInfo?.endDate} />
+          {!mainInfo?.isAuctionEnd && mainInfo?.endDate && (
+            <CountdownTimer endTime={mainInfo?.endDate} />
           )}
         </Box>
         <Box
@@ -263,7 +300,7 @@ const All = () => {
                   fontWeight={700}
                   className="money"
                 >
-                  {maxValue[index]} BYN
+                  {maxValue[index]?.max.money} BYN
                 </Typography>
                 <Link
                   to={`/auction/lot/${index + 1}`}
@@ -291,7 +328,7 @@ const All = () => {
                     }}
                     // onClick={handleSubmit}
                   >
-                    {auctionInfo?.isAuctionEnd
+                    {auctionInfo[index]?.isAuctionEnd
                       ? "Узнать победителя"
                       : "Сделать ставку"}
                   </Box>
