@@ -56,7 +56,7 @@ client
     const db = client.db("PawsUpAuction");
     const collection = db.collection("Auction");
     const counterCollection = db.collection("Counter");
-
+    console.log(123, db);
     // Использование Change Streams для отслеживания изменений
     const changeStream = collection.watch();
     const counterChangeStream = counterCollection.watch();
@@ -86,8 +86,11 @@ client
         }
       });
     });
+    server.listen(PORT, () => {
+      console.log("server is running on " + PORT);
+    });
   })
-  .catch((err) => console.error(err.stack));
+  .catch((err) => console.error(222, err.stack));
 
 const endtime = "2025-05-17T18:00+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
@@ -225,4 +228,4 @@ app.get("/api/count/minus", async function (request, response) {
 });
 
 // Запуск сервера на заданном порту
-server.listen(PORT, () => console.log("server is running on " + PORT));
+// server.listen(PORT, () => console.log("server is running on " + PORT));
