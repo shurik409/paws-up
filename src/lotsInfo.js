@@ -8,32 +8,32 @@ import Six from "../src/img/lots/6.webp";
 export const LotsInfo = [
   {
     id: 1,
-    name: "Начинка",
+    name: "Мазерлодэ",
     img: First,
   },
   {
     id: 2,
-    name: "Don't touch",
+    name: "Йоу собаки я Наруто Узумаки",
     img: Second,
   },
   {
     id: 3,
-    name: "Моё!",
+    name: "Милки",
     img: Third,
   },
   {
     id: 4,
-    name: "Ароматерапия",
+    name: "Вопрос риторический",
     img: Fourth,
   },
   {
     id: 5,
-    name: "Утро",
+    name: "Счастливы вместе",
     img: Fifth,
   },
   {
     id: 6,
-    name: "Я тебя жду",
+    name: "Главная потребность",
     img: Six,
   },
 ];
