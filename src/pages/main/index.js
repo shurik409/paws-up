@@ -52,7 +52,7 @@ const Main = () => {
     if (value) {
       setMaxValue(value.max.money);
       setWinner(value.max.name);
-      setLastTime(value.max.time);
+      setLastTime(value.max.time || `${new Date()}`);
     }
   };
 
