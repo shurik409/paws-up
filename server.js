@@ -56,35 +56,35 @@ client
     const db = client.db("PawsUpAuction");
     const collection = db.collection("Auction");
     const counterCollection = db.collection("Counter");
-    console.log(123, db);
     // Использование Change Streams для отслеживания изменений
     const changeStream = collection.watch();
     const counterChangeStream = counterCollection.watch();
     changeStream.on("change", (change) => {
-      // console.log("Document changed: ", change);
-      // Отправка изменений всем подключенным клиентам
-      wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-          if (change.fullDocument.paint) {
+      if (change.fullDocument && change.fullDocument.paint) {
+        wss.clients.forEach((client) => {
+          if (client.readyState === WebSocket.OPEN) {
             client.send(JSON.stringify(change.fullDocument.paint));
           }
-        }
-      });
+        });
+      }
     });
 
     counterChangeStream.on("change", (change) => {
-      // console.log("Document changed: ", change);
-      // Отправка изменений всем подключенным клиентам
-      wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send(
-            JSON.stringify({
-              count: change.fullDocument.count,
-              type: "counter",
-            })
-          );
-        }
-      });
+      if (
+        change.fullDocument &&
+        typeof change.fullDocument.count !== "undefined"
+      ) {
+        wss.clients.forEach((client) => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(
+              JSON.stringify({
+                count: change.fullDocument.count,
+                type: "counter",
+              })
+            );
+          }
+        });
+      }
     });
     server.listen(PORT, () => {
       console.log("server is running on " + PORT);
