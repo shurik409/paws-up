@@ -92,7 +92,7 @@ client
   })
   .catch((err) => console.error(222, err.stack));
 
-const endtime = "2025-05-17T18:00+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
+const endtime = "2025-05-19T15:00+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
 const reactBuild = path.join(__dirname, "build");
 app.use(express.static(reactBuild));
@@ -106,7 +106,8 @@ app.get("/", function (request, response) {
 });
 
 app.get("/auction/", function (request, response) {
-  response.sendFile(path.join(__dirname + "/build/index.html"));
+  // response.sendFile(path.join(__dirname + "/build/index.html"));
+  response.redirect("/auction/lot/1");
 });
 
 app.get("/count/", function (request, response) {
