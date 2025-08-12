@@ -430,7 +430,7 @@ const Main = () => {
               fontWeight={700}
               className="name"
             >
-              {`«${data.size}»`}
+              {`${data.size}`}
             </Typography>
             <Typography
               fontFamily="Manrope"
