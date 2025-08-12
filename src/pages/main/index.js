@@ -428,6 +428,15 @@ const Main = () => {
               lineHeight="110%"
               marginBottom="20px"
               fontWeight={700}
+              className="name"
+            >
+              {`«${data.size}»`}
+            </Typography>
+            <Typography
+              fontFamily="Manrope"
+              lineHeight="110%"
+              marginBottom="20px"
+              fontWeight={700}
               className="money"
             >
               {auctionInfo?.isAuctionEnd

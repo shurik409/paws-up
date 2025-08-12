@@ -10,42 +10,50 @@ import Paint8 from "../src/img/lots/8.jpeg";
 export const LotsInfo = [
   {
     id: 1,
-    name: "Банка котурцов 30х40см",
+    name: "Банка котурцов",
     img: Paint1,
+    size: "30х40см",
   },
   {
     id: 2,
-    name: "Рабочее утро 30х30см",
+    name: "Рабочее утро",
     img: Paint2,
+    size: "30х30см",
   },
   {
     id: 3,
-    name: "Париж 15х20см",
+    name: "Париж",
     img: Paint3,
+    size: "15х20см",
   },
   {
     id: 4,
-    name: "Бджола 30х30см",
+    name: "Бджола",
     img: Paint4,
+    size: "30х30см",
   },
   {
     id: 5,
-    name: "Утро 30х40см",
+    name: "Утро",
     img: Paint5,
+    size: "30х40см",
   },
   {
     id: 6,
-    name: "Бесконечность 30х40см",
+    name: "Бесконечность",
     img: Paint6,
+    size: "30х40см",
   },
   {
     id: 7,
-    name: "Котовик обыкновенный 30х40см",
+    name: "Котовик обыкновенный",
     img: Paint7,
+    size: "30х40см",
   },
   {
     id: 8,
-    name: "Нян кэт 30х30см",
+    name: "Нян кэт",
     img: Paint8,
+    size: "30х30см",
   },
 ];

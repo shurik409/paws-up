@@ -298,6 +298,15 @@ const All = () => {
                   lineHeight="110%"
                   marginBottom="16px"
                   fontWeight={700}
+                  className="name"
+                >
+                  {`${data.size}`}
+                </Typography>
+                <Typography
+                  fontFamily="Manrope"
+                  lineHeight="110%"
+                  marginBottom="16px"
+                  fontWeight={700}
                   className="money"
                 >
                   {maxValue[index]?.max.money} BYN
