@@ -106,8 +106,8 @@ app.get("/", function (request, response) {
 });
 
 app.get("/auction/", function (request, response) {
-  // response.sendFile(path.join(__dirname + "/build/index.html"));
-  response.redirect("/auction/lot/1");
+  response.sendFile(path.join(__dirname + "/build/index.html"));
+  // response.redirect("/auction/lot/1");
 });
 
 app.get("/count/", function (request, response) {
@@ -115,7 +115,7 @@ app.get("/count/", function (request, response) {
 });
 
 app.get("/auction/lot/:id", function (request, response) {
-  const ids = ["1", "2", "3", "4", "5", "6"];
+  const ids = ["1", "2", "3", "4", "5", "6", "7", "8"];
   if (ids.includes(request.params.id)) {
     response.sendFile(path.join(__dirname + "/build/index.html"));
     return;
