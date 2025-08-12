@@ -241,8 +241,12 @@ const All = () => {
                     fontSize: { xs: "25px" },
                     textAlign: "center",
                   },
-                  ".money": {
+                  ".size": {
                     fontSize: { xs: "25px" },
+                    textAlign: "center",
+                  },
+                  ".money": {
+                    fontSize: { xs: "36px" },
                     textAlign: "center",
                   },
                   "& label.Mui-focused": {
@@ -287,18 +291,17 @@ const All = () => {
                 <Typography
                   fontFamily="Manrope"
                   lineHeight="110%"
-                  marginBottom="16px"
                   fontWeight={700}
                   className="name"
                 >
-                  {`«${data.name}»`}
+                  {`${data.name}`}
                 </Typography>
                 <Typography
                   fontFamily="Manrope"
                   lineHeight="110%"
                   marginBottom="16px"
                   fontWeight={700}
-                  className="name"
+                  className="size"
                 >
                   {`${data.size}`}
                 </Typography>

@@ -366,6 +366,9 @@ const Main = () => {
               ".name": {
                 fontSize: { xs: "40px", md: "80px" },
               },
+              ".size": {
+                fontSize: { xs: "40px", md: "80px" },
+              },
               ".money": {
                 fontSize: { xs: "20px", md: "30px", bg: "40px" },
               },
@@ -421,14 +424,14 @@ const Main = () => {
               fontWeight={700}
               className="name"
             >
-              {`«${data.name}»`}
+              {`${data.name}`}
             </Typography>
             <Typography
               fontFamily="Manrope"
               lineHeight="110%"
               marginBottom="20px"
               fontWeight={700}
-              className="name"
+              className="size"
             >
               {`${data.size}`}
             </Typography>
