@@ -206,7 +206,7 @@ const All = () => {
           sx={{
             display: "flex",
             flexWrap: "wrap",
-            columnGap: "100px",
+            columnGap: { xs: "28px", md: "100px" },
             rowGap: "50px",
             maxWidth: "1440px",
             margin: "auto",
@@ -220,33 +220,42 @@ const All = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: { xs: "center", lg: "center" },
-                maxWidth: { xs: 220, md: 270 },
+                maxWidth: { xs: 130, md: 270 },
               }}
               key={`lot-${index}`}
             >
               <Box
                 sx={{
-                  width: { xs: 220, md: 270 },
-                  height: { xs: 300, md: 355 },
+                  width: { xs: 130, md: 270 },
+                  height: { xs: 140, md: 355 },
                   marginBottom: "16px",
-                  background: `url(${data.img})`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "contain",
+                  display: "flex",
+                  alignItems: "center",
                 }}
-              ></Box>
+              >
+                <Box
+                  component="img"
+                  sx={{
+                    width: { xs: 130, md: 270 },
+                    maxHeight: { xs: 140, md: 355 },
+                    objectFit: "contain",
+                  }}
+                  src={data.img}
+                />
+              </Box>
               <Box
                 sx={{
                   textAlign: { xs: "center" },
                   ".name": {
-                    fontSize: { xs: "25px" },
+                    fontSize: { xs: "18px", md: "25px" },
                     textAlign: "center",
                   },
                   ".size": {
-                    fontSize: { xs: "25px" },
+                    fontSize: { xs: "18px", md: "25px" },
                     textAlign: "center",
                   },
                   ".money": {
-                    fontSize: { xs: "36px" },
+                    fontSize: { xs: "22px", md: "36px" },
                     textAlign: "center",
                   },
                   "& label.Mui-focused": {
@@ -320,7 +329,7 @@ const All = () => {
                 >
                   <Box
                     sx={{
-                      padding: "12px 34px",
+                      padding: "8px 16px",
                       alignItems: "flex-start",
                       width: "fit-content",
                       gap: "10px",
@@ -328,6 +337,7 @@ const All = () => {
                       background: "#0F5190",
                       transition: "all 0.3s ease-in-out",
                       cursor: "pointer",
+                      fontSize: { xs: "12px", md: "16px" },
                       fontFamily: "Manrope",
                       margin: { xs: "auto", lg: "none" },
                       fontWeight: 700,

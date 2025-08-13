@@ -15,22 +15,10 @@ export const LotsInfo = [
     size: "30х40см",
   },
   {
-    id: 2,
-    name: "Рабочее утро",
-    img: Paint2,
-    size: "30х30см",
-  },
-  {
     id: 3,
     name: "Париж",
     img: Paint3,
     size: "15х20см",
-  },
-  {
-    id: 4,
-    name: "Бджола",
-    img: Paint4,
-    size: "30х30см",
   },
   {
     id: 5,
@@ -49,6 +37,18 @@ export const LotsInfo = [
     name: "Котовик обыкновенный",
     img: Paint7,
     size: "30х40см",
+  },
+  {
+    id: 4,
+    name: "Бджола",
+    img: Paint4,
+    size: "30х30см",
+  },
+  {
+    id: 2,
+    name: "Рабочее утро",
+    img: Paint2,
+    size: "30х30см",
   },
   {
     id: 8,
