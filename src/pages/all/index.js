@@ -220,6 +220,7 @@ const All = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: { xs: "center", lg: "center" },
+                justifyContent: 'space-between',
                 maxWidth: { xs: 130, md: 270 },
               }}
               key={`lot-${index}`}
