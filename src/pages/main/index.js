@@ -282,7 +282,7 @@ const Main = () => {
         <Box
           sx={{
             ".timerHeading": {
-              fontSize: "55px",
+              fontSize: "32px",
               textAlign: "center",
             },
             display: { xs: "block", lg: "flex" },

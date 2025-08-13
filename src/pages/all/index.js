@@ -151,7 +151,7 @@ const All = () => {
         <Box
           sx={{
             ".head": {
-              paddingY: "30px",
+              paddingTop: "30px",
               fontSize: { xs: "40px", md: "80px" },
               textAlign: "center",
             },
@@ -171,7 +171,7 @@ const All = () => {
         <Box
           sx={{
             ".timerHeading": {
-              fontSize: "55px",
+              fontSize: "32px",
               textAlign: "center",
             },
             display: { xs: "block", lg: "flex" },
