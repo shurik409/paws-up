@@ -115,7 +115,7 @@ app.get("/count/", function (request, response) {
 });
 
 app.get("/auction/lot/:id", function (request, response) {
-  const ids = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  const ids = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   if (ids.includes(request.params.id)) {
     response.sendFile(path.join(__dirname + "/build/index.html"));
     return;
