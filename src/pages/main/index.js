@@ -252,6 +252,31 @@ const Main = () => {
     }
   };
 
+  const phoneRef = useRef(null);
+
+  useEffect(() => {
+    const el = phoneRef.current;
+    if (!el) return;
+
+    const handleInput = (e) => {
+      setPhone(e.target.value);
+    };
+
+    const handleAutoFillStart = (e) => {
+      if (e.animationName === "onAutoFillStart") {
+        setPhone(e.target.value);
+      }
+    };
+
+    el.addEventListener("input", handleInput);
+    el.addEventListener("animationstart", handleAutoFillStart);
+
+    return () => {
+      el.removeEventListener("input", handleInput);
+      el.removeEventListener("animationstart", handleAutoFillStart);
+    };
+  }, [setPhone]);
+
   return (
     <Box sx={{ position: "relative" }}>
       <Box
@@ -482,106 +507,109 @@ const Main = () => {
             ) : (
               <></>
             )}
-            {!auctionInfo?.isAuctionEnd &&
-            shouldAuctionContinue(auctionInfo?.endDate, lastTime) ? (
+            {/* {!auctionInfo?.isAuctionEnd &&
+            shouldAuctionContinue(auctionInfo?.endDate, lastTime) ? ( */}
+            <Box>
               <Box>
                 <Box>
-                  <Box>
-                    <TextField
-                      sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
-                      id="name"
-                      label={nameError || "Ваше имя или ник в instagram"}
-                      variant="filled"
-                      onChange={handleNameChange}
-                      error={nameError ? true : false}
-                      value={name}
-                    />
-                  </Box>
-                  <Box>
-                    <InputMask
-                      mask="+375(99)999-99-99"
-                      disabled={false}
-                      maskChar=" "
-                      onChange={(e) => setPhone(e.target.value)}
-                      value={phone}
-                    >
-                      <TextField
-                        sx={{
-                          width: { xs: 300, md: 400, bg: 600 },
-                          height: 70,
-                        }}
-                        id="phone"
-                        label={phoneError || "Ваш телефон"}
-                        variant="filled"
-                        type="phone"
-                        error={phoneError ? true : false}
-                        value={phone}
-                      />
-                    </InputMask>
-                  </Box>
-                  <Box
-                    sx={{
-                      ".warning": {
-                        fontSize: { xs: "15px", md: "20px" },
-                      },
+                  <TextField
+                    sx={{ width: { xs: 300, md: 400, bg: 600 }, height: 70 }}
+                    id="name"
+                    label={nameError || "Ваше имя или ник в instagram"}
+                    variant="filled"
+                    onChange={handleNameChange}
+                    error={nameError ? true : false}
+                    value={name}
+                  />
+                </Box>
+                <Box>
+                  <InputMask
+                    mask="+375(99)999-99-99"
+                    disabled={false}
+                    maskChar=" "
+                    onChange={(e) => {
+                      setPhone(e.target.value);
                     }}
+                    value={phone}
                   >
                     <TextField
                       sx={{
                         width: { xs: 300, md: 400, bg: 600 },
-                        minHeight: 70,
+                        height: 70,
                       }}
-                      id="money"
-                      label={`Ваша ставка (min ${maxValue + 5} BYN)`}
-                      helperText={moneyError}
+                      id="phone"
+                      label={phoneError || "Ваш телефон"}
                       variant="filled"
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">BYN</InputAdornment>
-                        ),
-                        inputMode: "numeric",
-                      }}
-                      value={money}
-                      onChange={handleMoneyChange}
-                      error={moneyError ? true : false}
+                      type="phone"
+                      error={phoneError ? true : false}
+                      value={phone}
+                      ref={phoneRef}
                     />
-                    <Typography
-                      fontFamily="Manrope"
-                      lineHeight="110%"
-                      marginBottom="20px"
-                      fontWeight={500}
-                      className="warning"
-                    >
-                      *Минимальная ставка 5 BYN
-                    </Typography>
-                  </Box>
+                  </InputMask>
                 </Box>
                 <Box
                   sx={{
-                    padding: "24px 48px",
-                    alignItems: "flex-start",
-                    width: "fit-content",
-                    gap: "10px",
-                    borderRadius: "20px",
-                    background: "#0F5190",
-                    transition: "all 0.3s ease-in-out",
-                    cursor: "pointer",
-                    fontFamily: "Manrope",
-                    margin: { xs: "auto", lg: "none" },
-                    fontWeight: 700,
-                    ":hover": {
-                      background: "#fff",
-                      color: "#0F5190",
+                    ".warning": {
+                      fontSize: { xs: "15px", md: "20px" },
                     },
                   }}
-                  onClick={handleSubmit}
                 >
-                  Сделать ставку
+                  <TextField
+                    sx={{
+                      width: { xs: 300, md: 400, bg: 600 },
+                      minHeight: 70,
+                    }}
+                    id="money"
+                    label={`Ваша ставка (min ${maxValue + 5} BYN)`}
+                    helperText={moneyError}
+                    variant="filled"
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">BYN</InputAdornment>
+                      ),
+                      inputMode: "numeric",
+                    }}
+                    value={money}
+                    onChange={handleMoneyChange}
+                    error={moneyError ? true : false}
+                  />
+                  <Typography
+                    fontFamily="Manrope"
+                    lineHeight="110%"
+                    marginBottom="20px"
+                    fontWeight={500}
+                    className="warning"
+                  >
+                    *Минимальная ставка 5 BYN
+                  </Typography>
                 </Box>
               </Box>
-            ) : (
+              <Box
+                sx={{
+                  padding: "24px 48px",
+                  alignItems: "flex-start",
+                  width: "fit-content",
+                  gap: "10px",
+                  borderRadius: "20px",
+                  background: "#0F5190",
+                  transition: "all 0.3s ease-in-out",
+                  cursor: "pointer",
+                  fontFamily: "Manrope",
+                  margin: { xs: "auto", lg: "none" },
+                  fontWeight: 700,
+                  ":hover": {
+                    background: "#fff",
+                    color: "#0F5190",
+                  },
+                }}
+                onClick={handleSubmit}
+              >
+                Сделать ставку
+              </Box>
+            </Box>
+            {/* ) : (
               <></>
-            )}
+            )} */}
           </Box>
         </Box>
         <Box

@@ -1,12 +1,3 @@
-// import Paint1 from "../src/img/lots/1.jpeg";
-// import Paint2 from "../src/img/lots/2.jpeg";
-// import Paint3 from "../src/img/lots/3.jpeg";
-// import Paint4 from "../src/img/lots/4.jpeg";
-// import Paint5 from "../src/img/lots/5.jpeg";
-// import Paint6 from "../src/img/lots/6.jpeg";
-// import Paint7 from "../src/img/lots/7.jpeg";
-// import Paint8 from "../src/img/lots/8.jpeg";
-
 const paints = Array.from({ length: 9 }, (_, i) =>
   require(`../src/img/lots/${i + 1}.jpeg`)
 );
