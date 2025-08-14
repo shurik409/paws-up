@@ -267,6 +267,10 @@ const Main = () => {
         setPhone(e.target.value);
       }
     };
+    
+    if (el.value) {
+      setPhone(el.value);
+    }
 
     el.addEventListener("input", handleInput);
     el.addEventListener("animationstart", handleAutoFillStart);
