@@ -220,14 +220,18 @@ const All = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: { xs: "center", lg: "center" },
-                justifyContent: 'space-between',
-                maxWidth: { xs: 130, md: 270 },
+                justifyContent: "space-between",
+                maxWidth: data.isVertic
+                  ? { xs: 130, md: 270 }
+                  : { xs: 260, md: 540 },
               }}
               key={`lot-${index}`}
             >
               <Box
                 sx={{
-                  width: { xs: 130, md: 270 },
+                  width: data.isVertic
+                    ? { xs: 130, md: 270 }
+                    : { xs: 260, md: 540 },
                   height: { xs: 140, md: 355 },
                   marginBottom: "16px",
                   display: "flex",
@@ -237,7 +241,9 @@ const All = () => {
                 <Box
                   component="img"
                   sx={{
-                    width: { xs: 130, md: 270 },
+                    width: data.isVertic
+                      ? { xs: 130, md: 270 }
+                      : { xs: 260, md: 540 },
                     maxHeight: { xs: 140, md: 355 },
                     objectFit: "contain",
                   }}

@@ -352,13 +352,25 @@ const Main = () => {
         >
           <Box
             sx={{
-              width: { xs: 220, md: 400, xl: 540 },
-              height: { xs: 300, md: 540, xl: 710 },
-              background: `url(${data.img})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
+              width: data.isVertic
+                ? { xs: 220, md: 400, xl: 540 }
+                : { xs: 340, md: 600, xl: 800 },
+              height: { xs: 250, md: 540, xl: 710 },
+              marginBottom: "16px",
             }}
-          ></Box>
+          >
+            <Box
+              component="img"
+              src={data.img}
+              sx={{
+                width: data.isVertic
+                  ? { xs: 220, md: 400, xl: 540 }
+                  : { xs: 340, md: 600, xl: 800 },
+                maxHeight: { xs: 250, md: 540, xl: 710 },
+                objectFit: "contain",
+              }}
+            />
+          </Box>
           <Box
             sx={{
               textAlign: { xs: "center", lg: "left" },
