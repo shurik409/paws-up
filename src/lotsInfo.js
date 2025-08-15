@@ -61,7 +61,7 @@ export const LotsInfo = [
   },
   {
     id: 9,
-    name: "Ковер",
+    name: "Ohana has",
     img: paints[8],
     size: "30х30см",
     isVertic: false,
