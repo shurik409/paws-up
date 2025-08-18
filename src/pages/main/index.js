@@ -309,7 +309,7 @@ const Main = () => {
               <CountdownTimer endTime={auctionInfo?.endDate} />
             )}
         </Box>
-        <Box>
+        {/* <Box>
           <Box
             sx={{
               a: {
@@ -338,7 +338,7 @@ const Main = () => {
           >
             <Link to={"/auction"}>Просмотреть все лоты</Link>
           </Box>
-        </Box>
+        </Box> */}
         <Box
           sx={{
             paddingTop: { xs: "30px", md: "70px", lg: "140px" },
