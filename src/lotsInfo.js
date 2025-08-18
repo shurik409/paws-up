@@ -32,7 +32,7 @@ export const LotsInfo = [
   //   isVertic: true,
   // },
   {
-    id: 5,
+    id: 1,
     name: "Котовик обыкновенный",
     img: paints[6],
     size: "30х40см",
