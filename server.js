@@ -40,7 +40,7 @@ wss.on("connection", (ws) => {
 
 // URL-адрес кластера MongoDB
 const uri =
-  "mongodb+srv://shurik409:hTnzJd74uT8cQaRy@pawsupcluster.omeirb9.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://shurik409:Dyxzvmfx8vQhjESx@pawsupcluster.omeirb9.mongodb.net/";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -92,7 +92,7 @@ client
   })
   .catch((err) => console.error(222, err.stack));
 
-const endtime = "2025-08-19T15:00+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
+const endtime = "2025-12-13T15:00+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
 const reactBuild = path.join(__dirname, "build");
 app.use(express.static(reactBuild));
