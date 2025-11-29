@@ -40,13 +40,13 @@ wss.on("connection", (ws) => {
 
 // URL-адрес кластера MongoDB
 const uri =
-  "mongodb+srv://shurik409:Dyxzvmfx8vQhjESx@pawsupcluster.omeirb9.mongodb.net/";
+  "mongodb+srv://shurik409:LHdZjovB3U75X3p9@pawsupcluster.omeirb9.mongodb.net/?appName=PawsUpCluster";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
-  },
+  }
 });
 
 client

@@ -13,7 +13,7 @@ export const LotsInfo = [
   {
     id: 2,
     name: "Очень странная атака",
-    img: paints[2],
+    img: paints[1],
     size: "30х40см",
     isVertic: true,
   },
