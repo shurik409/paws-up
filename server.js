@@ -116,6 +116,11 @@ app.get("/giveaway/", function (request, response) {
   // response.redirect("/auction/lot/1");
 });
 
+app.get("/giveaway/results", function (request, response) {
+  response.sendFile(path.join(__dirname + "/build/index.html"));
+  // response.redirect("/auction/lot/1");
+});
+
 app.get("/count/", function (request, response) {
   response.sendFile(path.join(__dirname + "/build/index.html"));
 });
@@ -244,6 +249,12 @@ app.post("/api/giveaway", async function (request, response) {
       response.status(400).json({ error: user.error });
     }
   }
+});
+
+app.get("/api/giveaway/results", async function (request, response) {
+  const results = await mongodb.getGiveawayUsers(request, request.params.id);
+
+  response.status(200).json(results);
 });
 
 // Запуск сервера на заданном порту

@@ -154,6 +154,21 @@ async function getNextUserNumber(req) {
   }
 }
 
+async function getGiveawayUsers(req) {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    const client = req.app.locals.db;
+    let users = await client
+      .db("PawsUpAuction")
+      .collection("giveaway")
+      .find()
+      .toArray();
+    return users;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   addUser,
   getUsers,
@@ -162,4 +177,5 @@ module.exports = {
   plusCount,
   minusCount,
   addGiveawayUser,
+  getGiveawayUsers,
 };
