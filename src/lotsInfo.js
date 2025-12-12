@@ -1,4 +1,4 @@
-const paints = Array.from({ length: 6 }, (_, i) =>
+const paints = Array.from({ length: 7 }, (_, i) =>
   require(`../src/img/lots/${i + 1}.jpeg`)
 );
 
@@ -15,14 +15,14 @@ export const LotsInfo = [
     name: "Очень странная атака",
     img: paints[1],
     size: "30х40см",
-    isVertic: true,
+    isVertic: false,
   },
   {
     id: 3,
     name: "Очень странное облако",
     img: paints[2],
     size: "30х40см",
-    isVertic: true,
+    isVertic: false,
   },
   {
     id: 4,
@@ -36,13 +36,20 @@ export const LotsInfo = [
     name: "Очень странное утро",
     img: paints[4],
     size: "30х40см",
-    isVertic: true,
+    isVertic: false,
   },
   {
     id: 6,
     name: "Очень странная кола",
     img: paints[5],
     size: "30х30см",
+    isVertic: true,
+  },
+  {
+    id: 7,
+    name: "Демогоркот",
+    img: paints[6],
+    size: "30х40см",
     isVertic: true,
   },
 ];
