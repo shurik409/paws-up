@@ -15,14 +15,14 @@ export const LotsInfo = [
     name: "Очень странная атака",
     img: paints[1],
     size: "30х40см",
-    isVertic: false,
+    isVertic: true,
   },
   {
     id: 3,
     name: "Очень странное облако",
     img: paints[2],
     size: "30х40см",
-    isVertic: false,
+    isVertic: true,
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ export const LotsInfo = [
     name: "Очень странное утро",
     img: paints[4],
     size: "30х40см",
-    isVertic: false,
+    isVertic: true,
   },
   {
     id: 6,
