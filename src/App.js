@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { Box } from "@mui/material";
-import { Main, Admin, All, Music, Count } from "./pages";
+import { Main, Admin, All, Music, Count, Giveaway } from "./pages";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -30,6 +30,7 @@ function App() {
             <Route path="/auction/" element={<All />} />
             <Route path="/music/:id" element={<Music />} />
             <Route path="/count/" element={<Count />} />
+            <Route path="/giveaway/" element={<Giveaway />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

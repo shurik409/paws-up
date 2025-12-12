@@ -7,6 +7,7 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 const WebSocket = require("ws");
 const http = require("http");
 const { decrypt } = require("./utils/crypt");
+const { error } = require("console");
 
 const PORT = process.env.PORT || 3001;
 
@@ -46,7 +47,7 @@ const client = new MongoClient(uri, {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
-  }
+  },
 });
 
 client
@@ -106,6 +107,11 @@ app.get("/", function (request, response) {
 });
 
 app.get("/auction/", function (request, response) {
+  response.sendFile(path.join(__dirname + "/build/index.html"));
+  // response.redirect("/auction/lot/1");
+});
+
+app.get("/giveaway/", function (request, response) {
   response.sendFile(path.join(__dirname + "/build/index.html"));
   // response.redirect("/auction/lot/1");
 });
@@ -224,6 +230,20 @@ app.get("/api/count/minus", async function (request, response) {
   const results = await mongodb.minusCount(request);
 
   response.status(200).json(results);
+});
+
+app.post("/api/giveaway", async function (request, response) {
+  if (!request.body) {
+    response.status(400).json({ message: "error" });
+  } else {
+    const user = await mongodb.addGiveawayUser(request, request.body);
+    console.log(user);
+    if (!user.error) {
+      response.status(200).json({ message: "success", number: user.number });
+    } else {
+      response.status(400).json({ error: user.error });
+    }
+  }
 });
 
 // Запуск сервера на заданном порту
