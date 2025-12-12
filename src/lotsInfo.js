@@ -47,7 +47,7 @@ export const LotsInfo = [
   },
   {
     id: 7,
-    name: "Демогоркот",
+    name: "Очень странный демогоркот",
     img: paints[6],
     size: "30х40см",
     isVertic: true,
