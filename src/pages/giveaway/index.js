@@ -26,6 +26,14 @@ const Giveaway = () => {
 
   const handleSubmit = async () => {
     const phoneRegexp = /^\+375\(\d{2}\)\d{3}-\d{2}-\d{2}$/;
+    const nameRegexp = /^(?!.*\.\.)(?!\.)(?!.*\.$)[a-zA-Z0-9._]{1,30}$/;
+
+    if (!nameRegexp.test(name)) {
+      setNameError("Некоректный ник");
+      return;
+    } else {
+      setNameError("");
+    }
 
     if (!phoneRegexp.test(phone)) {
       setPhoneError("Некоректный телефон");
