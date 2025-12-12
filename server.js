@@ -126,11 +126,8 @@ app.get("/count/", function (request, response) {
 });
 
 app.get("/auction/lot/:id", function (request, response) {
-  const id = Number(request.params.id);
-  if (id === 1) {
-    return response.sendFile(path.join(__dirname, "build", "index.html"));
-  }
-  response.sendStatus(404);
+  // const id = Number(request.params.id);
+  return response.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.get("/auction/results/:id", function (request, response) {
