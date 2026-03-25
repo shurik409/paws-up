@@ -3,6 +3,7 @@ import "./App.css";
 import { Box } from "@mui/material";
 import {
   Main,
+  Home,
   Admin,
   All,
   Music,
@@ -32,7 +33,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<Home />} />
             <Route path="/auction/lot/:id" element={<Main />} />
             <Route path="/auction/results/:id" element={<Admin />} />
             <Route path="/auction/" element={<All />} />
