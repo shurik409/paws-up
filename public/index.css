@@ -91,15 +91,10 @@
 
 @font-face {
   font-family: "HelveticaNeueCyr";
-  src: url("./fonts/HelveticaNeueCyr/HelveticaNeueCyr_Black.ttf") format("truetype");
+  src: url("./fonts/HelveticaNeueCyr/HelveticaNeueCyr_Black.otf") format("OpenType");
   font-weight: 700;
 }
 
-@font-face {
-  font-family: "HelveticaNeueCyr";
-  src: url("./fonts/HelveticaNeueCyr/HelveticaNeueCyr_Heavy.ttf") format("truetype");
-  font-weight: 800;
-}
 
 body {
   background-color: #2176C9;
