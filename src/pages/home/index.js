@@ -418,12 +418,12 @@ const Home = () => {
           {activityInfo.map((activity, index) => (
             <Box
               sx={{
-                marginTop: { xs: index ? "4px" : "0", md: "" },
+                marginTop: { xs: index ? "4px" : "0", md: "0" },
                 background: {
                   xs: "linear-gradient(269.68deg, #FFFFFF 1.57%, #2277C8 37.54%)",
                   md:
                     index % 2
-                      ? "linear-gradient(269.68deg, #FFFFFF 1.57%, #2277C8 37.54%)"
+                      ? "linear-gradient(269.68deg, #2277C8 39.57%, #FFFFFF 86.47%)"
                       : "linear-gradient(269.68deg, #FFFFFF 1.57%, #2277C8 65.47%)",
                 },
                 display: "flex",
@@ -520,7 +520,7 @@ const Home = () => {
               ".boldPart": {
                 fontWeight: 700,
               },
-              marginTop: { xs: index ? "4px" : "0", md: "" },
+              marginTop: { xs: index ? "4px" : "0", md: "0" },
               background: {
                 xs: "linear-gradient(269.68deg, #FFFFFF 1.57%, #FF3400 37.54%)",
                 md:
@@ -766,7 +766,7 @@ const Home = () => {
 
           <Box
             sx={{
-              background: { xs: `url(${MobileTeam})`, md: `url(${Team})` },
+              backgroundImage: { xs: `url(${MobileTeam})`, md: `url(${Team})` },
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -1031,7 +1031,7 @@ const Home = () => {
               paddingLeft: { xs: "12px", md: "80px" },
               marginTop: { xs: "48px", md: "22px" },
               marginBottom: "40px",
-              maxWidth: { xs: "252px", md: "" },
+              maxWidth: { xs: "252px", md: "none" },
               a: {
                 color: "#FFF",
                 textDecoration: "none",
