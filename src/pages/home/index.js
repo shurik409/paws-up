@@ -680,7 +680,7 @@ const Home = () => {
           </Typography>
           <Box
             sx={{
-              paddingX: { xs: "12px", md: "80px" },
+              paddingX: { xs: "8px", md: "80px" },
               marginTop: { xs: "10px", md: "40px" },
               paddingBottom: { xs: "120px", md: "380px" },
             }}
@@ -723,11 +723,11 @@ const Home = () => {
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              width: { xs: "322px", md: "1066px" },
-              height: { xs: "202px", md: "740px" },
+              width: { xs: "300px", md: "1066px" },
+              height: { xs: "188px", md: "740px" },
               position: "absolute",
-              right: { xs: "-10px", md: 0 },
-              bottom: { xs: "-10px", md: 0 },
+              right: { xs: "0", md: 0 },
+              bottom: { xs: "0", md: 0 },
             }}
           ></Box>
         </Box>
