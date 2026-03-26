@@ -22,6 +22,8 @@ import MobileTeam from "../../img/home/mobileTeam.png";
 import Arrows from "../../img/home/arrows.png";
 import Dog from "../../img/home/dog.png";
 import Elipse from "../../img/home/elipse.svg";
+import Auction from "../../img/home/auction.png";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const djInfo = [
@@ -109,7 +111,7 @@ const Home = () => {
         </>
       ),
       image: DonatActivity1,
-      mobileImage: MobileDonatActivity1,
+      mobileImage: MobileDonatActivity2,
       maxWidth: "810px",
     },
     {
@@ -124,7 +126,7 @@ const Home = () => {
         </>
       ),
       image: DonatActivity2,
-      mobileImage: MobileDonatActivity2,
+      mobileImage: MobileDonatActivity1,
       maxWidth: "780px",
     },
   ];
@@ -598,9 +600,47 @@ const Home = () => {
           </Box>
         ))}
       </Box>
-      <Box sx={{ background: "#FFF" }}>
-        <Box sx={{ maxWidth: "1440px", margin: "auto" }}>
+      <Box
+        sx={{
+          background: "linear-gradient(180deg, #FFFFFF 50%, #2376C7 100%)",
+          height: { xs: "248px", md: "800px" },
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: "1440px",
+            margin: "auto",
+            position: "relative",
+            img: {
+              position: "absolute",
+              top: { xs: "120px", md: "306px" },
+              left: 0,
+              width: "100%",
+            },
+            a: {
+              width: { xs: "148px", md: "484px" },
+              height: { xs: "26px", md: "80px" },
+              background: "#2277C8",
+              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              borderRadius: "46px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              textDecoration: "none",
+              position: "relative",
+              zIndex: "10",
+              marginX: "auto",
+              marginTop: { xs: "68px", md: "216px" },
+              color: "#FFF",
+              ":hover": {
+                background: "#FFF",
+                color: "#2277C8",
+              },
+            },
+          }}
+        >
           <Typography
+            className="auctionLink"
             sx={{
               textAlign: "left",
               fontSize: { xs: "16px", md: "60px" },
@@ -608,8 +648,8 @@ const Home = () => {
               lineHeight: "103%",
               textTransform: "uppercase",
               fontWeight: 700,
-              paddingTop: { xs: "44px", md: "80px" },
               color: "#2277C8",
+              paddingTop: { xs: "44px", md: "80px" },
               fontFamily: "HelveticaNeueCyr",
             }}
           >
@@ -628,21 +668,28 @@ const Home = () => {
               maxWidth: { md: "880px" },
             }}
           >
-            Сканируй QR-код у картины, делай ставку на сайте и забирай работу
-            домой. Каждая новая ставка выше предыдущей минимум на 5 рублей.
-            <br />
-            Обратный отсчёт идёт в реальном времени.
-            <br />
+            Делай ставку, выигрывай и забирай работу домой.
+            <br /> Минимальный ход ставки 5 рублей. <br />
+            Обратный отсчёт идёт в реальном времени. <br />
             Все донаты идут приюту.
           </Typography>
+          <Link to={"/auction"}>
+            <Typography
+              sx={{
+                textAlign: "center",
+                fontSize: { xs: "14px", md: "44px" },
+                lineHeight: "103%",
+                fontWeight: 700,
+                fontFamily: "HelveticaNeueCyr",
+                opacity: 100,
+              }}
+            >
+              Участвовать
+            </Typography>
+          </Link>
+          <img src={Auction} alt="auction"></img>
         </Box>
       </Box>
-      <Box
-        sx={{
-          height: { xs: "150px", md: "900px" },
-          background: "linear-gradient(180deg, #FFFFFF 0%, #2376C7 100%)",
-        }}
-      ></Box>
       <Box>
         <Box sx={{ maxWidth: "1440px", margin: "auto", position: "relative" }}>
           <Typography
@@ -652,7 +699,7 @@ const Home = () => {
               fontSize: { xs: "22px", md: "60px" },
               lineHeight: "120%",
               fontWeight: 700,
-              paddingTop: "70px",
+              paddingTop: { xs: "20px", md: "70px" },
               color: "#FFF",
               fontFamily: "HelveticaNeueCyr",
             }}
