@@ -23,6 +23,7 @@ import Arrows from "../../img/home/arrows.png";
 import Dog from "../../img/home/dog.png";
 import Elipse from "../../img/home/elipse.svg";
 import Auction from "../../img/home/auction.png";
+import Inst from "../../img/home/inst.png";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -115,7 +116,7 @@ const Home = () => {
       maxWidth: "810px",
     },
     {
-      title: "Guitar Hero",
+      title: "Rock Band 4",
       description: (
         <>
           Рок-зал открыт! Играем в Rock Band 4 на PS4: 65 легендарных треков,
@@ -1065,6 +1066,73 @@ const Home = () => {
               zIndex: "-1",
             }}
           ></Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: { xs: "20px", md: "100px" },
+              a: { textDecoration: "none" },
+              marginLeft: { xs: "8px", md: "80px" },
+            }}
+          >
+            <a
+              href="https://www.instagram.com/hey.pawsup/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Box
+                sx={{
+                  img: {
+                    width: { xs: "20px", md: "34px" },
+                  },
+                  display: "flex",
+                  alignItems: "center",
+                  gap: { xs: "4px", md: "8px" },
+                }}
+              >
+                <img src={Inst} alt="instagram"></img>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "12px", md: "18px" },
+                    lineHeight: "120%",
+                    fontWeight: 400,
+                    color: "#FFF",
+                    fontFamily: "HelveticaNeueCyr",
+                  }}
+                >
+                  hey.pawsup
+                </Typography>
+              </Box>
+            </a>
+            <a
+              href="https://www.instagram.com/hutor_novogrudok/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Box
+                sx={{
+                  img: {
+                    width: { xs: "20px", md: "34px" },
+                  },
+                  display: "flex",
+                  alignItems: "center",
+                  gap: { xs: "4px", md: "8px" },
+                }}
+              >
+                <img src={Inst} alt="instagram"></img>
+                <Typography
+                  sx={{
+                    fontSize: { xs: "12px", md: "18px" },
+                    lineHeight: "120%",
+                    fontWeight: 400,
+                    color: "#FFF",
+                    fontFamily: "HelveticaNeueCyr",
+                  }}
+                >
+                  hutor_novogrudok
+                </Typography>
+              </Box>
+            </a>
+          </Box>
         </Box>
       </Box>
     </Box>

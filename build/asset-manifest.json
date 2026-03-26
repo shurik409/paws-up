@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.b33d87c3.css",
-    "main.js": "/static/js/main.ef3b9bf5.js",
+    "main.js": "/static/js/main.03e17f4f.js",
     "static/js/453.ba14d20e.chunk.js": "/static/js/453.ba14d20e.chunk.js",
     "static/media/dog2.gif": "/static/media/dog2.ec85ba1318625023271a.gif",
     "static/media/cat4.gif": "/static/media/cat4.3660bf0e2b7a19f29936.gif",
@@ -17,6 +17,7 @@
     "static/media/cat5.gif": "/static/media/cat5.c31c96eadc41e8a83db9.gif",
     "static/media/cat2.gif": "/static/media/cat2.cecf1ec550f5ba2e737b.gif",
     "static/media/dog3.gif": "/static/media/dog3.648ff09e8c93d448b855.gif",
+    "static/media/mobileTeam.png": "/static/media/mobileTeam.d58aa61aad089c66876b.png",
     "static/media/dog.png": "/static/media/dog.fb893a2d82bb55b146e8.png",
     "static/media/5.jpeg": "/static/media/5.9bf39b878a9cae6d4f41.jpeg",
     "static/media/1.jpeg": "/static/media/1.3bcdea0cfe5cc2e945c3.jpeg",
@@ -35,18 +36,17 @@
     "static/media/activity1.png": "/static/media/activity1.4fe57c3e199b7ab107aa.png",
     "static/media/activity5.png": "/static/media/activity5.0213eb7e7abfbcb7e1ca.png",
     "static/media/activity6.png": "/static/media/activity6.b6abb6980ce30bea76fc.png",
-    "static/media/mobileTeam.png": "/static/media/mobileTeam.3b6330d395f653880c41.png",
     "static/media/activity7.png": "/static/media/activity7.56bebfb8cfd6ebbfbd73.png",
     "static/media/body.png": "/static/media/body.6905ba403a8429114736.png",
     "static/media/main_logo.svg": "/static/media/main_logo.dde0a99fec1d7de1b5d47e4a7d07f665.svg",
     "index.html": "/index.html",
     "static/media/elipse.svg": "/static/media/elipse.f3aea19e510200e557aeb71b30771c3d.svg",
     "main.b33d87c3.css.map": "/static/css/main.b33d87c3.css.map",
-    "main.ef3b9bf5.js.map": "/static/js/main.ef3b9bf5.js.map",
+    "main.03e17f4f.js.map": "/static/js/main.03e17f4f.js.map",
     "453.ba14d20e.chunk.js.map": "/static/js/453.ba14d20e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b33d87c3.css",
-    "static/js/main.ef3b9bf5.js"
+    "static/js/main.03e17f4f.js"
   ]
 }
