@@ -127,9 +127,11 @@ const Home = () => {
             backgroundRepeat: "no-repeat",
             backgroundSize: "contain",
             backgroundPosition: "center",
-            width: "100%",
+            width: "calc(100% - 24px)",
             height: "calc(100vh - 40px)",
             position: "absolute",
+            transform: "translateX(-50%)",
+            left: "50%",
             top: "20px",
             zIndex: -1,
           }}
@@ -140,6 +142,7 @@ const Home = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
+            paddingX: { xs: "12px", md: "0px" },
             flexDirection: "column",
             gap: "50px",
           }}
@@ -147,17 +150,17 @@ const Home = () => {
           <Typography
             sx={{
               textAlign: "center",
-              fontSize: "68px",
+              fontSize: { xs: "20px", md: "68px" },
               lineHeight: "103%",
               textTransform: "uppercase",
               fontWeight: 700,
               fontFamily: "HelveticaNeueCyr",
               ".headline-part-2": {
-                fontSize: { xs: "40px", md: "78px" },
-                lineHeight: "122%",
+                fontSize: { xs: "46px", md: "78px" },
+                lineHeight: { xs: "94%", md: "122%" },
               },
               ".headline-part-3": {
-                fontSize: { xs: "40px", md: "126px" },
+                fontSize: { xs: "36px", md: "126px" },
                 lineHeight: "103%",
               },
             }}
@@ -182,15 +185,17 @@ const Home = () => {
       </Box>
       <Box
         sx={{
-          background:
-            "linear-gradient(180deg, #2176C9 10%, #FFFFFF 30%, #FFFFFF 100%)",
+          background: {
+            xs: "linear-gradient(180deg, #2176C9 15%, #FFFFFF 24%, #FFFFFF 100%)",
+            md: "linear-gradient(180deg, #2176C9 10%, #FFFFFF 30%, #FFFFFF 100%)",
+          },
         }}
       >
         <Box>
           <Typography
             sx={{
               textAlign: "center",
-              fontSize: "78px",
+              fontSize: { xs: "18px", md: "78px" },
               lineHeight: "103%",
               textTransform: "uppercase",
               fontWeight: 700,
@@ -204,7 +209,7 @@ const Home = () => {
         <Box
           sx={{
             maxWidth: "1440px",
-            paddingX: "80px",
+            paddingX: { md: "80px" },
             marginX: "auto",
           }}
         >
@@ -212,7 +217,7 @@ const Home = () => {
             sx={{
               display: "flex",
               justifyContent: "end",
-              marginTop: "170px",
+              marginTop: { xs: "70px", md: "170px" },
               position: "relative",
             }}
           >
@@ -222,22 +227,23 @@ const Home = () => {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                width: "640px",
-                height: "654px",
+                width: { xs: "164px", md: "640px" },
+                height: { xs: "168px", md: "654px" },
                 position: "absolute",
                 left: 0,
-                top: "-100px",
+                top: { xs: "-46px", md: "-100px" },
               }}
             ></Box>
             <Box
               sx={{
-                width: "575px",
+                width: { xs: "160px", md: "575px" },
+                marginRight: { xs: "12px", md: 0 },
               }}
             >
               <Typography
                 sx={{
                   textAlign: "center",
-                  fontSize: "60px",
+                  fontSize: { xs: "14px", md: "60px" },
                   lineHeight: "100%",
                   textTransform: "uppercase",
                   fontWeight: 700,
@@ -250,7 +256,7 @@ const Home = () => {
               <Typography
                 sx={{
                   textAlign: "center",
-                  fontSize: "54px",
+                  fontSize: { xs: "14px", md: "54px" },
                   lineHeight: "100%",
                   textTransform: "uppercase",
                   fontWeight: 700,
@@ -263,10 +269,10 @@ const Home = () => {
               <Typography
                 sx={{
                   textAlign: "center",
-                  fontSize: "44px",
+                  fontSize: { xs: "12px", md: "44px" },
                   lineHeight: "103%",
                   fontWeight: 400,
-                  marginTop: "36px",
+                  marginTop: { xs: "12px", md: "36px" },
                   fontFamily: "HelveticaNeueCyr",
                   color: "#000",
                   ".part": {
@@ -285,15 +291,16 @@ const Home = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "start",
-              marginTop: "280px",
+              marginTop: { xs: "100px", md: "280px" },
               position: "relative",
+              paddingLeft: { xs: "12px", md: "0px" },
             }}
           >
             <Box sx={{}}>
               <Typography
                 sx={{
                   textAlign: "center",
-                  fontSize: "60px",
+                  fontSize: { xs: "16px", md: "60px" },
                   lineHeight: "100%",
                   textTransform: "uppercase",
                   fontWeight: 700,
@@ -306,12 +313,13 @@ const Home = () => {
               <Typography
                 sx={{
                   textAlign: "center",
-                  fontSize: "54px",
+                  fontSize: { xs: "14px", md: "54px" },
                   lineHeight: "100%",
                   textTransform: "uppercase",
                   fontWeight: 700,
                   fontFamily: "HelveticaNeueCyr",
                   color: "#000",
+                  marginTop: { xs: "6px" },
                 }}
               >
                 22:30 — 03:00
@@ -320,8 +328,8 @@ const Home = () => {
             <Typography
               sx={{
                 textAlign: "left",
-                marginTop: "94px",
-                fontSize: "32px",
+                marginTop: { xs: "14px", md: "94px" },
+                fontSize: { xs: "8px", md: "32px" },
                 lineHeight: "210%",
                 fontWeight: 600,
                 fontFamily: "HelveticaNeueCyr",
@@ -346,17 +354,17 @@ const Home = () => {
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                width: "628px",
-                height: "762px",
+                width: { xs: "162px", md: "628px" },
+                height: { xs: "196px", md: "762px" },
                 position: "absolute",
                 right: 0,
-                top: "-200px",
+                top: { xs: "-80px", md: "-200px" },
               }}
             ></Box>
           </Box>
         </Box>
       </Box>
-      <Box sx={{ background: "#FFF" }}>
+      {/* <Box sx={{ background: "#FFF" }}>
         <Typography
           sx={{
             textAlign: "center",
@@ -514,8 +522,8 @@ const Home = () => {
             <img src={activity.image} alt={`activity-${index}`}></img>
           </Box>
         ))}
-      </Box>
-      <Box sx={{ background: "#FFF" }}>
+      </Box> */}
+      {/* <Box sx={{ background: "#FFF" }}>
         <Box sx={{ maxWidth: "1440px", margin: "auto" }}>
           <Typography
             sx={{
@@ -552,14 +560,14 @@ const Home = () => {
             Все донаты идут приюту.
           </Typography>
         </Box>
-      </Box>
-      <Box
+      </Box> */}
+      {/* <Box
         sx={{
           height: "900px",
           background: "linear-gradient(180deg, #FFFFFF 0%, #2376C7 100%)",
         }}
-      ></Box>
-      <Box>
+      ></Box> */}
+      {/* <Box>
         <Box sx={{ maxWidth: "1440px", margin: "auto", position: "relative" }}>
           <Typography
             sx={{
@@ -650,8 +658,8 @@ const Home = () => {
             }}
           ></Box>
         </Box>
-      </Box>
-      <Box>
+      </Box> */}
+      {/* <Box>
         <Box sx={{ maxWidth: "1440px", margin: "auto", position: 'relative' }}>
           <Typography
             sx={{
@@ -926,7 +934,7 @@ const Home = () => {
             }}
           ></Box>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
