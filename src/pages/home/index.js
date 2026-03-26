@@ -364,11 +364,11 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
-      {/* <Box sx={{ background: "#FFF" }}>
+      <Box sx={{ background: "#FFF" }}>
         <Typography
           sx={{
             textAlign: "center",
-            fontSize: "78px",
+            fontSize: { xs: "18px", md: "78px" },
             lineHeight: "103%",
             textTransform: "uppercase",
             fontWeight: 700,
@@ -382,8 +382,8 @@ const Home = () => {
         <Box sx={{ maxWidth: "1440px", margin: "auto" }}>
           <Typography
             sx={{
-              fontSize: "60px",
-              paddingLeft: "80px",
+              fontSize: { xs: "16px", md: "60px" },
+              paddingLeft: { xs: "12px", md: "80px" },
               lineHeight: "103%",
               textTransform: "uppercase",
               fontWeight: 700,
@@ -406,23 +406,27 @@ const Home = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                width: "1440px",
+                width: "100%",
+                maxWidth: { xs: "100%", md: "1440px" },
                 margin: "auto",
                 flexDirection: index % 2 ? "row-reverse" : "row",
+                img: {
+                  maxHeight: { xs: "78px", md: "auto" },
+                },
               }}
               key={`activity-${index}`}
             >
               <Box
                 sx={{
-                  width: "600px",
-                  paddingLeft: !(index % 2) && "60px",
-                  paddingRight: index % 2 && "60px",
+                  width: { md: activity.maxWidth || "600px" },
+                  marginLeft: !(index % 2) && { xs: "12px", md: "60px" },
+                  marginRight: index % 2 && { xs: "12px", md: "60px" },
                 }}
               >
                 <Typography
                   sx={{
                     textAlign: "center",
-                    fontSize: "30px",
+                    fontSize: { xs: "8px", md: "30px" },
                     lineHeight: "103%",
                     textTransform: "uppercase",
                     fontWeight: 700,
@@ -435,10 +439,10 @@ const Home = () => {
                 <Typography
                   sx={{
                     textAlign: "center",
-                    fontSize: "25px",
+                    fontSize: { xs: "6px", md: "25px" },
                     lineHeight: "103%",
                     fontWeight: 400,
-                    marginTop: "30px",
+                    marginTop: { xs: "8px", md: "30px" },
                     color: "FFF",
                     fontFamily: "HelveticaNeueCyr",
                   }}
@@ -453,8 +457,8 @@ const Home = () => {
         <Box sx={{ maxWidth: "1440px", margin: "auto" }}>
           <Typography
             sx={{
-              fontSize: "60px",
-              paddingLeft: "80px",
+              fontSize: { xs: "16px", md: "60px" },
+              paddingLeft: { xs: "12px", md: "80px" },
               lineHeight: "103%",
               textTransform: "uppercase",
               fontWeight: 700,
@@ -476,26 +480,30 @@ const Home = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              width: "1440px",
+              width: "100%",
+              maxWidth: { xs: "100%", md: "1440px" },
               margin: "auto",
               flexDirection: index % 2 ? "row-reverse" : "row",
               ".boldPart": {
                 fontWeight: 700,
+              },
+              img: {
+                maxHeight: { xs: "78px", md: "auto" },
               },
             }}
             key={`activity-${index}`}
           >
             <Box
               sx={{
-                width: activity.maxWidth || "600px",
-                marginLeft: !(index % 2) && "60px",
-                marginRight: index % 2 && "60px",
+                width: { md: activity.maxWidth || "600px" },
+                marginLeft: !(index % 2) && { xs: "12px", md: "60px" },
+                marginRight: index % 2 && { xs: "12px", md: "60px" },
               }}
             >
               <Typography
                 sx={{
                   textAlign: "center",
-                  fontSize: "30px",
+                  fontSize: { xs: "8px", md: "30px" },
                   lineHeight: "103%",
                   textTransform: "uppercase",
                   fontWeight: 700,
@@ -508,10 +516,10 @@ const Home = () => {
               <Typography
                 sx={{
                   textAlign: "center",
-                  fontSize: "25px",
+                  fontSize: { xs: "6px", md: "25px" },
                   lineHeight: "103%",
                   fontWeight: 400,
-                  marginTop: "30px",
+                  marginTop: { xs: "8px", md: "30px" },
                   color: "FFF",
                   fontFamily: "HelveticaNeueCyr",
                 }}
@@ -522,7 +530,7 @@ const Home = () => {
             <img src={activity.image} alt={`activity-${index}`}></img>
           </Box>
         ))}
-      </Box> */}
+      </Box>
       {/* <Box sx={{ background: "#FFF" }}>
         <Box sx={{ maxWidth: "1440px", margin: "auto" }}>
           <Typography
