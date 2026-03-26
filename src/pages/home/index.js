@@ -12,6 +12,7 @@ import DonatActivity1 from "../../img/home/donatActivity1.png";
 import DonatActivity2 from "../../img/home/donatActivity2.png";
 import Team from "../../img/home/team.png";
 import Arrows from "../../img/home/arrows.png";
+import Dog from "../../img/home/dog.png";
 
 const Home = () => {
   const djInfo = [
@@ -651,7 +652,7 @@ const Home = () => {
         </Box>
       </Box>
       <Box>
-        <Box sx={{ maxWidth: "1440px", margin: "auto" }}>
+        <Box sx={{ maxWidth: "1440px", margin: "auto", position: 'relative' }}>
           <Typography
             sx={{
               textAlign: "left",
@@ -911,6 +912,19 @@ const Home = () => {
               инстаграме «Paws Up»
             </a>
           </Typography>
+          <Box
+            sx={{
+              background: `url(${Dog})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              width: "670px",
+              height: "862px",
+              position: "absolute",
+              right: 0,
+              bottom: '-80px',
+            }}
+          ></Box>
         </Box>
       </Box>
     </Box>
