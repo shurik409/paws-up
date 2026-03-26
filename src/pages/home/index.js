@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import Body from "../../img/home/body.png";
-import MainLogo from "../../img/home/main_logo.png";
+import MainLogo from "../../img/home/main_logo.svg";
 import Participant from "../../img/home/participant.png";
 import Singer from "../../img/home/singer.png";
 import Activity1 from "../../img/home/activity1.png";
@@ -391,7 +391,7 @@ const Home = () => {
             lineHeight: "103%",
             textTransform: "uppercase",
             fontWeight: 700,
-            paddingTop: "80px",
+            paddingTop: { xs: "50px", md: "80px" },
             color: "#000",
             fontFamily: "HelveticaNeueCyr",
           }}
@@ -408,7 +408,7 @@ const Home = () => {
               fontWeight: 700,
               color: "#2277C8",
               fontFamily: "HelveticaNeueCyr",
-              marginY: "40px",
+              marginY: { xs: "10px", md: "40px" },
             }}
           >
             Бесплатно
@@ -508,7 +508,7 @@ const Home = () => {
               fontWeight: 700,
               color: "#DF3F05",
               fontFamily: "HelveticaNeueCyr",
-              marginY: "40px",
+              marginY: { xs: "16px", md: "40px" },
             }}
           >
             За донат
@@ -613,7 +613,7 @@ const Home = () => {
             position: "relative",
             img: {
               position: "absolute",
-              top: { xs: "120px", md: "306px" },
+              top: { xs: "100px", md: "306px" },
               left: 0,
               width: "100%",
             },
@@ -649,7 +649,7 @@ const Home = () => {
               textTransform: "uppercase",
               fontWeight: 700,
               color: "#2277C8",
-              paddingTop: { xs: "44px", md: "80px" },
+              paddingTop: { xs: "20px", md: "80px" },
               fontFamily: "HelveticaNeueCyr",
             }}
           >
