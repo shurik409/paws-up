@@ -1,5 +1,5 @@
 const paints = Array.from({ length: 7 }, (_, i) =>
-  require(`../src/img/lots/${i + 1}.jpeg`)
+  require(`../src/img/lots/${i + 1}.jpeg`),
 );
 
 export const LotsInfo = [
@@ -19,7 +19,7 @@ export const LotsInfo = [
   },
   {
     id: 3,
-    name: "Я с моими пацанами",
+    name: "А тебя это * не должно",
     img: paints[2],
     size: "30х40см",
     isVertic: true,
@@ -33,7 +33,7 @@ export const LotsInfo = [
   },
   {
     id: 5,
-    name: "А тебя это * не должно",
+    name: "Я с моими пацанами",
     img: paints[4],
     size: "40х30см",
     isVertic: true,
