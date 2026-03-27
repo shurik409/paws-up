@@ -1,14 +1,13 @@
 {
   "files": {
     "main.css": "/static/css/main.b33d87c3.css",
-    "main.js": "/static/js/main.03e17f4f.js",
+    "main.js": "/static/js/main.161f8604.js",
     "static/js/453.ba14d20e.chunk.js": "/static/js/453.ba14d20e.chunk.js",
     "static/media/dog2.gif": "/static/media/dog2.ec85ba1318625023271a.gif",
     "static/media/cat4.gif": "/static/media/cat4.3660bf0e2b7a19f29936.gif",
     "static/media/noise.png": "/static/media/noise.9f5dad44526d418de42c.png",
     "static/media/cat3.gif": "/static/media/cat3.13a731ac341a7560baa3.gif",
     "static/media/cat1.gif": "/static/media/cat1.4e85a90b745cc7685c80.gif",
-    "static/media/7.jpeg": "/static/media/7.6b54da6bde7df37cc5ec.jpeg",
     "static/media/dog4.gif": "/static/media/dog4.5dddca04156a84ae40cf.gif",
     "static/media/dog5.gif": "/static/media/dog5.136ebbb158cb1ecbacb4.gif",
     "static/media/auction.png": "/static/media/auction.cbc2e14cc4c328042453.png",
@@ -21,6 +20,7 @@
     "static/media/dog.png": "/static/media/dog.fb893a2d82bb55b146e8.png",
     "static/media/5.jpeg": "/static/media/5.9bf39b878a9cae6d4f41.jpeg",
     "static/media/1.jpeg": "/static/media/1.3bcdea0cfe5cc2e945c3.jpeg",
+    "static/media/7.jpeg": "/static/media/7.624916148054e3666cd0.jpeg",
     "static/media/singer.png": "/static/media/singer.f7220ae5dd5e0ee1926a.png",
     "static/media/2.jpeg": "/static/media/2.86f22d7bf4531179db65.jpeg",
     "static/media/participant.png": "/static/media/participant.5116e322fcddaeeec7ec.png",
@@ -42,11 +42,11 @@
     "index.html": "/index.html",
     "static/media/elipse.svg": "/static/media/elipse.f3aea19e510200e557aeb71b30771c3d.svg",
     "main.b33d87c3.css.map": "/static/css/main.b33d87c3.css.map",
-    "main.03e17f4f.js.map": "/static/js/main.03e17f4f.js.map",
+    "main.161f8604.js.map": "/static/js/main.161f8604.js.map",
     "453.ba14d20e.chunk.js.map": "/static/js/453.ba14d20e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b33d87c3.css",
-    "static/js/main.03e17f4f.js"
+    "static/js/main.161f8604.js"
   ]
 }
