@@ -278,7 +278,6 @@ const Main = () => {
             zIndex: -1,
           }}
         ></Box> */}
-
         <Box
           sx={{
             ".timerHeading": {

@@ -27,8 +27,8 @@ const All = () => {
   const getAllValue = async () => {
     const all = await Promise.all(
       Array.from({ length: LotsInfo.length }, (_, i) => i + 1).map((id) =>
-        getMaxValue(id)
-      )
+        getMaxValue(id),
+      ),
     );
     setMaxValue(all);
   };
@@ -90,7 +90,7 @@ const All = () => {
       const isAuctionEnd = endDate - currentDate < 0;
       setMainInfo({ isAuctionEnd, endDate });
       setAuctionInfo(
-        new Array(LotsInfo.length).fill({ isAuctionEnd, endDate })
+        new Array(LotsInfo.length).fill({ isAuctionEnd, endDate }),
       );
     }, 1000);
 
@@ -148,6 +148,42 @@ const All = () => {
             zIndex: -1,
           }}
         ></Box> */}
+        <Box
+          sx={{
+            marginTop: "20px",
+            a: {
+              textDecoration: "none",
+              color: "#FFF",
+              ":hover": {
+                div: {
+                  background: "#fff",
+                },
+                color: "#0F5190",
+              },
+            },
+          }}
+        >
+          <Link to="/">
+            <Box
+              sx={{
+                padding: "12px 24px",
+                alignItems: "flex-start",
+                width: "fit-content",
+                gap: "10px",
+                borderRadius: "20px",
+                background: "#0F5190",
+                transition: "all 0.3s ease-in-out",
+                cursor: "pointer",
+                fontFamily: "Manrope",
+                margin: { xs: "auto", lg: "none" },
+                fontWeight: 700,
+                fontSize: "20px",
+              }}
+            >
+              О мероприятии
+            </Box>
+          </Link>
+        </Box>
         <Box
           sx={{
             ".head": {
