@@ -280,6 +280,42 @@ const Main = () => {
         ></Box> */}
         <Box
           sx={{
+            marginTop: "20px",
+            a: {
+              textDecoration: "none",
+              color: "#FFF",
+              ":hover": {
+                div: {
+                  background: "#fff",
+                },
+                color: "#0F5190",
+              },
+            },
+          }}
+        >
+          <Link to="/">
+            <Box
+              sx={{
+                padding: "12px 24px",
+                alignItems: "flex-start",
+                width: "fit-content",
+                gap: "10px",
+                borderRadius: "20px",
+                background: "#0F5190",
+                transition: "all 0.3s ease-in-out",
+                cursor: "pointer",
+                fontFamily: "Manrope",
+                margin: { xs: "auto", lg: "none" },
+                fontWeight: 700,
+                fontSize: "20px",
+              }}
+            >
+              О мероприятии
+            </Box>
+          </Link>
+        </Box>
+        <Box
+          sx={{
             ".timerHeading": {
               fontSize: "32px",
               textAlign: "center",
