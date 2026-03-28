@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); // Разрешить доступ с любых источников
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept",
   );
   next();
 });
@@ -81,7 +81,7 @@ client
               JSON.stringify({
                 count: change.fullDocument.count,
                 type: "counter",
-              })
+              }),
             );
           }
         });
@@ -112,6 +112,11 @@ app.get("/auction/", function (request, response) {
 });
 
 app.get("/giveaway/", function (request, response) {
+  response.sendFile(path.join(__dirname + "/build/index.html"));
+  // response.redirect("/auction/lot/1");
+});
+
+app.get("/photo/", function (request, response) {
   response.sendFile(path.join(__dirname + "/build/index.html"));
   // response.redirect("/auction/lot/1");
 });
@@ -191,7 +196,7 @@ app.post("/api/auction/:id/user/", async function (request, response) {
     let max = 0;
     if (users?.length && decName && decPhone) {
       const decUser = users.filter(
-        (user) => user.name === decName && user.phone === decPhone
+        (user) => user.name === decName && user.phone === decPhone,
       );
       if (decUser.length) {
         max = decUser.reduce(function (prev, current) {

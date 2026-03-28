@@ -10,6 +10,7 @@ import {
   Count,
   Giveaway,
   GiveawayResults,
+  Gallery,
 } from "./pages";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -41,6 +42,7 @@ function App() {
             <Route path="/count/" element={<Count />} />
             <Route path="/giveaway/" element={<Giveaway />} />
             <Route path="/giveaway/results" element={<GiveawayResults />} />
+            <Route path="/photo" element={<Gallery />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
