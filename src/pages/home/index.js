@@ -114,6 +114,9 @@ const Home = () => {
       image: DonatActivity1,
       mobileImage: MobileDonatActivity2,
       maxWidth: "810px",
+      button: true,
+      link: "/photo",
+      maxHeight: "156px",
     },
     {
       title: "Rock Band 4",
@@ -581,6 +584,48 @@ const Home = () => {
               >
                 {activity.description}
               </Typography>
+              {activity.button ? (
+                <Box
+                  sx={{
+                    marginTop: { xs: "6px", md: "12px" },
+                    marginX: { xs: "none", md: "auto" },
+                    width: "fit-content",
+                    a: {
+                      textDecoration: "none",
+                      display: "block",
+                      width: "fit-content",
+                      color: "#FFF",
+                      ":hover": {
+                        div: {
+                          background: "#fff",
+                        },
+                        color: "#0F5190",
+                      },
+                    },
+                  }}
+                >
+                  <a href={activity.link}>
+                    <Box
+                      sx={{
+                        padding: { xs: "6px 12px", md: "12px 24px" },
+                        alignItems: "flex-start",
+                        width: "fit-content",
+                        borderRadius: "20px",
+                        background: "#0F5190",
+                        transition: "all 0.3s ease-in-out",
+                        cursor: "pointer",
+                        fontFamily: "Manrope",
+                        fontWeight: 700,
+                        fontSize: { xs: "12px", md: "20px" },
+                      }}
+                    >
+                      Примеры и артисты
+                    </Box>
+                  </a>
+                </Box>
+              ) : (
+                <></>
+              )}
             </Box>
             <Box
               sx={{
@@ -674,7 +719,7 @@ const Home = () => {
             Обратный отсчёт идёт в реальном времени. <br />
             Все донаты идут приюту.
           </Typography>
-          <Link to={"/auction"}>
+          <a href={"/auction"}>
             <Typography
               sx={{
                 textAlign: "center",
@@ -687,7 +732,7 @@ const Home = () => {
             >
               Участвовать
             </Typography>
-          </Link>
+          </a>
           <img src={Auction} alt="auction"></img>
         </Box>
       </Box>
