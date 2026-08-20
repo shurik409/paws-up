@@ -1,1184 +1,2002 @@
-import { Box, Typography } from "@mui/material";
-import Body from "../../img/home/body.png";
-import MainLogo from "../../img/home/main_logo.svg";
-import Participant from "../../img/home/participant.png";
-import Singer from "../../img/home/singer.png";
-import Activity1 from "../../img/home/activity1.png";
-import Activity2 from "../../img/home/activity2.png";
-import Activity3 from "../../img/home/activity3.png";
-import Activity4 from "../../img/home/activity4.png";
-import Activity5 from "../../img/home/activity5.png";
-import MobileActivity1 from "../../img/home/mobile/activity1.png";
-import MobileActivity2 from "../../img/home/mobile/activity2.png";
-import MobileActivity3 from "../../img/home/mobile/activity3.png";
-import MobileActivity4 from "../../img/home/mobile/activity4.png";
-import MobileActivity5 from "../../img/home/mobile/activity5.png";
-import DonatActivity1 from "../../img/home/donatActivity1.png";
-import DonatActivity2 from "../../img/home/donatActivity2.png";
-import MobileDonatActivity1 from "../../img/home/mobile/activity6.png";
-import MobileDonatActivity2 from "../../img/home/mobile/activity7.png";
-import Team from "../../img/home/team.png";
-import MobileTeam from "../../img/home/mobileTeam.png";
-import Arrows from "../../img/home/arrows.png";
-import Dog from "../../img/home/dog.png";
-import Elipse from "../../img/home/elipse.svg";
-import Auction from "../../img/home/auction.png";
-import Inst from "../../img/home/inst.png";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Home = () => {
-  const djInfo = [
-    {
-      time: "22:00 – 22:30",
-      name: "DJ Krosh",
-    },
-    {
-      time: "22:30 – 23:00",
-      name: "Общее караоке",
-    },
-    {
-      time: "23:00 – 00:00",
-      name: "DJ Krosh",
-    },
-    {
-      time: "00:00 – 00:30",
-      name: "Сольное караоке",
-    },
-    {
-      time: "00:30 – 01:30",
-      name: "DJ Sion",
-    },
-    {
-      time: "01:30 – 02:00",
-      name: "Сольное караоке",
-    },
-    {
-      time: "02:00 – 03:00",
-      name: "DJ Sion",
-    },
-  ];
-  const activityInfo = [
-    {
-      title: "Если бы я был песней...",
-      description:
-        "Плакат на стене, где каждый дописывает своё. Какой песней ты был бы и почему? Загляни, прочитай чужие ответы и оставь свой.",
-      image: Activity1,
-      mobileImage: MobileActivity1,
-    },
-    {
-      title: "Сочиняем песню вместе",
-      description:
-        "Коллективное творчество в действии: первая строчка уже есть, дело за тобой. Дописывай следующую, передавай эстафету, и к концу вечера из ваших строк родится настоящая песня. Финальный аккорд: генерируем трек с помощью ИИ и слушаем всё вместе.",
-      image: Activity2,
-      maxHeight: "158px",
-      mobileImage: MobileActivity2,
-    },
-    {
-      title: "Переиграй пикетчика",
-      description:
-        "Называем слово, у тебя минута, чтобы вспомнить как можно больше строчек из песен, где оно встречается. Быстро, весело и неожиданно сложно. Каждый участник получает приз.",
-      image: Activity3,
-      mobileImage: MobileActivity3,
-    },
-    {
-      title: "Бирпонг",
-      description:
-        "игра, где твоя задача попасть шариком для пинг-понга в стаканы соперника. Цель — выбить все стаканы противника!",
-      image: Activity4,
-      mobileImage: MobileActivity4,
-    },
-    {
-      title: "Твистер",
-      description:
-        "Игра на ловкость и гибкость. Сможешь удержать равновесие на коврике с цветными кругами, выполняя команды ведущего и переставляя руки или ноги по цветам, не упав?",
-      image: Activity5,
-      mobileImage: MobileActivity5,
-    },
-  ];
-
-  const donatActivity = [
-    {
-      title: "Фото с любимым артистом",
-      description: (
-        <>
-          Мечтали сфотографироваться с кумиром?
-          <br />
-          Теперь это реально!
-          <br />
-          Выбирай шаблон (серьёзный или максимально угарный) и получай фото как
-          с настоящей школьной фотосессии.
-          <br />
-          Free donat
-        </>
-      ),
-      image: DonatActivity1,
-      mobileImage: MobileDonatActivity2,
-      maxWidth: "810px",
-      button: true,
-      link: "/photo",
-      maxHeight: "156px",
-    },
-    {
-      title: "Rock Band 4",
-      description: (
-        <>
-          Рок-зал открыт! Играем в Rock Band 4 на PS4: 65 легендарных треков,
-          гитара, барабаны и микрофон. Можно рубиться соло или втроём. <br />
-          <span className="boldPart">7 рублей = 3 песни на одного игрока.</span>
-          <br />
-          Найдёшь нас в чилл-зоне
-        </>
-      ),
-      image: DonatActivity2,
-      mobileImage: MobileDonatActivity1,
-      maxWidth: "780px",
-    },
-  ];
-
-  const pawsupInfo = [
-    "Как можно помогать приютам и просто дворовым животным.",
-    "Где можно познакомиться с пушистыми друзьями и забрать их к себе домой.",
-    "На какие crazy тусовки с нами можно попасть, а заодно и помочь животным.",
-  ];
-
+export function EventCard({
+  event,
+  expanded,
+  onChange,
+  buttonText,
+  backgroundColor = "#FFFBF4",
+  buttonColor = "#DBA535",
+}) {
   return (
-    <Box>
-      <Box>
-        <Box
-          sx={{
-            background: `url(${Body})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            width: "calc(100% - 24px)",
-            height: "calc(100vh - 40px)",
-            position: "absolute",
-            transform: "translateX(-50%)",
-            left: "50%",
-            top: "20px",
-            zIndex: -1,
-          }}
-        ></Box>
+    <Accordion
+      expanded={expanded}
+      onChange={onChange}
+      disableGutters
+      elevation={0}
+      sx={{
+        backgroundColor: backgroundColor,
+        borderRadius: "10px !important",
+        "&:before": { display: "none" },
+        position: "relative",
+      }}
+    >
+      <AccordionSummary
+        expandIcon={null}
+        sx={{
+          minHeight: "auto",
+          flexDirection: "column",
+          alignItems: "stretch",
+          "& .MuiAccordionSummary-content": { flexDirection: "column", m: 0 },
+          paddingTop: "18px",
+          paddingX: "14px",
+        }}
+      >
+        {event.image && (
+          <Box
+            sx={{ position: "absolute", ...event.image.position, zIndex: 2 }}
+          >
+            <img
+              src={event.image.src}
+              alt={event.id}
+              width={event.image.size.width}
+              height={event.image.size.height}
+            ></img>
+          </Box>
+        )}
         <Box
           sx={{
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
-            height: "100vh",
-            paddingX: { xs: "12px", md: "0px" },
-            flexDirection: "column",
-            gap: "50px",
+            justifyContent: "space-between",
+            marginBottom: event.description ? "40px" : "18px",
           }}
         >
+          <Box sx={{ display: "flex", gap: "4px" }}>
+            <svg
+              width="13"
+              height="17"
+              viewBox="0 0 13 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                fill="#E1AD41"
+              />
+            </svg>
+            <Typography
+              sx={{
+                fontFamily: "Calypso",
+                fontSize: "24px",
+                lineHeight: "100%",
+                textTransform: "uppercase",
+                textAlign: "left",
+                color: "#0B0B0B",
+                marginTop: "10px",
+              }}
+            >
+              {event.time || event.name}
+            </Typography>
+          </Box>
+          {event.price && (
+            <Box
+              sx={{
+                backgroundImage: "url(/images/home/price_back.png)",
+                backgroundRepeat: "round",
+                backgroundSize: "cover",
+                height: "28px",
+                width: "94px",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                fontWeight: "400",
+                textAlign: "left",
+                color: "#E1AD41",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                filter: "drop-shadow(3px 3px 2.8px rgba(0, 0, 0, 0.1))",
+              }}
+            >
+              {event.price}
+            </Box>
+          )}
+        </Box>
+
+        {event.time && (
           <Typography
             sx={{
-              textAlign: "center",
-              fontSize: { xs: "20px", md: "68px" },
-              lineHeight: "103%",
-              textTransform: "uppercase",
-              fontWeight: 700,
-              fontFamily: "HelveticaNeueCyr",
-              ".headline-part-2": {
-                fontSize: { xs: "46px", md: "78px" },
-                lineHeight: { xs: "94%", md: "122%" },
+              fontFamily: "Montserrat",
+              fontSize: "18px",
+              lineHeight: "100%",
+              fontWeight: "400",
+              textAlign: "left",
+              color: "#111111",
+              marginBottom: "10px",
+            }}
+          >
+            {event.name}
+          </Typography>
+        )}
+
+        {!expanded && event.description && (
+          <Box
+            onClick={(e) => {
+              e.stopPropagation();
+              onChange(e, true);
+            }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 0.5,
+              cursor: "pointer",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "100%",
+              fontWeight: "400",
+              textAlign: "left",
+              color: buttonColor,
+              marginBottom: "10px",
+            }}
+          >
+            {buttonText}
+            <Box>
+              <svg
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="0.353553"
+                  y1="0.353478"
+                  x2="5.35355"
+                  y2="5.35348"
+                  stroke={buttonColor}
+                />
+                <line
+                  y1="-0.5"
+                  x2="7.07107"
+                  y2="-0.5"
+                  transform="matrix(-0.707107 0.707107 0.707107 0.707107 10 0.707031)"
+                  stroke={buttonColor}
+                />
+              </svg>
+            </Box>
+          </Box>
+        )}
+      </AccordionSummary>
+      <AccordionDetails sx={{ px: "14px", pb: "10px", pt: 0 }}>
+        {event.preDescription && (
+          <Typography
+            sx={{
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "100%",
+              fontWeight: "700",
+              textAlign: "left",
+              color: "#111111",
+              mb: "4px",
+            }}
+          >
+            {event.preDescription}
+          </Typography>
+        )}
+        <Typography
+          sx={{
+            fontFamily: "Montserrat",
+            fontSize: "12px",
+            lineHeight: "100%",
+            fontWeight: "400",
+            textAlign: "left",
+            color: "#111111",
+            mb: "10px",
+          }}
+        >
+          {event.description}
+        </Typography>
+        <Box
+          onClick={(e) => onChange(e, false)}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 0.5,
+            cursor: "pointer",
+            fontFamily: "Montserrat",
+            fontSize: "12px",
+            lineHeight: "100%",
+            fontWeight: "400",
+            textAlign: "left",
+            color: buttonColor,
+          }}
+        >
+          {buttonText}
+          <Box sx={{ transform: "rotate(180deg)" }}>
+            <svg
+              width="10"
+              height="6"
+              viewBox="0 0 10 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="0.353553"
+                y1="0.353478"
+                x2="5.35355"
+                y2="5.35348"
+                stroke={buttonColor}
+              />
+              <line
+                y1="-0.5"
+                x2="7.07107"
+                y2="-0.5"
+                transform="matrix(-0.707107 0.707107 0.707107 0.707107 10 0.707031)"
+                stroke={buttonColor}
+              />
+            </svg>
+          </Box>
+        </Box>
+      </AccordionDetails>
+    </Accordion>
+  );
+}
+
+export function ImageCarousel({ count, isRight }) {
+  const images = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
+  console.log(count);
+  return (
+    <Box
+      sx={{
+        overflow: "hidden",
+        width: "100%",
+        position: "relative",
+        "&::before, &::after": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          width: "60px",
+          zIndex: 2,
+        },
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          width: "fit-content",
+          animation: `scroll 20s linear infinite ${isRight ? "" : "reverse"}`,
+          "@keyframes scroll": {
+            "0%": { transform: "translateX(0)" },
+            "100%": { transform: `translateX(-${100 / 2}%)` },
+          },
+        }}
+      >
+        {images.map((image, i) => (
+          <Box
+            key={i}
+            component="img"
+            src={`/images/home/courusel${count}/${image}.png`}
+            sx={{
+              height: 200,
+              width: "auto",
+              flexShrink: 0,
+              mx: 1,
+              borderRadius: "12px",
+              objectFit: "cover",
+            }}
+          />
+        ))}
+      </Box>
+    </Box>
+  );
+}
+
+const Home = () => {
+  const info = {
+    scene_1: [
+      {
+        time: "11:30 – 13:00",
+        name: "Фильм",
+      },
+      {
+        time: "13:00 – 14:30",
+        name: "Lampa Just Dance",
+      },
+      {
+        time: "14:30 – 15:30",
+        name: "BEAUTY показ",
+      },
+      {
+        time: "15:40 - 16:10",
+        name: "Dj Frukt",
+      },
+      {
+        time: "16:20 - 17:00",
+        name: "Znichka",
+      },
+    ],
+    scene_2: [
+      {
+        time: "17:10 - 18:10",
+        name: "Dj Bravo",
+      },
+      {
+        time: "18:20 - 19:00",
+        name: "Лайтовы Бізнес",
+      },
+      {
+        time: "19:20 - 20:10",
+        name: "Dj Sion",
+      },
+      {
+        time: "20:20 - 20:45",
+        name: "Wasssup",
+      },
+      {
+        time: "21:00 - 21:30",
+        name: "Живая музыка от Виталия Шишпоронка",
+      },
+    ],
+    mk: [
+      {
+        id: "mk1",
+        time: "12:00 – 13:00",
+        price: "Бесплатно",
+        name: "Вязание крючком для правшей",
+        description: (
+          <>
+            Создайте уникальное украшение на пуговицу своими руками из цветной
+            пряжи с помощью крючка. Подойдёт даже тем, кто только знакомится с
+            вязанием.
+          </>
+        ),
+      },
+      {
+        id: "mk2",
+        time: "12:00 – 13:00",
+        price: "Бесплатно",
+        name: "Прыжки на скакалке",
+        description: (
+          <>
+            Потренируйтесь в прыжках на скакалке и попробуйте разные техники и
+            комбинации.{" "}
+            <span>Для участия необходимо прийти со своей скакалкой.</span>
+          </>
+        ),
+      },
+      {
+        id: "mk3",
+        time: "13:00 – 14:30",
+        price: "Бесплатно",
+        name: "Плетение из бусин от Conte",
+        description: (
+          <>
+            Создайте ожерелье из бусин для своей собаки с её кличкой и номером
+            телефона хозяина. Получится красивый и полезный аксессуар для вашего
+            четвероногого друга.
+          </>
+        ),
+      },
+      {
+        id: "mk4",
+        time: "14:30 – 17:00",
+        price: "15 ₽ за 1 чел",
+        name: "Вязание крючком для правшей",
+        preDescription: <span>2 группы: 14:30 – 15:30, 15:45 – 16:45</span>,
+        description: (
+          <>
+            Создайте яркий брелок из цветных бусин в форме звёздочки своими
+            руками.
+          </>
+        ),
+      },
+      {
+        id: "mk5",
+        time: "18:00 – 20:00",
+        price: "15 ₽ за 1 чел",
+        name: "Живопись на холстах",
+        preDescription: <span>2 группы: 17:00 – 18:30, 18:30 – 20:00</span>,
+        description: (
+          <>
+            Распишите собственный холст акриловыми красками и создайте картину,
+            которую можно будет забрать с собой.
+          </>
+        ),
+      },
+    ],
+    activity: [
+      {
+        id: "ac1",
+        time: "11:00 – 16:00",
+        name: "Деревянные игры",
+        description:
+          "Попробуйте разные деревянные игры, испытайте ловкость, внимательность и смекалку. Можно играть с друзьями или присоединиться к игре на месте.",
+        image: {
+          src: "/images/home/activity/magic.png",
+          size: { width: "152px", height: "172px" },
+          position: {
+            right: 0,
+            bottom: "-106px",
+          },
+        },
+      },
+      {
+        id: "ac2",
+        time: "12:00 – 16:00",
+        name: "Шахматы",
+        description:
+          "Сыграйте партию с друзьями или новым соперником и проверьте, кому сегодня улыбнётся удача. Подходите в любое время работы зоны.",
+      },
+      {
+        id: "ac3",
+        time: "12:00 – 17:00",
+        name: "BEAUTYZONE POINT",
+        description:
+          "Познакомьтесь со специалистами и задайте вопросы о волосах и коже головы. Получите полезные рекомендации по уходу и узнайте больше о здоровье волос.",
+        image: {
+          src: "/images/home/activity/flags.png",
+          size: { width: "102px", height: "82px" },
+          position: {
+            right: 0,
+            top: 0,
+          },
+        },
+      },
+      {
+        id: "ac4",
+        time: "13:00 – 16:00",
+        name: "Аквагрим",
+        description:
+          "Добавьте немного волшебства в свой образ! Выберите сказочного героя, животное или любой другой образ — и превратитесь в него с помощью красок.",
+        image: {
+          src: "/images/home/activity/stars.png",
+          size: { width: "89px", height: "125px" },
+          position: {
+            right: 0,
+            top: 0,
+          },
+        },
+      },
+      {
+        id: "ac5",
+        time: "13:00 – 16:00",
+        name: "Чайная церемония",
+        description:
+          "Остановитесь на несколько минут, познакомьтесь с традициями чайной церемонии и насладитесь чашкой ароматного чая. Это место, где можно немного замедлиться и отдохнуть от фестивальной суеты.",
+      },
+      {
+        id: "ac6",
+        time: "15:00 - 19:00",
+        name: "Таро",
+        description:
+          "Загляните в мир символов и попробуйте посмотреть на волнующие вас вопросы под другим углом. Расклад может подсказать неожиданный взгляд на привычную ситуацию.",
+        image: {
+          src: "/images/home/activity/taro.png",
+          size: { width: "101px", height: "115px" },
+          position: {
+            right: "22px",
+            top: "-48px",
+          },
+        },
+      },
+    ],
+    activity2: [
+      {
+        id: "ac2_1",
+        name: "Беспроигрышная лотерея",
+        description:
+          "Испытайте удачу и заберите свой подарок — здесь выигрывает каждый билет. А главное, участие в лотерее помогает животным проекта «Мурзики».",
+      },
+      {
+        id: "ac2_2",
+        name: "Детская зона",
+        description:
+          "Добро пожаловать в мастерскую чудес! Здесь маленькие гости смогут мастерить, рисовать, украшать и создавать собственных сказочных героев. Можно сделать корону, волшебную палочку, меч и щит, браслет из цветов и листьев или просто взять раскраски и дать волю фантазии.",
+      },
+      {
+        id: "ac2_3",
+        name: "Точка продаж от Conte",
+      },
+      {
+        id: "ac2_4",
+        name: "Точка продаж от Random Bedroom",
+      },
+      {
+        id: "ac2_5",
+        name: "Мини-активности",
+        description: (
+          <Box
+            sx={{
+              ".description": {
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "12px",
+                textAlign: "left",
+                display: "block",
+                marginTop: "4px",
+                marginBottom: "10px",
               },
-              ".headline-part-3": {
-                fontSize: { xs: "36px", md: "126px" },
-                lineHeight: "103%",
+              ".headline": {
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "12px",
+                fontWeight: "700",
+                textAlign: "left",
+                display: "block",
               },
             }}
           >
-            Благотворительная
-            <br />
-            <span className="headline-part-2">музлото караоке</span>
-            <br />
-            <span className="headline-part-3">вечеринка</span>
+            <span className="headline">Найди свое пожелание</span>
+            <span className="description">
+              Иногда нужные слова находят нас сами. Пройдите сквозь волшебную
+              завесу и найдите первое слово, которое встретится вам на пути.
+              Возможно, именно оно станет вашим пожеланием на сегодня.
+            </span>
+            <span className="headline">Чек-лист найди слова</span>
+            <span className="description">
+              Перед вами — настоящее поле слов. Среди множества букв спрятались
+              слова, которые ждут, когда вы их найдёте.
+              <br />
+              <br />
+              Внимательно изучайте ватман, ищите знакомые и неожиданные слова и
+              обводите те, что удалось обнаружить. Кто знает, может быть, среди
+              них спрятано что-то именно для вас?
+            </span>
+            <span className="headline">Оставь свой след</span>
+            <span className="description">
+              В Сказочном мире каждый может стать кем угодно. Перед вами —
+              заготовка будущего героя. Дорисуйте его так, как подскажет
+              воображение: придумайте внешность, характер и настроение.
+            </span>
+            <span className="headline">Послание тишины</span>
+            <span className="description">
+              Оставьте доброе слово тому, кого никогда не встретите. Возьмите
+              одну открытку, а взамен оставьте свою: пожелание, слова поддержки,
+              мысль или маленькое послание для следующего человека. Пусть добрые
+              слова продолжают свой путь от сердца к сердцу!
+            </span>
+          </Box>
+        ),
+      },
+    ],
+    auction: {
+      name: "Аукцион картин",
+      description:
+        "Выберите картину, которая вам понравилась, и попробуйте побороться за неё на благотворительном аукционе. Все собранные средства помогут животным проекта «Мурзики».",
+    },
+  };
+
+  const pets = [
+    { image: 1, name: "Юки, 2 года" },
+    { image: 2, name: "Шарки, 1.5 года" },
+    { image: 3, name: "Мура" },
+    { image: 4, name: "Тося, 4 года" },
+    { image: 5, name: "Вишня, 5 мес" },
+    { image: 6, name: "Агата, 3 мес" },
+    { image: 7, name: "Малыши" },
+    { image: 8, name: "Лютик, 2 года" },
+  ];
+  const colapsePets = [...pets, ...pets];
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (id) => (event, isExpanded) => {
+    setExpanded(isExpanded ? id : false);
+  };
+
+  return (
+    <Box sx={{ backgroundColor: "#fff" }}>
+      <Box
+        sx={{
+          // height: "1080px",
+          backgroundImage: "url(/images/home/hero.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
+        <Box sx={{ paddingTop: "110px", px: "2px", position: "relative" }}>
+          <Typography
+            sx={{
+              fontFamily: "Calypso",
+              fontSize: "30px",
+              lineHeight: "180%",
+              textTransform: "uppercase",
+              textAlign: "center",
+              color: "#0B0B0B",
+              span: {
+                fontSize: "60px",
+                lineHeight: "130%",
+                color: "#EFB53C",
+              },
+            }}
+          >
+            самые настоящие <br />
+            <span>чудеса</span> <br />
+            создаем мы сами
           </Typography>
           <Box
             sx={{
-              background: `url(${MainLogo})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              width: "155px",
-              height: "185px",
+              position: "absolute",
+              bottom: 0,
+              left: "50%",
+              transform: "translate(-50%)",
             }}
-          ></Box>
+          >
+            <img src={"/images/home/hero_headline.png"} alt="headline" />
+          </Box>
+        </Box>
+        <Box sx={{ paddingX: "42px", marginTop: "26px" }}>
+          <Box
+            sx={{
+              background: "url(/images/home/hero_desc.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              paddingX: "20px",
+              height: "106px",
+              maxWidth: "250px",
+              marginX: "auto",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: "Calypso",
+                  fontSize: "30px",
+                  lineHeight: "100%",
+                  textAlign: "center",
+                  color: "#111111",
+                }}
+              >
+                PawsUp
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontSize: "14px",
+                  lineHeight: "100%",
+                  fontWeight: "500",
+                  textAlign: "center",
+                  color: "#111111",
+                  marginTop: "4px",
+                }}
+              >
+                Благотворительный фестиваль
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "44px",
+            justifyContent: "center",
+            marginTop: "32px",
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <img src={"/images/home/calendar.png"} alt="calendar" />
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                  fontWeight: "700",
+                  textAlign: "left",
+                  color: "#111111",
+                }}
+              >
+                22 августа
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                  fontWeight: "400",
+                  textAlign: "left",
+                  color: "#111111",
+                  marginTop: "2px",
+                }}
+              >
+                12:00 - 22:00
+              </Typography>
+            </Box>
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
+            <img src={"/images/home/place.png"} alt="calendar" />
+            <Box>
+              <Typography
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                  fontWeight: "700",
+                  textAlign: "left",
+                  color: "#111111",
+                }}
+              >
+                ЭХО двор
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                  fontWeight: "400",
+                  textAlign: "left",
+                  color: "#111111",
+                  marginTop: "2px",
+                }}
+              >
+                Независимости 95к5
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+        <Box sx={{ marginTop: "20px" }}>
+          <Box
+            sx={{
+              width: "340px",
+              paddingY: "14px",
+              borderRadius: "100px",
+              background: "#FFFFFF",
+              color: "#DBA535",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              fontWeight: "700",
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginX: "auto",
+            }}
+          >
+            Смотреть программу
+          </Box>
+          <Box
+            sx={{
+              width: "340px",
+              paddingY: "14px",
+              borderRadius: "100px",
+              background: "#DBA535",
+              color: "#FFFFFF",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              fontWeight: "700",
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginX: "auto",
+              marginTop: "6px",
+            }}
+          >
+            Помочь прямо сейчас
+          </Box>
+        </Box>
+        <Box>
+          <Box
+            sx={{ position: "relative", marginTop: "26px", paddingLeft: "12%" }}
+          >
+            <Box
+              sx={{
+                width: "95px",
+                height: "28px",
+                background: "url(/images/home/paper.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                fontStyle: "italic",
+                lineHeight: "14px",
+                fontWeight: "400",
+                textAlign: "center",
+                color: "#E1AD41",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Творчество
+            </Box>
+          </Box>
+          <Box
+            sx={{ position: "relative", marginTop: "62px", paddingLeft: "49%" }}
+          >
+            <Box
+              sx={{
+                width: "81px",
+                height: "28px",
+                background: "url(/images/home/paper.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                fontStyle: "italic",
+                lineHeight: "14px",
+                fontWeight: "400",
+                textAlign: "center",
+                color: "#E1AD41",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Музыка
+            </Box>
+          </Box>
+          <Box
+            sx={{ position: "relative", marginTop: "12px", paddingLeft: "27%" }}
+          >
+            <Box
+              sx={{
+                width: "97px",
+                height: "28px",
+                background: "url(/images/home/paper.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                fontStyle: "italic",
+                lineHeight: "14px",
+                fontWeight: "400",
+                textAlign: "center",
+                color: "#E1AD41",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Знакомства
+            </Box>
+          </Box>
+          <Box
+            sx={{ position: "relative", marginTop: "12px", paddingLeft: "60%" }}
+          >
+            <Box
+              sx={{
+                width: "106px",
+                height: "28px",
+                background: "url(/images/home/paper.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                fontStyle: "italic",
+                lineHeight: "14px",
+                fontWeight: "400",
+                textAlign: "center",
+                color: "#E1AD41",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Добрые дела
+            </Box>
+          </Box>
+        </Box>
+        <Box
+          sx={{ marginTop: "32px", display: "flex", justifyContent: "center" }}
+        >
+          <Box
+            sx={{
+              width: "294px",
+              height: "58px",
+              background: "url(/images/home/big_paper.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              fontWeight: "400",
+              textAlign: "center",
+              color: "#111111",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            Добро начинается с маленьких шагов.
+            <br /> А чудеса мы создаём вместе!
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            backgroundImage: "url(/images/home/hero_end.png)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            width: "100%",
+            height: "40px",
+            zIndex: 1,
+            marginTop: "30px",
+          }}
+        ></Box>
+      </Box>
+      <Box sx={{ marginTop: "96px" }}>
+        <Typography
+          sx={{
+            fontFamily: "Calypso",
+            fontSize: "30px",
+            lineHeight: "100%",
+            textTransform: "uppercase",
+            textAlign: "left",
+            color: "#0B0B0B",
+            paddingLeft: "12px",
+          }}
+        >
+          Карта фестиваля
+        </Typography>
+        <Box
+          sx={{
+            position: "relative",
+            marginX: "auto",
+            zIndex: 1,
+            marginTop: "20px",
+          }}
+        >
+          <Box
+            sx={{
+              width: "335px",
+              height: "250px",
+              borderRadius: "20px",
+              // background: "url(/images/home/map.png)",
+              backgroundColor: "#F0E9DE",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              position: "relative",
+              margin: "auto",
+            }}
+          >
+            <Box
+              sx={{
+                width: "115px",
+                height: "115px",
+                background: "url(/images/home/star_map.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                position: "absolute",
+                top: "-50px",
+                right: "0",
+              }}
+            ></Box>
+          </Box>
         </Box>
       </Box>
       <Box
         sx={{
-          background: {
-            xs: "linear-gradient(180deg, #2176C9 15%, #FFFFFF 24%, #FFFFFF 100%)",
-            md: "linear-gradient(180deg, #2176C9 10%, #FFFFFF 30%, #FFFFFF 100%)",
-          },
+          marginTop: "40px",
         }}
       >
-        <Box>
-          <Typography
-            sx={{
-              textAlign: "center",
-              fontSize: { xs: "24px", md: "78px" },
-              lineHeight: "103%",
-              textTransform: "uppercase",
-              fontWeight: 700,
-              paddingTop: "70px",
-              fontFamily: "HelveticaNeueCyr",
-            }}
-          >
-            Что вас ждет сегодня
-          </Typography>
-        </Box>
+        <Typography
+          sx={{
+            fontFamily: "Calypso",
+            fontSize: "30px",
+            lineHeight: "100%",
+            textTransform: "uppercase",
+            textAlign: "left",
+            color: "#0B0B0B",
+            paddingLeft: "12px",
+          }}
+        >
+          Основная
+          <br />
+          программа (сцена)
+        </Typography>
         <Box
           sx={{
-            maxWidth: "1440px",
-            paddingX: { md: "80px" },
-            marginX: "auto",
+            backgroundImage: "url(/images/home/scene_back.png)",
+            backgroundRepeat: "round",
+            backgroundSize: "cover",
+            paddingLeft: "30px",
+            paddingTop: "50px",
+            paddingBottom: "32px",
+            position: "relative",
+            marginTop: "66px",
           }}
         >
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "end",
-              marginTop: { xs: "70px", md: "170px" },
-              position: "relative",
+              position: "absolute",
+              backgroundImage: "url(/images/home/scene_clip.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              width: "150px",
+              height: "92px",
+              left: "45px",
+              top: "-58px",
             }}
-          >
+          ></Box>
+          {info.scene_1.map((activity, index) => (
             <Box
               sx={{
-                background: `url(${Participant})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                width: { xs: "164px", md: "640px" },
-                height: { xs: "168px", md: "654px" },
-                position: "absolute",
-                left: { xs: "8px", md: 0 },
-                top: { xs: "-14px", md: "-100px" },
-              }}
-            ></Box>
-            <Box
-              sx={{
-                width: { xs: "184px", md: "575px" },
-                marginRight: { xs: "12px", md: 0 },
+                marginTop: index !== 0 ? "20px" : "0px",
+                display: "flex",
+                gap: "2px",
               }}
             >
-              <Typography
-                sx={{
-                  textAlign: { xs: "left", md: "center" },
-                  fontSize: { xs: "20px", md: "60px" },
-                  lineHeight: "100%",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  color: "#FF3400",
-                  fontFamily: "HelveticaNeueCyr",
-                }}
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Музлото
-              </Typography>
-              <Typography
-                sx={{
-                  textAlign: { xs: "left", md: "center" },
-                  fontSize: { xs: "18px", md: "54px" },
-                  lineHeight: "100%",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  fontFamily: "HelveticaNeueCyr",
-                  color: "#000",
-                }}
-              >
-                19:00 — 22:00
-              </Typography>
-              <Typography
-                sx={{
-                  textAlign: { xs: "left", md: "center" },
-                  fontSize: { xs: "14px", md: "44px" },
-                  lineHeight: "103%",
-                  fontWeight: 400,
-                  marginTop: { xs: "12px", md: "36px" },
-                  fontFamily: "HelveticaNeueCyr",
-                  color: "#000",
-                  ".part": {
-                    color: "#FF3400",
-                    fontWeight: 700,
-                  },
-                }}
-              >
-                Угадывай треки, вычёркивай их из бланков, собирай комбинации и{" "}
-                <span className="part">выигрывай призы</span>
-              </Typography>
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <Box sx={{ marginTop: "14px" }}>
+                <Typography
+                  sx={{
+                    fontFamily: "Calypso",
+                    fontSize: "24px",
+                    lineHeight: "100%",
+                    textAlign: "left",
+                    color: "#0B0B0B",
+                  }}
+                >
+                  {activity.time}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "18px",
+                    lineHeight: "100%",
+                    textAlign: "left",
+                    color: "#111111",
+                    marginTop: "2px",
+                  }}
+                >
+                  {activity.name}
+                </Typography>
+              </Box>
             </Box>
-          </Box>
+          ))}
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "start",
-              marginTop: { xs: "100px", md: "280px" },
-              position: "relative",
-              paddingLeft: { xs: "12px", md: "0px" },
+              position: "absolute",
+              backgroundImage: "url(/images/home/scene_star.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              width: "144px",
+              height: "376px",
+              right: "16px",
+              top: "12px",
             }}
-          >
-            <Box sx={{}}>
-              <Typography
-                sx={{
-                  textAlign: { xs: "left", md: "center" },
-                  fontSize: { xs: "20px", md: "60px" },
-                  lineHeight: "100%",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  color: "#2277C8",
-                  fontFamily: "HelveticaNeueCyr",
-                }}
-              >
-                Караоке-вечеринка
-              </Typography>
-              <Typography
-                sx={{
-                  textAlign: { xs: "left", md: "center" },
-                  fontSize: { xs: "18px", md: "54px" },
-                  lineHeight: "100%",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  fontFamily: "HelveticaNeueCyr",
-                  color: "#000",
-                  marginTop: { xs: "6px" },
-                }}
-              >
-                22:30 — 03:00
-              </Typography>
-            </Box>
-            <Typography
-              sx={{
-                textAlign: "left",
-                marginTop: { xs: "14px", md: "94px" },
-                fontSize: { xs: "12px", md: "32px" },
-                lineHeight: "210%",
-                fontWeight: 600,
-                fontFamily: "HelveticaNeueCyr",
-                color: "#2277C8",
-                ".name": {
-                  color: "#000",
-                  fontWeight: 700,
-                },
-              }}
-            >
-              {djInfo.map((dj) => (
-                <>
-                  <div>
-                    {dj.time} <span className="name">{dj.name}</span>
-                  </div>
-                </>
-              ))}
-            </Typography>
+          ></Box>
+        </Box>
+        <Box
+          sx={{
+            backgroundImage: "url(/images/home/scene_back.png)",
+            backgroundRepeat: "round",
+            backgroundSize: "cover",
+            paddingRight: "30px",
+            paddingTop: "50px",
+            paddingBottom: "32px",
+            position: "relative",
+            marginTop: "66px",
+          }}
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              backgroundImage: "url(/images/home/scene_clip.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              width: "150px",
+              height: "92px",
+              right: "45px",
+              top: "-58px",
+            }}
+          ></Box>
+          {info.scene_2.map((activity, index) => (
             <Box
               sx={{
-                background: `url(${Singer})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                width: { xs: "162px", md: "628px" },
-                height: { xs: "196px", md: "762px" },
-                position: "absolute",
-                right: 0,
-                top: { xs: "28px", md: "-200px" },
+                marginTop: index !== 0 ? "20px" : "0px",
+                display: "flex",
+                gap: "2px",
+                justifyContent: "end",
               }}
-            ></Box>
-          </Box>
+            >
+              <Box sx={{ marginTop: "14px" }}>
+                <Typography
+                  sx={{
+                    fontFamily: "Calypso",
+                    fontSize: "24px",
+                    lineHeight: "100%",
+                    textAlign: "right",
+                    color: "#0B0B0B",
+                  }}
+                >
+                  {activity.time}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "18px",
+                    lineHeight: "100%",
+                    textAlign: "right",
+                    color: "#111111",
+                    marginTop: "2px",
+                  }}
+                >
+                  {activity.name}
+                </Typography>
+              </Box>
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+            </Box>
+          ))}
+          <Box
+            sx={{
+              position: "absolute",
+              backgroundImage: "url(/images/home/scene_star.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              width: "144px",
+              height: "376px",
+              left: "16px",
+              top: "12px",
+            }}
+          ></Box>
+        </Box>
+        <Box sx={{ marginTop: "40px" }}>
+          <ImageCarousel count={1} isRight={false}></ImageCarousel>
+        </Box>
+        <Box sx={{ marginTop: "20px", marginBottom: "70px" }}>
+          <ImageCarousel count={2} isRight={true}></ImageCarousel>
         </Box>
       </Box>
-      <Box sx={{ background: "#FFF" }}>
+      <Box
+        sx={{
+          background: "url(/images/home/green_start.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          width: "100%",
+          height: "36px",
+        }}
+      ></Box>
+      <Box sx={{ backgroundColor: "#C8D399", paddingX: "10px" }}>
         <Typography
           sx={{
-            textAlign: "center",
-            fontSize: { xs: "22px", md: "78px" },
-            lineHeight: "103%",
+            color: "#0B0B0B",
+            fontFamily: "Calypso",
+            fontSize: "30px",
+            lineHeight: "100%",
+            textAlign: "left",
+            marginBottom: "20px",
             textTransform: "uppercase",
-            fontWeight: 700,
-            paddingTop: { xs: "50px", md: "80px" },
-            color: "#000",
-            fontFamily: "HelveticaNeueCyr",
+          }}
+        >
+          Мастер-классы
+        </Typography>
+        {info.mk.map((activity, index) => (
+          <Box sx={{ marginTop: index !== 0 ? "10px" : 0 }}>
+            <EventCard
+              event={activity}
+              expanded={expanded === activity.id}
+              onChange={handleChange(activity.id)}
+              buttonText={"Подробнее о мастер-классе"}
+            />
+          </Box>
+        ))}
+        <Box
+          sx={{
+            width: "340px",
+            paddingY: "14px",
+            borderRadius: "100px",
+            background: "#DBA535",
+            color: "#FFF",
+            fontFamily: "Montserrat",
+            fontSize: "12px",
+            lineHeight: "14px",
+            fontWeight: "700",
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginX: "auto",
+            marginTop: "20px",
+            textTransform: "uppercase",
+          }}
+        >
+          Регистрация на мастер-классы
+        </Box>
+        <Typography
+          sx={{
+            color: "#0B0B0B",
+            fontFamily: "Calypso",
+            fontSize: "30px",
+            lineHeight: "100%",
+            textAlign: "left",
+            marginTop: "50px",
+            marginBottom: "20px",
+            textTransform: "uppercase",
           }}
         >
           Активности
         </Typography>
-        <Box sx={{ maxWidth: "1440px", margin: "auto" }}>
-          <Typography
-            sx={{
-              fontSize: { xs: "18px", md: "60px" },
-              paddingLeft: { xs: "12px", md: "80px" },
-              lineHeight: "103%",
-              textTransform: "uppercase",
-              fontWeight: 700,
-              color: "#2277C8",
-              fontFamily: "HelveticaNeueCyr",
-              marginY: { xs: "10px", md: "40px" },
-            }}
-          >
-            Бесплатно
-          </Typography>
-        </Box>
         <Box>
-          {activityInfo.map((activity, index) => (
-            <Box
-              sx={{
-                marginTop: { xs: index ? "4px" : "0", md: "0" },
-                background: {
-                  xs: "linear-gradient(269.68deg, #FFFFFF 1.57%, #2277C8 37.54%)",
-                  md:
-                    index % 2
-                      ? "linear-gradient(269.68deg, #2277C8 39.57%, #FFFFFF 86.47%)"
-                      : "linear-gradient(269.68deg, #FFFFFF 1.57%, #2277C8 65.47%)",
-                },
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-                maxWidth: { xs: "100%", md: "1440px" },
-                margin: "auto",
-                flexDirection: {
-                  xs: "row",
-                  md: index % 2 ? "row-reverse" : "row",
-                },
-                position: "relative",
-                img: {
-                  display: { xs: "none", md: "block" },
-                },
-              }}
-              key={`activity-${index}`}
-            >
-              <Box
-                sx={{
-                  width: { xs: "268px", md: activity.maxWidth || "600px" },
-                  marginLeft: { xs: "8px", md: !(index % 2) && "60px" },
-                  marginRight: { xs: "8px", md: index % 2 && "60px" },
-                  height: { xs: activity.maxHeight || "122px", md: "auto" },
-                }}
-              >
-                <Typography
-                  sx={{
-                    textAlign: { xs: "left", md: "center" },
-                    fontSize: { xs: "14px", md: "30px" },
-                    lineHeight: "103%",
-                    textTransform: "uppercase",
-                    fontWeight: 700,
-                    color: "#FFF",
-                    fontFamily: "HelveticaNeueCyr",
-                    marginTop: { xs: "12px", md: 0 },
-                  }}
-                >
-                  {activity.title}
-                </Typography>
-                <Typography
-                  sx={{
-                    textAlign: { xs: "left", md: "center" },
-                    fontSize: { xs: "12px", md: "25px" },
-                    lineHeight: "103%",
-                    fontWeight: 400,
-                    marginTop: { xs: "14px", md: "30px" },
-                    color: "FFF",
-                    fontFamily: "HelveticaNeueCyr",
-                  }}
-                >
-                  {activity.description}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: { xs: "block", md: "none" },
-                  background: `url(${activity.mobileImage})`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  maxHeight: { xs: activity.maxHeight || "122px" },
-                  position: "absolute",
-                  width: "40%",
-                  height: "100%",
-                  top: 0,
-                  right: 0,
-                }}
-              ></Box>
-              <img src={activity.image} alt={`activity-${index}`}></img>
+          {info.activity.map((activity, index) => (
+            <Box sx={{ marginTop: index !== 0 ? "10px" : 0 }}>
+              <EventCard
+                event={activity}
+                expanded={expanded === activity.id}
+                onChange={handleChange(activity.id)}
+                buttonText={"Подробнее"}
+              />
             </Box>
           ))}
         </Box>
-        <Box sx={{ maxWidth: "1440px", margin: "auto" }}>
-          <Typography
-            sx={{
-              fontSize: { xs: "18px", md: "60px" },
-              paddingLeft: { xs: "12px", md: "80px" },
-              lineHeight: "103%",
-              textTransform: "uppercase",
-              fontWeight: 700,
-              color: "#DF3F05",
-              fontFamily: "HelveticaNeueCyr",
-              marginY: { xs: "16px", md: "40px" },
-            }}
-          >
-            За донат
-          </Typography>
-        </Box>
-        {donatActivity.map((activity, index) => (
-          <Box
-            sx={{
-              ".boldPart": {
-                fontWeight: 700,
-              },
-              marginTop: { xs: index ? "4px" : "0", md: "0" },
-              background: {
-                xs: "linear-gradient(269.68deg, #FFFFFF 1.57%, #FF3400 37.54%)",
-                md:
-                  index % 2
-                    ? "linear-gradient(269.68deg, #FF3400 36.57%, #FFFFFF 65.47%)"
-                    : "linear-gradient(269.68deg, #FFFFFF 1.57%, #FF3400 63.57%)",
-              },
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-              maxWidth: { xs: "100%", md: "1440px" },
-              margin: "auto",
-              flexDirection: {
-                xs: "row",
-                md: index % 2 ? "row-reverse" : "row",
-              },
-              position: "relative",
-              img: {
-                display: { xs: "none", md: "block" },
-              },
-            }}
-            key={`activity-${index}`}
-          >
-            <Box
-              sx={{
-                width: { xs: "268px", md: activity.maxWidth || "600px" },
-                marginLeft: { xs: "8px", md: !(index % 2) && "60px" },
-                marginRight: { xs: "8px", md: index % 2 && "60px" },
-                height: { xs: activity.maxHeight || "144px", md: "auto" },
-              }}
-            >
-              <Typography
-                sx={{
-                  textAlign: { xs: "left", md: "center" },
-                  fontSize: { xs: "14px", md: "30px" },
-                  lineHeight: "103%",
-                  textTransform: "uppercase",
-                  fontWeight: 700,
-                  color: "#FFF",
-                  fontFamily: "HelveticaNeueCyr",
-                  marginTop: { xs: "12px", md: 0 },
-                }}
-              >
-                {activity.title}
-              </Typography>
-              <Typography
-                sx={{
-                  textAlign: { xs: "left", md: "center" },
-                  fontSize: { xs: "12px", md: "25px" },
-                  lineHeight: "103%",
-                  fontWeight: 400,
-                  marginTop: { xs: "14px", md: "30px" },
-                  color: "FFF",
-                  fontFamily: "HelveticaNeueCyr",
-                }}
-              >
-                {activity.description}
-              </Typography>
-              {activity.button ? (
-                <Box
-                  sx={{
-                    marginTop: { xs: "6px", md: "12px" },
-                    marginX: { xs: "none", md: "auto" },
-                    width: "fit-content",
-                    a: {
-                      textDecoration: "none",
-                      display: "block",
-                      width: "fit-content",
-                      color: "#FFF",
-                      ":hover": {
-                        div: {
-                          background: "#fff",
-                        },
-                        color: "#0F5190",
-                      },
-                    },
-                  }}
-                >
-                  <a href={activity.link}>
-                    <Box
-                      sx={{
-                        padding: { xs: "6px 12px", md: "12px 24px" },
-                        alignItems: "flex-start",
-                        width: "fit-content",
-                        borderRadius: "20px",
-                        background: "#0F5190",
-                        transition: "all 0.3s ease-in-out",
-                        cursor: "pointer",
-                        fontFamily: "Manrope",
-                        fontWeight: 700,
-                        fontSize: { xs: "12px", md: "20px" },
-                      }}
-                    >
-                      Примеры и артисты
-                    </Box>
-                  </a>
-                </Box>
-              ) : (
-                <></>
-              )}
-            </Box>
-            <Box
-              sx={{
-                display: { xs: "block", md: "none" },
-                background: `url(${activity.mobileImage})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                maxHeight: { xs: activity.maxHeight || "144px" },
-                position: "absolute",
-                width: "40%",
-                height: "100%",
-                top: 0,
-                right: 0,
-              }}
-            ></Box>
-            <img src={activity.image} alt={`activity-${index}`}></img>
-          </Box>
-        ))}
       </Box>
       <Box
         sx={{
-          background: "linear-gradient(180deg, #FFFFFF 50%, #2376C7 100%)",
-          height: { xs: "248px", md: "800px" },
+          background: "url(/images/home/green_end.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          width: "100%",
+          height: "40px",
         }}
-      >
-        <Box
+      ></Box>
+      <Box sx={{ paddingX: "10px" }}>
+        <Typography
           sx={{
-            maxWidth: "1440px",
-            margin: "auto",
-            position: "relative",
-            img: {
-              position: "absolute",
-              top: { xs: "100px", md: "306px" },
-              left: 0,
-              width: "100%",
-            },
-            a: {
-              width: { xs: "148px", md: "484px" },
-              height: { xs: "26px", md: "80px" },
-              background: "#2277C8",
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-              borderRadius: "46px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              textDecoration: "none",
-              position: "relative",
-              zIndex: "10",
-              marginX: "auto",
-              marginTop: { xs: "68px", md: "216px" },
-              color: "#FFF",
-              ":hover": {
-                background: "#FFF",
-                color: "#2277C8",
-              },
-            },
+            color: "#0B0B0B",
+            fontFamily: "Calypso",
+            fontSize: "30px",
+            lineHeight: "100%",
+            textAlign: "left",
+            marginTop: "50px",
+            marginBottom: "20px",
+            textTransform: "uppercase",
           }}
         >
-          <Typography
-            className="auctionLink"
-            sx={{
-              textAlign: "left",
-              fontSize: { xs: "16px", md: "60px" },
-              paddingLeft: { xs: "12px", md: "80px" },
-              lineHeight: "103%",
-              textTransform: "uppercase",
-              fontWeight: 700,
-              color: "#2277C8",
-              paddingTop: { xs: "20px", md: "80px" },
-              fontFamily: "HelveticaNeueCyr",
-            }}
-          >
-            Аукцион
-          </Typography>
-          <Typography
-            sx={{
-              textAlign: "left",
-              paddingX: { xs: "12px", md: "80px" },
-              fontSize: { xs: "10px", md: "26px" },
-              lineHeight: "103%",
-              fontWeight: 400,
-              paddingTop: { xs: "16px", md: "44px" },
-              color: "#2277C8",
-              fontFamily: "HelveticaNeueCyr",
-              maxWidth: { md: "880px" },
-            }}
-          >
-            Делай ставку, выигрывай и забирай работу домой.
-            <br /> Минимальный ход ставки 5 рублей. <br />
-            Обратный отсчёт идёт в реальном времени. <br />
-            Все донаты идут приюту.
-          </Typography>
-          <a href={"/auction"}>
-            <Typography
-              sx={{
-                textAlign: "center",
-                fontSize: { xs: "14px", md: "44px" },
-                lineHeight: "103%",
-                fontWeight: 700,
-                fontFamily: "HelveticaNeueCyr",
-                opacity: 100,
-              }}
-            >
-              Участвовать
-            </Typography>
-          </a>
-          <img src={Auction} alt="auction"></img>
+          а еще...
+        </Typography>
+        <Typography
+          sx={{
+            color: "#0B0B0B",
+            fontFamily: "Montserrat",
+            fontSize: "12px",
+            lineHeight: "14px",
+            textAlign: "left",
+          }}
+        >
+          Некоторые активности будут ждать вас практически весь фестиваль —
+          можно заглянуть в удобное время!
+        </Typography>
+        <Box sx={{ marginTop: "6px" }}>
+          <EventCard
+            event={info.auction}
+            expanded={expanded === "auction"}
+            onChange={handleChange("auction")}
+            buttonText={"Подробнее"}
+            backgroundColor="#DBECF0"
+            buttonColor="#111111"
+          />
         </Box>
-      </Box>
-      <Box>
-        <Box sx={{ maxWidth: "1440px", margin: "auto", position: "relative" }}>
-          <Typography
-            sx={{
-              textAlign: "left",
-              paddingX: { xs: "12px", md: "80px" },
-              fontSize: { xs: "22px", md: "60px" },
-              lineHeight: "120%",
-              fontWeight: 700,
-              paddingTop: { xs: "20px", md: "70px" },
-              color: "#FFF",
-              fontFamily: "HelveticaNeueCyr",
-            }}
-          >
-            Кто мы?
-          </Typography>
-          <Typography
-            sx={{
-              textAlign: "left",
-              paddingX: { xs: "14px", md: "80px" },
-              fontSize: { xs: "10px", md: "30px" },
-              lineHeight: "120%",
-              fontWeight: 400,
-              paddingTop: { xs: "8px", md: "14px" },
-              color: "#FFF",
-              fontFamily: "HelveticaNeueCyr",
-              ".bold": { fontWeight: "700" },
-            }}
-          >
-            Мы небольшой волонтерский проект{" "}
-            <span className="bold">«Paws Up!»</span>
-            <br /> Основная наша цель - это показать, что делать добро легко!
-            <br /> <br />
-            <span className="bold">Мы рассказываем людям:</span>
-          </Typography>
-          <Box
-            sx={{
-              paddingX: { xs: "8px", md: "80px" },
-              marginTop: { xs: "10px", md: "40px" },
-              paddingBottom: { xs: "120px", md: "380px" },
-            }}
-          >
-            {pawsupInfo.map((info, index) => (
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: { xs: "6px", md: "20px" },
-                  alignItems: "center",
-                  paddingTop: index ? { xs: "6px", md: "22px" } : "",
-                  img: {
-                    width: { xs: "7", md: "22px" },
-                    height: { xs: "7", md: "22px" },
-                  },
-                }}
-              >
-                <img src={Elipse} alt="elipse"></img>
-
-                <Typography
-                  sx={{
-                    textAlign: "left",
-                    fontSize: { xs: "12px", md: "24px" },
-                    lineHeight: "120%",
-                    fontWeight: 400,
-                    color: "#FFF",
-                    fontFamily: "Manrope",
-                    maxWidth: { xs: "232px", md: "570px" },
-                  }}
-                >
-                  {info}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-
-          <Box
-            sx={{
-              backgroundImage: { xs: `url(${MobileTeam})`, md: `url(${Team})` },
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              width: { xs: "300px", md: "1066px" },
-              height: { xs: "188px", md: "740px" },
-              position: "absolute",
-              right: { xs: "0", md: 0 },
-              bottom: { xs: "0", md: 0 },
-            }}
-          ></Box>
-        </Box>
-      </Box>
-      <Box>
         <Box
           sx={{
-            maxWidth: { md: "1440px" },
-            margin: "auto",
-            position: "relative",
+            width: "340px",
+            paddingY: "14px",
+            borderRadius: "100px",
+            background: "#DBA535",
+            color: "#FFF",
+            fontFamily: "Montserrat",
+            fontSize: "12px",
+            lineHeight: "14px",
+            fontWeight: "700",
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginX: "auto",
+            marginTop: "10px",
+            textTransform: "uppercase",
+          }}
+        >
+          Посмотреть лоты аукциона
+        </Box>
+        <Box sx={{ marginTop: "10px" }}>
+          {info.activity2.map((activity, index) => (
+            <Box sx={{ marginTop: index !== 0 ? "10px" : 0 }}>
+              <EventCard
+                event={activity}
+                expanded={expanded === activity.id}
+                onChange={activity.description && handleChange(activity.id)}
+                buttonText={"Подробнее"}
+                backgroundColor="#DBECF0"
+                buttonColor="#111111"
+              />
+            </Box>
+          ))}
+        </Box>
+      </Box>
+      {/* кому помогаем */}
+      <Box sx={{ paddingX: "10px" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box>
+            <Typography
+              sx={{
+                color: "#0B0B0B",
+                fontFamily: "Calypso",
+                fontSize: "30px",
+                lineHeight: "100%",
+                textAlign: "left",
+                marginTop: "50px",
+                maxWidth: "185px",
+                textTransform: "uppercase",
+              }}
+            >
+              Кому мы помогаем
+            </Typography>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                textAlign: "left",
+                marginTop: "20px",
+                maxWidth: "165px",
+              }}
+            >
+              В этом году PawsUp проходит в поддержку Учреждения помощи животным
+              «Мурзики».
+            </Typography>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                textAlign: "left",
+                marginTop: "6px",
+                fontStyle: "italic",
+              }}
+            >
+              «Мурзикам» уже 6 лет.
+            </Typography>
+          </Box>
+          <Box sx={{ marginTop: "54px" }}>
+            <img
+              src="images/home/murziki.png"
+              alt="murziki"
+              width="142px"
+              height="152px"
+            />
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "4px",
+            alignItems: "center",
           }}
         >
           <Typography
             sx={{
-              textAlign: "left",
-              paddingX: { xs: "12px", md: "80px" },
-              fontSize: { xs: "22px", md: "60px" },
-              lineHeight: "103%",
-              fontWeight: 700,
-              marginTop: { xs: "16px", md: "80px" },
-              color: "#FFF",
-              fontFamily: "HelveticaNeueCyr",
-            }}
-          >
-            О приюте
-          </Typography>
-          <Typography
-            sx={{
-              textAlign: "left",
-              paddingX: { xs: "12px", md: "80px" },
-              fontSize: { xs: "14px", md: "32px" },
-              lineHeight: "120%",
-              marginTop: { xs: "16px", md: "44px" },
-              maxWidth: { xs: "348px", md: "826px" },
-              fontWeight: 400,
-              color: "#FFF",
-              fontFamily: "HelveticaNeueCyr",
-              ".bold": {
-                fontWeight: 700,
-              },
-            }}
-          >
-            <span className="bold">Приют Хутор</span> — место в Новогрудке, где
-            живут собаки и кошки, подобранные с улицы.
-            <br />
-            <br />
-            <span className="bold">Каждый из них</span> ждёт своего человека.
-            Пока дома нет — приют их кормит, лечит и любит.
-          </Typography>
-          <Typography
-            sx={{
+              color: "#111111",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "100%",
               textAlign: "center",
-              paddingX: { xs: "12px", md: "80px" },
-              fontSize: { xs: "22px", md: "60px" },
-              lineHeight: "103%",
-              fontWeight: 700,
-              marginTop: { xs: "14px", md: "50px" },
-              color: "#FFF",
-              fontFamily: "HelveticaNeueCyr",
+              marginTop: "20px",
+              maxWidth: "176px",
             }}
           >
-            Сколько их?
+            Все начиналось с обычного волонтерства
           </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              gap: { xs: "48px", md: "180px" },
-              justifyContent: "center",
-              marginTop: { xs: "14px", md: "28px" },
-            }}
-          >
-            <Typography
-              sx={{
-                textAlign: "center",
-                fontSize: { xs: "44px", md: "168px" },
-                lineHeight: "27%",
-                maxWidth: { xs: "68px", md: "180px" },
-                fontWeight: 700,
-                marginTop: { xs: "14px", md: "50px" },
-                color: "#FFF",
-                fontFamily: "HelveticaNeueCyr",
-                ".part": {
-                  fontSize: { xs: "16px", md: "60px" },
-                },
-              }}
-            >
-              87 <span className="part">собак</span>
-            </Typography>
-            <Typography
-              sx={{
-                textAlign: "center",
-                fontSize: { xs: "44px", md: "168px" },
-                lineHeight: "27%",
-                maxWidth: { xs: "68px", md: "180px" },
-                fontWeight: 700,
-                marginTop: { xs: "14px", md: "50px" },
-                color: "#FFF",
-                fontFamily: "HelveticaNeueCyr",
-                ".part": {
-                  fontSize: { xs: "16px", md: "60px" },
-                },
-              }}
-            >
-              79 <span className="part">кошек</span>
-            </Typography>
-          </Box>
+          <img
+            src="images/home/pet_arrow.png"
+            alt="arrow"
+            width="208px"
+            height="59px"
+          />
           <Typography
             sx={{
+              color: "#111111",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "100%",
               textAlign: "center",
-              fontSize: { xs: "14px", md: "32px" },
-              lineHeight: "120%",
-              maxWidth: { xs: "322px", md: "1220px" },
-              fontWeight: 700,
-              marginTop: { xs: "20px", md: "48px" },
-              color: "#FFF",
-              fontFamily: "HelveticaNeueCyr",
-              marginX: "auto",
-            }}
-          >
-            Всего 167 животных живут в приюте прямо сейчас и каждый день
-            нуждаются в помощи
-          </Typography>
-          <Typography
-            sx={{
-              textAlign: "left",
-              fontSize: { xs: "18px", md: "60px" },
-              lineHeight: "120%",
-              fontWeight: 700,
-              marginTop: { xs: "22px", md: "122px" },
-              color: "#FFF",
-              fontFamily: "HelveticaNeueCyr",
-              paddingLeft: { xs: "12px", md: "80px" },
-            }}
-          >
-            Как помочь через ЕРИП:
-          </Typography>
-          <Box
-            sx={{
-              position: "relative",
-              marginLeft: { xs: "12px", md: "80px" },
-              marginTop: { xs: "12px", md: "38px" },
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", md: "32px" },
-                lineHeight: "120%",
-                fontWeight: 700,
-                color: "#FFF",
-                fontFamily: "HelveticaNeueCyr",
-              }}
-            >
-              Голодный номер приюта
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", md: "32px" },
-                lineHeight: "120%",
-                fontWeight: 700,
-                color: "#FFF",
-                fontFamily: "HelveticaNeueCyr",
-                paddingLeft: { xs: "22px", md: "60px" },
-                paddingTop: { xs: "4px", md: "14px" },
-              }}
-            >
-              Ерип
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", md: "32px" },
-                lineHeight: "120%",
-                fontWeight: 700,
-                color: "#FFF",
-                fontFamily: "HelveticaNeueCyr",
-                paddingLeft: { xs: "40px", md: "108px" },
-                paddingTop: { xs: "6px", md: "22px" },
-              }}
-            >
-              Мобильная связь
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", md: "32px" },
-                lineHeight: "120%",
-                fontWeight: 700,
-                color: "#FFF",
-                fontFamily: "HelveticaNeueCyr",
-                paddingLeft: { xs: "58px", md: "156px" },
-                paddingTop: { xs: "8px", md: "26px" },
-              }}
-            >
-              MTC
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: "14px", md: "32px" },
-                lineHeight: "120%",
-                fontWeight: 700,
-                color: "#FFF",
-                fontFamily: "HelveticaNeueCyr",
-                paddingLeft: { xs: "76px", md: "200px" },
-                paddingTop: { xs: "8px", md: "24px" },
-              }}
-            >
-              По номеру телефона
-            </Typography>
-            <Box
-              sx={{
-                background: `url(${Arrows})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                width: { xs: "72px", md: "188px" },
-                height: { xs: "96px", md: "238px" },
-                position: "absolute",
-                left: { xs: "2px", md: 0 },
-                top: { xs: "12px", md: "32px" },
-              }}
-            ></Box>
-          </Box>
-          <Box
-            sx={{
-              background: "#0F5190",
-              borderRadius: { xs: "6px", md: "22px" },
-              width: { xs: "162px", md: "700px" },
-              height: { xs: "34px", md: "144px" },
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginLeft: { xs: "12px", md: "80px" },
-              marginTop: { xs: "12px", md: "50px" },
-            }}
-          >
-            <Typography
-              sx={{
-                fontSize: { xs: "18px", md: "80px" },
-                lineHeight: "120%",
-                fontWeight: 600,
-                color: "#FFF",
-                fontFamily: "Manrope",
-              }}
-            >
-              +375333750032
-            </Typography>
-          </Box>
-          <Typography
-            sx={{
-              fontSize: { xs: "14px", md: "24px" },
-              lineHeight: "120%",
-              fontWeight: 400,
-              color: "#EFEFEF",
-              fontFamily: "Manrope",
-              opacity: "60%",
-              paddingLeft: { xs: "12px", md: "80px" },
-              marginTop: { xs: "48px", md: "22px" },
-              marginBottom: "40px",
-              maxWidth: { xs: "252px", md: "none" },
-              a: {
-                color: "#FFF",
-                textDecoration: "none",
-                ":hover": {
-                  color: "#c5c3c3",
-                },
-              },
-              ".bold": {
+              maxWidth: "340px",
+              span: {
                 fontWeight: "700",
               },
             }}
           >
-            Все переведённые средства идут{" "}
-            <span className="bold">напрямую</span> приюту «Хутор».
-            <br /> Отчёт о потраченных средствах ищите в{" "}
-            <a href="https://www.instagram.com/hey.pawsup">
-              инстаграме «Paws Up»
-            </a>
+            Постепенно команда брала на себя все больше ответственности, а
+            последние 4 года{" "}
+            <span>полностью опекает пункт содержания животных</span> и работает
+            с ним по договору с ЖКХ
           </Typography>
+        </Box>
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "18px",
+            lineHeight: "100%",
+            textAlign: "center",
+            maxWidth: "310px",
+            marginTop: "40px",
+            marginX: "auto",
+          }}
+        >
+          Сегодня на пункте находится около 250 животных
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "30px",
+            marginTop: "10px",
+          }}
+        >
           <Box
             sx={{
-              background: `url(${Dog})`,
+              background: "url(/images/home/paper.png)",
+              filter: "drop-shadow(3px 3px 2.8px rgba(0, 0, 0, 0.1))",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
-              backgroundPosition: "center",
-              width: { xs: "195px", md: "670px" },
-              height: { xs: "280px", md: "862px" },
-              position: "absolute",
-              right: 0,
-              bottom: "-40px",
-              zIndex: "-1",
+              width: "96px",
+              height: "28px",
+              color: "#E1AD41",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          ></Box>
+          >
+            ≈ 200 собак
+          </Box>
+          <Box
+            sx={{
+              background: "url(/images/home/paper.png)",
+              filter: "drop-shadow(3px 3px 2.8px rgba(0, 0, 0, 0.1))",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              width: "84px",
+              height: "28px",
+              color: "#E1AD41",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            ≈ 50 котов
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            overflow: "hidden",
+            marginTop: "30px",
+            width: "100%",
+            position: "relative",
+            "&::before, &::after": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              width: "60px",
+              zIndex: 2,
+            },
+          }}
+        >
           <Box
             sx={{
               display: "flex",
-              gap: { xs: "20px", md: "100px" },
-              a: { textDecoration: "none" },
-              marginLeft: { xs: "8px", md: "80px" },
+              gap: "12px",
+              width: "fit-content",
+              animation: `scroll 20s linear infinite `,
+              "@keyframes scroll": {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: `translateX(-${100 / 2}%)` },
+              },
             }}
           >
-            <a
-              href="https://www.instagram.com/hey.pawsup/"
-              target="_blank"
-              rel="noreferrer"
-            >
+            {colapsePets.map((pet, i) => (
               <Box
                 sx={{
-                  img: {
-                    width: { xs: "20px", md: "34px" },
-                  },
-                  display: "flex",
-                  alignItems: "center",
-                  gap: { xs: "4px", md: "8px" },
+                  width: "180px",
+                  height: "200px",
+                  padding: "10px",
+                  backgroundColor: "#C8D399",
+                  borderRadius: "10px",
                 }}
               >
-                <img src={Inst} alt="instagram"></img>
+                <Box
+                  key={i}
+                  component="img"
+                  src={`/images/home/pets/${pet.image}.png`}
+                  sx={{
+                    height: "158px",
+                    width: "auto",
+                    flexShrink: 0,
+                    mx: 1,
+                    borderRadius: "12px",
+                    objectFit: "cover",
+                  }}
+                />
                 <Typography
                   sx={{
-                    fontSize: { xs: "12px", md: "18px" },
-                    lineHeight: "120%",
-                    fontWeight: 400,
-                    color: "#FFF",
-                    fontFamily: "HelveticaNeueCyr",
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    fontStyle: "italic",
+                    marginTop: "6px",
                   }}
                 >
-                  hey.pawsup
+                  {pet.name}
                 </Typography>
               </Box>
-            </a>
-            <a
-              href="https://www.instagram.com/hutor_novogrudok/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Box
-                sx={{
-                  img: {
-                    width: { xs: "20px", md: "34px" },
-                  },
-                  display: "flex",
-                  alignItems: "center",
-                  gap: { xs: "4px", md: "8px" },
-                }}
-              >
-                <img src={Inst} alt="instagram"></img>
-                <Typography
-                  sx={{
-                    fontSize: { xs: "12px", md: "18px" },
-                    lineHeight: "120%",
-                    fontWeight: 400,
-                    color: "#FFF",
-                    fontFamily: "HelveticaNeueCyr",
-                  }}
-                >
-                  hutor_novogrudok
-                </Typography>
-              </Box>
-            </a>
+            ))}
           </Box>
         </Box>
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "10px",
+            fontStyle: "italic",
+            lineHeight: "100%",
+            textAlign: "center",
+            marginTop: "10px",
+            marginX: "auto",
+          }}
+        >
+          * Но на самом деле под опекой команды их ещё больше!
+        </Typography>
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "12px",
+            lineHeight: "100%",
+            marginTop: "30px",
+          }}
+        >
+          Волонтеры помогают животным по всему Барановичскому району и в
+          близлежащих населенных пунктах: выезжают по обращениям, помогают
+          бездомным кошкам и собакам, организуют стерилизацию и кастрацию,
+          спасают животных, которым требуется лечение.
+        </Typography>
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "12px",
+            lineHeight: "100%",
+            textAlign: "left",
+            marginTop: "10px",
+            maxWidth: "294px",
+            span: {
+              fontWeight: "700",
+            },
+          }}
+        >
+          И все это возможно <span>благодаря людям, которым не все равно.</span>
+        </Typography>
+      </Box>
+      {/* Как помогает фестиваль */}
+      <Box sx={{ paddingX: "10px" }}>
+        <Typography
+          sx={{
+            color: "#0B0B0B",
+            fontFamily: "Calypso",
+            fontSize: "30px",
+            lineHeight: "100%",
+            textAlign: "left",
+            marginTop: "50px",
+            textTransform: "uppercase",
+          }}
+        >
+          Как помогает фестиваль
+        </Typography>
+        <Box
+          sx={{
+            background: "url(/images/home/fest_paper.png)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            width: "340px",
+            height: "130px",
+            marginTop: "20px",
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#111111",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "100%",
+              textAlign: "left",
+              paddingTop: "28px",
+              marginLeft: "26px",
+              maxWidth: "220px",
+            }}
+          >
+            Каждый билет, донат и участие в благотворительных активностях
+          </Typography>
+          <Typography
+            sx={{
+              color: "#111111",
+              fontFamily: "Montserrat",
+              fontSize: "18px",
+              lineHeight: "100%",
+              textAlign: "left",
+              marginTop: "6px",
+              marginLeft: "26px",
+              maxWidth: "220px",
+            }}
+          >
+            становится реальной помощью животным
+          </Typography>
+        </Box>
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "18px",
+            lineHeight: "120%",
+            textAlign: "center",
+            marginTop: "20px",
+            maxWidth: "275px",
+            marginX: "auto",
+          }}
+        >
+          Собранные средства помогают оплачивать:
+        </Typography>
+        <Box sx={{ marginTop: "20px" }}>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: "24px" }}>
+            <Box
+              sx={{
+                background: "url(/images/home/pet_paper.png)",
+                backgroundRepeat: "round",
+                backgroundSize: "cover",
+                width: "86px",
+                height: "30px",
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontStyle: "italic",
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                span: {
+                  paddingRight: "10px",
+                  maxWidth: "36px",
+                },
+                position: "relative",
+                svg: {
+                  position: "absolute",
+                  top: "-2px",
+                  left: "10px",
+                },
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <span>Корм</span>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "42px",
+              marginTop: "6px",
+            }}
+          >
+            <Box
+              sx={{
+                background: "url(/images/home/pet_paper.png)",
+                backgroundRepeat: "round",
+                backgroundSize: "cover",
+                width: "136px",
+                height: "43px",
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontStyle: "italic",
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                span: {
+                  paddingRight: "10px",
+                  maxWidth: "88px",
+                },
+                position: "relative",
+                svg: {
+                  position: "absolute",
+                  top: "-2px",
+                  left: "10px",
+                },
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <span>Содержание животных</span>
+            </Box>
+            <Box
+              sx={{
+                background: "url(/images/home/pet_paper.png)",
+                backgroundRepeat: "round",
+                backgroundSize: "cover",
+                width: "133px",
+                height: "43px",
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontStyle: "italic",
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                span: {
+                  paddingRight: "10px",
+                  maxWidth: "82px",
+                },
+                position: "relative",
+                svg: {
+                  position: "absolute",
+                  top: "-2px",
+                  left: "10px",
+                },
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <span>Экстренную помощь</span>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "24px",
+              marginTop: "6px",
+            }}
+          >
+            <Box
+              sx={{
+                background: "url(/images/home/pet_paper.png)",
+                backgroundRepeat: "round",
+                backgroundSize: "cover",
+                width: "155px",
+                height: "43px",
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontStyle: "italic",
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                span: {
+                  paddingRight: "10px",
+                  maxWidth: "100px",
+                },
+                position: "relative",
+                svg: {
+                  position: "absolute",
+                  top: "-2px",
+                  left: "10px",
+                },
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <span>Лечение и медикаменты</span>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "24px",
+              marginTop: "6px",
+            }}
+          >
+            <Box
+              sx={{
+                background: "url(/images/home/pet_paper.png)",
+                backgroundRepeat: "round",
+                backgroundSize: "cover",
+                width: "155px",
+                height: "43px",
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontStyle: "italic",
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                span: {
+                  paddingRight: "10px",
+                  maxWidth: "100px",
+                },
+                position: "relative",
+                svg: {
+                  position: "absolute",
+                  top: "-2px",
+                  left: "10px",
+                },
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <span>Ветеринарную помощь</span>
+            </Box>
+            <Box
+              sx={{
+                background: "url(/images/home/pet_paper.png)",
+                backgroundRepeat: "round",
+                backgroundSize: "cover",
+                width: "149px",
+                height: "43px",
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontStyle: "italic",
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+                span: {
+                  paddingRight: "10px",
+                  maxWidth: "100px",
+                },
+                position: "relative",
+                svg: {
+                  position: "absolute",
+                  top: "-2px",
+                  left: "10px",
+                },
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <span>Стерилизацию и кастрацию</span>
+            </Box>
+          </Box>
+        </Box>
+        <Box sx={{ position: "relative" }}>
+          <Box sx={{ position: "absolute", top: "-52px", right: "4px" }}>
+            <img src="images/home/flowRight.png" alt="flower" />
+          </Box>
+          <Typography
+            sx={{
+              color: "#111111",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              textAlign: "center",
+              maxWidth: "226px",
+              marginX: "auto",
+              marginTop: "76px",
+            }}
+          >
+            Так обычный день на фестивале превращается во что-то большее
+          </Typography>
+          <Box sx={{ position: "absolute", bottom: "-52px", left: "4px" }}>
+            <img src="images/home/flowLeft.png" alt="flower" />
+          </Box>
+        </Box>
+      </Box>
+      <Box sx={{ marginTop: "180px", paddingX: "10px" }}>
+        <Typography
+          sx={{
+            color: "#0B0B0B",
+            fontFamily: "Calypso",
+            fontSize: "30px",
+            lineHeight: "100%",
+            textAlign: "left",
+            marginTop: "50px",
+            textTransform: "uppercase",
+          }}
+        >
+          Помочь прямо сейчас
+        </Typography>
       </Box>
     </Box>
   );

@@ -43,15 +43,21 @@
 }
 
 
-@font-face {
+/* @font-face {
   font-family: "Montserrat";
   src: url("./fonts/Montserrat-Black.ttf") format("truetype");
   font-weight: 400;
-}
+} */
 
 @font-face {
   font-family: "Tahoma";
   src: url("./fonts/Tahoma.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Calypso";
+  src: url("./fonts/Calypso.ttf") format("truetype");
   font-weight: 400;
 }
 
