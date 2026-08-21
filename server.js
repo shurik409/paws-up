@@ -93,7 +93,7 @@ client
   })
   .catch((err) => console.error(222, err.stack));
 
-const endtime = "2026-03-29T15:00+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
+const endtime = "2026-08-23T15:00+03:00"; //YYYY-MM-DDTHH:mm:ss.sssZ
 
 const reactBuild = path.join(__dirname, "build");
 app.use(express.static(reactBuild));

@@ -87,7 +87,7 @@ const Gallery = ({ theme }) => {
       <Box sx={{ margin: "auto", maxWidth: "1440px", paddingX: "24px" }}>
         <Box
           sx={{
-            marginTop: "20px",
+            paddingTop: "20px",
             a: {
               textDecoration: "none",
               color: "#FFF",

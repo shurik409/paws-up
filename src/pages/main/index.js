@@ -280,7 +280,7 @@ const Main = () => {
         ></Box> */}
         <Box
           sx={{
-            marginTop: "20px",
+            paddingTop: "20px",
             a: {
               textDecoration: "none",
               color: "#FFF",
