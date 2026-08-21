@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export function EventCard({
   event,
@@ -611,8 +612,10 @@ const Home = () => {
       console.error("Ошибка копирования:", err);
     }
   };
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md")); // от 900px и выше
 
-  return (
+  return !isDesktop ? (
     <Box
       sx={{
         backgroundColor: "#fff",
@@ -3180,6 +3183,318 @@ const Home = () => {
             </svg>
           </Box>
         </Box>
+      </Box>
+    </Box>
+  ) : (
+    <Box sx={{ paddingTop: "50px" }}>
+      <Box sx={{ display: "flex", gap: "30px", justifyContent: "center" }}>
+        <img
+          src="/images/home/desktop/logo.png"
+          alt="logo"
+          width="auto"
+          height="120px"
+        ></img>
+        <img
+          src="/images/home/desktop/murziki.png"
+          alt="logo"
+          width="auto"
+          height="120px"
+        ></img>
+      </Box>
+      <Box
+        sx={{
+          marginTop: "50px",
+          maxWidth: "600px",
+          marginX: "auto",
+          position: "relative",
+        }}
+      >
+        <Typography
+          sx={{
+            color: "#0B0B0B",
+            fontFamily: "Calypso",
+            fontSize: "30px",
+            lineHeight: "100%",
+            textAlign: "center",
+            textTransform: "uppercase",
+          }}
+        >
+          Сказочный мир помещается
+          <br />в вашем телефоне
+        </Typography>
+        <Box sx={{ position: "absolute", left: "0", top: "26px" }}>
+          <svg
+            width="34"
+            height="46"
+            viewBox="0 0 34 46"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.5293 29C8.56249 27.7648 8.53013 26.5257 8.4133 25.2948C8.02716 20.6252 5.86682 14.2071 0.0292975 14.1229L0.058747 14.8759C7.02703 13.8395 9.13131 5.87254 9.02929 2.60673e-06C9.0293 -3.11532e-06 9.02929 6.99382e-07 9.02929 -1.20797e-06L8.0293 -1.12054e-06C7.92728 5.87254 10.0316 13.8395 16.9998 14.8759L17.0293 14.123C11.1918 14.2071 9.03143 20.6252 8.6453 25.2948C8.52846 26.5257 8.4961 27.7648 8.5293 29C8.56275 27.7648 8.65855 26.5326 8.83395 25.3173C9.43843 20.6414 11.8724 14.7314 17.0293 14.8771L17.0587 14.1241C10.9405 13.0861 8.92202 5.75436 9.0293 -1.20797e-06L8.0293 -1.12054e-06C8.0293 -1.12054e-06 8.0293 -1.12054e-06 8.0293 -1.12054e-06C8.13657 5.75436 6.11811 13.0861 -0.000151981 14.1241L0.0292975 14.877C5.18621 14.7314 7.62017 20.6414 8.22464 25.3173C8.40005 26.5326 8.49584 27.7648 8.5293 29ZM8.5293 29"
+              fill="#E1AD41"
+            />
+            <path
+              d="M27.0293 46C27.0624 45.2269 27.043 44.4528 26.9537 43.6794C26.7399 40.6636 24.6066 37.0415 21.0293 37.1229L21.0538 37.8762C25.4298 37.5963 27.7272 32.8144 27.5293 29L26.5293 29C26.5293 29 26.5293 29 26.5293 29C26.3314 32.8144 28.6288 37.5963 33.0048 37.8763L33.0293 37.123C29.452 37.0415 27.3187 40.6636 27.1049 43.6794C27.0156 44.4528 26.9962 45.2269 27.0293 46C27.0628 45.2269 27.1457 44.4617 27.2927 43.7085C27.7681 40.7115 29.9395 37.6534 33.0293 37.877L33.0538 37.1238C29.3139 36.7029 27.3783 32.628 27.5293 29C27.5293 29 27.5293 29 27.5293 29L26.5293 29C26.6803 32.628 24.7447 36.7029 21.0048 37.1237L21.0293 37.877C24.1191 37.6534 26.2905 40.7115 26.7659 43.7085C26.9129 44.4617 26.9958 45.2269 27.0293 46ZM27.0293 46"
+              fill="#E1AD41"
+            />
+          </svg>
+        </Box>
+        <Box sx={{ position: "absolute", right: "0", top: "0" }}>
+          <svg
+            width="35"
+            height="50"
+            viewBox="0 0 35 50"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.5293 50C8.56249 48.7648 8.53013 47.5257 8.4133 46.2948C8.02716 41.6252 5.86682 35.2071 0.0292975 35.1229L0.058747 35.8759C7.02703 34.8395 9.13131 26.8725 9.02929 21C9.0293 21 9.02929 21 9.02929 21L8.0293 21C7.92728 26.8725 10.0316 34.8395 16.9998 35.8759L17.0293 35.123C11.1918 35.2071 9.03143 41.6252 8.6453 46.2948C8.52846 47.5257 8.4961 48.7648 8.5293 50C8.56275 48.7648 8.65855 47.5326 8.83395 46.3173C9.43843 41.6414 11.8724 35.7314 17.0293 35.8771L17.0587 35.1241C10.9405 34.0861 8.92202 26.7544 9.0293 21L8.0293 21C8.0293 21 8.0293 21 8.0293 21C8.13657 26.7544 6.11811 34.0861 -0.000151981 35.1241L0.0292975 35.877C5.18621 35.7314 7.62017 41.6414 8.22464 46.3173C8.40005 47.5326 8.49584 48.7648 8.5293 50ZM8.5293 50"
+              fill="#E1AD41"
+            />
+            <path
+              d="M28.0293 17C28.0624 16.2269 28.043 15.4528 27.9537 14.6794C27.7399 11.6636 25.6066 8.04146 22.0293 8.12295L22.0538 8.87625C26.4298 8.59632 28.7272 3.81441 28.5293 -1.42652e-06L27.5293 -1.3391e-06C27.5293 -1.3391e-06 27.5293 -1.3391e-06 27.5293 -1.3391e-06C27.3314 3.81441 29.6288 8.59632 34.0048 8.87625L34.0293 8.12296C30.452 8.04146 28.3187 11.6636 28.1049 14.6794C28.0156 15.4528 27.9962 16.2269 28.0293 17C28.0628 16.2269 28.1457 15.4617 28.2927 14.7085C28.7681 11.7115 30.9395 8.65342 34.0293 8.87705L34.0538 8.12375C30.3139 7.70293 28.3783 3.62801 28.5293 -1.42652e-06C28.5293 -1.42652e-06 28.5293 -1.42652e-06 28.5293 -1.42652e-06L27.5293 -1.3391e-06C27.6803 3.628 25.7447 7.70293 22.0048 8.12375L22.0293 8.87704C25.1191 8.65341 27.2905 11.7115 27.7659 14.7085C27.9129 15.4617 27.9958 16.2269 28.0293 17ZM28.0293 17"
+              fill="#E1AD41"
+            />
+          </svg>
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "-40px",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <svg
+            width="290"
+            height="30"
+            viewBox="0 0 290 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 13.2395C9.88665 12.128 19.6212 11.0796 29.3641 10.0834C115.633 1.73768 203.172 -5.46098 288.914 9.6625L289.023 8.67083C287.399 8.59527 285.656 8.5278 283.978 8.47329C234.571 7.51208 184.651 9.91369 136.66 22.374L136.804 23.1056C175.602 18.8942 214.996 17.9375 253.763 23.2213C263.482 24.646 273.185 26.5857 282.549 29.5167C273.205 26.522 263.508 24.5183 253.791 23.0334C215.022 17.5092 175.599 18.2766 136.714 22.3634L136.857 23.0951C184.744 10.8326 234.631 8.51166 283.945 9.47276C285.62 9.52714 287.358 9.59434 288.977 9.66946L289.086 8.67779C203.156 -6.4639 115.558 1.02429 29.3442 9.89443C19.6069 10.9504 9.87898 12.0618 0 13.2395Z"
+              fill="#E1AD41"
+            />
+          </svg>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          maxWidth: "430px",
+          marginX: "auto",
+          marginTop: "76px",
+          position: "relative",
+        }}
+      >
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "14px",
+            lineHeight: "14px",
+            textAlign: "center",
+          }}
+        >
+          Мы создали эту страницу специально для мобильных устройств. Так гулять
+          по программе фестиваля будет удобнее прямо 22 августа.
+        </Typography>
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "14px",
+            lineHeight: "14px",
+            textAlign: "center",
+            marginTop: "10px",
+          }}
+        >
+          Отсканируйте QR-код телефоном, чтобы войти
+        </Typography>
+        <Box sx={{ position: "absolute", right: "-118px", bottom: "-106px" }}>
+          <svg
+            width="174"
+            height="103"
+            viewBox="0 0 174 103"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14.7084 0.0983841L14.2086 0.109739L14.2313 1.10948L14.7311 1.09813L14.7198 0.598255L14.7084 0.0983841ZM133 76.9854L132.881 77.471L133 76.9854ZM0.00177842 101.443C-0.0214915 101.718 0.182706 101.96 0.457866 101.984L4.94186 102.363C5.21702 102.386 5.45895 102.182 5.48222 101.907C5.50549 101.632 5.30129 101.39 5.02613 101.366L1.04036 101.029L1.37743 97.0435C1.4007 96.7684 1.1965 96.5265 0.921339 96.5032C0.646179 96.4799 0.404253 96.6841 0.380983 96.9593L0.00177842 101.443ZM14.7198 0.598255L14.7311 1.09813C95.0649 -0.726668 144.339 23.2261 163.609 45.0652C168.424 50.5227 171.345 55.824 172.431 60.5344C173.515 65.2355 172.77 69.3287 170.283 72.4512C167.788 75.5842 163.477 77.8187 157.273 78.6564C151.07 79.4939 143.018 78.9278 133.119 76.4998L133 76.9854L132.881 77.471C142.857 79.918 151.041 80.5069 157.406 79.6474C163.77 78.7883 168.358 76.474 171.066 73.0742C173.782 69.6642 174.542 65.2409 173.406 60.3098C172.271 55.3881 169.245 49.9415 164.359 44.4035C144.821 22.2607 95.2053 -1.73012 14.7084 0.0983841L14.7198 0.598255ZM133 76.9854L133.119 76.4998C90.5406 66.056 59.5617 70.2863 38.0841 78.104C16.6105 85.9203 4.66736 97.3136 0.177497 101.103L0.5 101.485L0.822503 101.867C5.32216 98.0695 17.1411 86.7913 38.4262 79.0437C59.7073 71.2975 90.4836 67.0717 132.881 77.471L133 76.9854Z"
+              fill="#E1AD41"
+            />
+          </svg>
+        </Box>
+      </Box>
+      <Box sx={{ marginTop: "10px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            img: {
+              filter:
+                "drop-shadow(-2.27534px 2.27534px 3.5647px rgba(0, 0, 0, 0.1))",
+            },
+          }}
+        >
+          <img
+            src="/images/home/desktop/qr.png"
+            alt="qr"
+            width="291px"
+            height="auto"
+          ></img>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "50px",
+          marginTop: "70px",
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <img src={"/images/home/calendar.png"} alt="calendar" />
+          <Box>
+            <Typography
+              sx={{
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                fontWeight: "700",
+                textAlign: "left",
+                color: "#111111",
+              }}
+            >
+              22 августа
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                fontWeight: "400",
+                textAlign: "left",
+                color: "#111111",
+                marginTop: "2px",
+              }}
+            >
+              12:00 - 22:00
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <img src={"/images/home/place.png"} alt="calendar" />
+          <Box>
+            <Typography
+              sx={{
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                fontWeight: "700",
+                textAlign: "left",
+                color: "#111111",
+              }}
+            >
+              ЭХО двор
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                fontWeight: "400",
+                textAlign: "left",
+                color: "#111111",
+                marginTop: "2px",
+              }}
+            >
+              Независимости 95к5
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
+          <Box>
+            <img src="/images/home/threads.png" alt="threads" />
+          </Box>
+          <Box>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontWeight: "700",
+                textAlign: "left",
+              }}
+            >
+              Threads
+            </Typography>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                textAlign: "left",
+                marginTop: "2px",
+              }}
+            >
+              @hey.pawsup
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
+          <Box>
+            <img src="/images/home/inst.png" alt="inst" />
+          </Box>
+          <Box>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontWeight: "700",
+                textAlign: "left",
+              }}
+            >
+              Instagram
+            </Typography>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                textAlign: "left",
+                marginTop: "2px",
+              }}
+            >
+              @hey.pawsup
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", marginTop: "50px" }}
+      >
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "11px",
+            lineHeight: "14px",
+            textAlign: "center",
+            marginTop: "10px",
+            maxWidth: "330px",
+            fontStyle: "italic",
+          }}
+        >
+          PawsUp — благотворительный фестиваль в поддержку учреждения помощи
+          животным «Мурзики»
+        </Typography>
       </Box>
     </Box>
   );
