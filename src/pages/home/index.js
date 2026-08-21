@@ -103,6 +103,7 @@ export function EventCard({
                 color: "#E1AD41",
                 display: "flex",
                 justifyContent: "center",
+                fontStyle: "italic",
                 alignItems: "center",
                 filter: "drop-shadow(3px 3px 2.8px rgba(0, 0, 0, 0.1))",
               }}
@@ -176,7 +177,13 @@ export function EventCard({
           </Box>
         )}
       </AccordionSummary>
-      <AccordionDetails sx={{ px: "14px", pb: "10px", pt: 0 }}>
+      <AccordionDetails
+        sx={{ px: "14px", pb: "10px", pt: 0 }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onChange(e, false);
+        }}
+      >
         {event.preDescription && (
           <Typography
             sx={{
@@ -251,9 +258,8 @@ export function EventCard({
   );
 }
 
-export function ImageCarousel({ count, isRight }) {
+export function ImageCarousel({ folder, isRight }) {
   const images = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
-  console.log(count);
   return (
     <Box
       sx={{
@@ -285,7 +291,7 @@ export function ImageCarousel({ count, isRight }) {
           <Box
             key={i}
             component="img"
-            src={`/images/home/courusel${count}/${image}.png`}
+            src={`/images/home/${folder}/${image}.png`}
             sx={{
               height: 200,
               width: "auto",
@@ -421,14 +427,6 @@ const Home = () => {
         name: "Деревянные игры",
         description:
           "Попробуйте разные деревянные игры, испытайте ловкость, внимательность и смекалку. Можно играть с друзьями или присоединиться к игре на месте.",
-        image: {
-          src: "/images/home/activity/magic.png",
-          size: { width: "152px", height: "172px" },
-          position: {
-            right: 0,
-            bottom: "-106px",
-          },
-        },
       },
       {
         id: "ac2",
@@ -436,6 +434,14 @@ const Home = () => {
         name: "Шахматы",
         description:
           "Сыграйте партию с друзьями или новым соперником и проверьте, кому сегодня улыбнётся удача. Подходите в любое время работы зоны.",
+        image: {
+          src: "/images/home/activity/magic.png",
+          size: { width: "97px", height: "164px" },
+          position: {
+            right: 0,
+            top: "-76px",
+          },
+        },
       },
       {
         id: "ac3",
@@ -599,322 +605,345 @@ const Home = () => {
       <Box
         sx={{
           // height: "1080px",
-          backgroundImage: "url(/images/home/hero.png)",
+          backgroundImage: "url(/images/home/hero_back.png)",
           backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
+          backgroundPosition: "center",
+          maxHeight: "979px",
         }}
       >
-        <Box sx={{ paddingTop: "110px", px: "2px", position: "relative" }}>
-          <Typography
-            sx={{
-              fontFamily: "Calypso",
-              fontSize: "30px",
-              lineHeight: "180%",
-              textTransform: "uppercase",
-              textAlign: "center",
-              color: "#0B0B0B",
-              span: {
-                fontSize: "60px",
-                lineHeight: "130%",
-                color: "#EFB53C",
-              },
-            }}
-          >
-            самые настоящие <br />
-            <span>чудеса</span> <br />
-            создаем мы сами
-          </Typography>
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: 0,
-              left: "50%",
-              transform: "translate(-50%)",
-            }}
-          >
-            <img src={"/images/home/hero_headline.png"} alt="headline" />
-          </Box>
-        </Box>
-        <Box sx={{ paddingX: "42px", marginTop: "26px" }}>
-          <Box
-            sx={{
-              background: "url(/images/home/hero_desc.png)",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              paddingX: "20px",
-              height: "106px",
-              maxWidth: "250px",
-              marginX: "auto",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Box>
-              <Typography
-                sx={{
-                  fontFamily: "Calypso",
-                  fontSize: "30px",
-                  lineHeight: "100%",
-                  textAlign: "center",
-                  color: "#111111",
-                }}
-              >
-                PawsUp
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "Montserrat",
-                  fontSize: "14px",
-                  lineHeight: "100%",
-                  fontWeight: "500",
-                  textAlign: "center",
-                  color: "#111111",
-                  marginTop: "4px",
-                }}
-              >
-                Благотворительный фестиваль
-              </Typography>
+        <Box sx={{ width: "360px", marginX: "auto" }}>
+          <Box sx={{ paddingTop: "110px", px: "2px", position: "relative" }}>
+            <Typography
+              sx={{
+                fontFamily: "Calypso",
+                fontSize: "30px",
+                lineHeight: "180%",
+                textTransform: "uppercase",
+                textAlign: "center",
+                color: "#0B0B0B",
+                span: {
+                  fontSize: "60px",
+                  lineHeight: "130%",
+                  color: "#EFB53C",
+                },
+              }}
+            >
+              самые настоящие <br />
+              <span>чудеса</span> <br />
+              создаем мы сами
+            </Typography>
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                left: "50%",
+                transform: "translate(-50%)",
+              }}
+            >
+              <img src={"/images/home/hero_headline.png"} alt="headline" />
             </Box>
           </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            gap: "44px",
-            justifyContent: "center",
-            marginTop: "32px",
-          }}
-        >
-          <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <img src={"/images/home/calendar.png"} alt="calendar" />
-            <Box>
-              <Typography
+          <Box sx={{ paddingX: "42px", marginTop: "26px" }}>
+            <Box
+              sx={{
+                background: "url(/images/home/hero_desc.png)",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                paddingX: "20px",
+                height: "106px",
+                maxWidth: "250px",
+                marginX: "auto",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Box>
+                <Typography
+                  sx={{
+                    fontFamily: "Calypso",
+                    fontSize: "30px",
+                    lineHeight: "100%",
+                    textAlign: "center",
+                    color: "#111111",
+                  }}
+                >
+                  PawsUp
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "14px",
+                    lineHeight: "100%",
+                    fontWeight: "500",
+                    textAlign: "center",
+                    color: "#111111",
+                    marginTop: "4px",
+                  }}
+                >
+                  Благотворительный фестиваль
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "44px",
+              justifyContent: "center",
+              marginTop: "32px",
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <img src={"/images/home/calendar.png"} alt="calendar" />
+              <Box>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "100%",
+                    fontWeight: "700",
+                    textAlign: "left",
+                    color: "#111111",
+                  }}
+                >
+                  22 августа
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "100%",
+                    fontWeight: "400",
+                    textAlign: "left",
+                    color: "#111111",
+                    marginTop: "2px",
+                  }}
+                >
+                  12:00 - 22:00
+                </Typography>
+              </Box>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <img src={"/images/home/place.png"} alt="calendar" />
+              <Box>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "100%",
+                    fontWeight: "700",
+                    textAlign: "left",
+                    color: "#111111",
+                  }}
+                >
+                  ЭХО двор
+                </Typography>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "100%",
+                    fontWeight: "400",
+                    textAlign: "left",
+                    color: "#111111",
+                    marginTop: "2px",
+                  }}
+                >
+                  Независимости 95к5
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          <Box sx={{ marginTop: "20px" }}>
+            <Box
+              sx={{
+                width: "340px",
+                paddingY: "14px",
+                borderRadius: "100px",
+                background: "#FFFFFF",
+                color: "#DBA535",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontWeight: "700",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginX: "auto",
+              }}
+            >
+              Смотреть программу
+            </Box>
+            <Box
+              sx={{
+                width: "340px",
+                paddingY: "14px",
+                borderRadius: "100px",
+                background: "#DBA535",
+                color: "#FFFFFF",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontWeight: "700",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginX: "auto",
+                marginTop: "6px",
+              }}
+            >
+              Помочь прямо сейчас
+            </Box>
+          </Box>
+          <Box>
+            <Box
+              sx={{
+                position: "relative",
+                marginTop: "26px",
+                paddingLeft: "12%",
+              }}
+            >
+              <Box
                 sx={{
+                  width: "95px",
+                  height: "28px",
+                  background: "url(/images/home/paper.png)",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
                   fontFamily: "Montserrat",
                   fontSize: "12px",
-                  lineHeight: "100%",
-                  fontWeight: "700",
-                  textAlign: "left",
-                  color: "#111111",
-                }}
-              >
-                22 августа
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "Montserrat",
-                  fontSize: "12px",
-                  lineHeight: "100%",
+                  fontStyle: "italic",
+                  lineHeight: "14px",
                   fontWeight: "400",
-                  textAlign: "left",
-                  color: "#111111",
-                  marginTop: "2px",
+                  textAlign: "center",
+                  color: "#E1AD41",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                12:00 - 22:00
-              </Typography>
+                Творчество
+              </Box>
             </Box>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <img src={"/images/home/place.png"} alt="calendar" />
-            <Box>
-              <Typography
+            <Box
+              sx={{
+                position: "relative",
+                marginTop: "62px",
+                paddingLeft: "49%",
+              }}
+            >
+              <Box
                 sx={{
+                  width: "81px",
+                  height: "28px",
+                  background: "url(/images/home/paper.png)",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
                   fontFamily: "Montserrat",
                   fontSize: "12px",
-                  lineHeight: "100%",
-                  fontWeight: "700",
-                  textAlign: "left",
-                  color: "#111111",
-                }}
-              >
-                ЭХО двор
-              </Typography>
-              <Typography
-                sx={{
-                  fontFamily: "Montserrat",
-                  fontSize: "12px",
-                  lineHeight: "100%",
+                  fontStyle: "italic",
+                  lineHeight: "14px",
                   fontWeight: "400",
-                  textAlign: "left",
-                  color: "#111111",
-                  marginTop: "2px",
+                  textAlign: "center",
+                  color: "#E1AD41",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
-                Независимости 95к5
-              </Typography>
+                Музыка
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                position: "relative",
+                marginTop: "12px",
+                paddingLeft: "27%",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "97px",
+                  height: "28px",
+                  background: "url(/images/home/paper.png)",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  fontStyle: "italic",
+                  lineHeight: "14px",
+                  fontWeight: "400",
+                  textAlign: "center",
+                  color: "#E1AD41",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                Знакомства
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                position: "relative",
+                marginTop: "12px",
+                paddingLeft: "60%",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "106px",
+                  height: "28px",
+                  background: "url(/images/home/paper.png)",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  fontStyle: "italic",
+                  lineHeight: "14px",
+                  fontWeight: "400",
+                  textAlign: "center",
+                  color: "#E1AD41",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                Добрые дела
+              </Box>
             </Box>
           </Box>
-        </Box>
-        <Box sx={{ marginTop: "20px" }}>
           <Box
             sx={{
-              width: "340px",
-              paddingY: "14px",
-              borderRadius: "100px",
-              background: "#FFFFFF",
-              color: "#DBA535",
-              fontFamily: "Montserrat",
-              fontSize: "12px",
-              lineHeight: "14px",
-              fontWeight: "700",
-              textAlign: "center",
+              marginTop: "32px",
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
-              marginX: "auto",
             }}
           >
-            Смотреть программу
-          </Box>
-          <Box
-            sx={{
-              width: "340px",
-              paddingY: "14px",
-              borderRadius: "100px",
-              background: "#DBA535",
-              color: "#FFFFFF",
-              fontFamily: "Montserrat",
-              fontSize: "12px",
-              lineHeight: "14px",
-              fontWeight: "700",
-              textAlign: "center",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginX: "auto",
-              marginTop: "6px",
-            }}
-          >
-            Помочь прямо сейчас
-          </Box>
-        </Box>
-        <Box>
-          <Box
-            sx={{ position: "relative", marginTop: "26px", paddingLeft: "12%" }}
-          >
             <Box
               sx={{
-                width: "95px",
-                height: "28px",
-                background: "url(/images/home/paper.png)",
+                width: "294px",
+                height: "58px",
+                background: "url(/images/home/big_paper.png)",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 fontFamily: "Montserrat",
                 fontSize: "12px",
-                fontStyle: "italic",
                 lineHeight: "14px",
                 fontWeight: "400",
                 textAlign: "center",
-                color: "#E1AD41",
+                color: "#111111",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              Творчество
+              Добро начинается с маленьких шагов.
+              <br /> А чудеса мы создаём вместе!
             </Box>
-          </Box>
-          <Box
-            sx={{ position: "relative", marginTop: "62px", paddingLeft: "49%" }}
-          >
-            <Box
-              sx={{
-                width: "81px",
-                height: "28px",
-                background: "url(/images/home/paper.png)",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                fontFamily: "Montserrat",
-                fontSize: "12px",
-                fontStyle: "italic",
-                lineHeight: "14px",
-                fontWeight: "400",
-                textAlign: "center",
-                color: "#E1AD41",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              Музыка
-            </Box>
-          </Box>
-          <Box
-            sx={{ position: "relative", marginTop: "12px", paddingLeft: "27%" }}
-          >
-            <Box
-              sx={{
-                width: "97px",
-                height: "28px",
-                background: "url(/images/home/paper.png)",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                fontFamily: "Montserrat",
-                fontSize: "12px",
-                fontStyle: "italic",
-                lineHeight: "14px",
-                fontWeight: "400",
-                textAlign: "center",
-                color: "#E1AD41",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              Знакомства
-            </Box>
-          </Box>
-          <Box
-            sx={{ position: "relative", marginTop: "12px", paddingLeft: "60%" }}
-          >
-            <Box
-              sx={{
-                width: "106px",
-                height: "28px",
-                background: "url(/images/home/paper.png)",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                fontFamily: "Montserrat",
-                fontSize: "12px",
-                fontStyle: "italic",
-                lineHeight: "14px",
-                fontWeight: "400",
-                textAlign: "center",
-                color: "#E1AD41",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              Добрые дела
-            </Box>
-          </Box>
-        </Box>
-        <Box
-          sx={{ marginTop: "32px", display: "flex", justifyContent: "center" }}
-        >
-          <Box
-            sx={{
-              width: "294px",
-              height: "58px",
-              background: "url(/images/home/big_paper.png)",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              fontFamily: "Montserrat",
-              fontSize: "12px",
-              lineHeight: "14px",
-              fontWeight: "400",
-              textAlign: "center",
-              color: "#111111",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            Добро начинается с маленьких шагов.
-            <br /> А чудеса мы создаём вместе!
           </Box>
         </Box>
         <Box
@@ -929,7 +958,7 @@ const Home = () => {
           }}
         ></Box>
       </Box>
-      <Box sx={{ marginTop: "96px" }}>
+      <Box sx={{ marginTop: "96px", width: "340px", marginX: "auto" }}>
         <Typography
           sx={{
             fontFamily: "Calypso",
@@ -938,50 +967,26 @@ const Home = () => {
             textTransform: "uppercase",
             textAlign: "left",
             color: "#0B0B0B",
-            paddingLeft: "12px",
           }}
         >
           Карта фестиваля
         </Typography>
-        <Box
-          sx={{
-            position: "relative",
-            marginX: "auto",
-            zIndex: 1,
-            marginTop: "20px",
-          }}
-        >
-          <Box
-            sx={{
-              width: "335px",
-              height: "250px",
-              borderRadius: "20px",
-              // background: "url(/images/home/map.png)",
-              backgroundColor: "#F0E9DE",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              position: "relative",
-              margin: "auto",
-            }}
-          >
-            <Box
-              sx={{
-                width: "115px",
-                height: "115px",
-                background: "url(/images/home/star_map.png)",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                position: "absolute",
-                top: "-50px",
-                right: "0",
-              }}
-            ></Box>
-          </Box>
-        </Box>
+      </Box>
+      <Box
+        sx={{
+          position: "relative",
+          marginX: "auto",
+          zIndex: 1,
+          marginTop: "20px",
+        }}
+      >
+        <img src="/images/home/map.png" alt="map" width="100%" height="auto" />
       </Box>
       <Box
         sx={{
           marginTop: "40px",
+          width: "360px",
+          marginX: "auto",
         }}
       >
         <Typography
@@ -1168,12 +1173,12 @@ const Home = () => {
             }}
           ></Box>
         </Box>
-        <Box sx={{ marginTop: "40px" }}>
-          <ImageCarousel count={1} isRight={false}></ImageCarousel>
-        </Box>
-        <Box sx={{ marginTop: "20px", marginBottom: "70px" }}>
-          <ImageCarousel count={2} isRight={true}></ImageCarousel>
-        </Box>
+      </Box>
+      <Box sx={{ marginTop: "40px" }}>
+        <ImageCarousel folder="courusel1" isRight={false}></ImageCarousel>
+      </Box>
+      <Box sx={{ marginTop: "20px", marginBottom: "70px" }}>
+        <ImageCarousel folder="courusel2" isRight={true}></ImageCarousel>
       </Box>
       <Box
         sx={{
@@ -1184,77 +1189,79 @@ const Home = () => {
           height: "36px",
         }}
       ></Box>
-      <Box sx={{ backgroundColor: "#C8D399", paddingX: "10px" }}>
-        <Typography
-          sx={{
-            color: "#0B0B0B",
-            fontFamily: "Calypso",
-            fontSize: "30px",
-            lineHeight: "100%",
-            textAlign: "left",
-            marginBottom: "20px",
-            textTransform: "uppercase",
-          }}
-        >
-          Мастер-классы
-        </Typography>
-        {info.mk.map((activity, index) => (
-          <Box sx={{ marginTop: index !== 0 ? "10px" : 0 }}>
-            <EventCard
-              event={activity}
-              expanded={expanded === activity.id}
-              onChange={handleChange(activity.id)}
-              buttonText={"Подробнее о мастер-классе"}
-            />
-          </Box>
-        ))}
-        <Box
-          sx={{
-            width: "340px",
-            paddingY: "14px",
-            borderRadius: "100px",
-            background: "#DBA535",
-            color: "#FFF",
-            fontFamily: "Montserrat",
-            fontSize: "12px",
-            lineHeight: "14px",
-            fontWeight: "700",
-            textAlign: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginX: "auto",
-            marginTop: "20px",
-            textTransform: "uppercase",
-          }}
-        >
-          Регистрация на мастер-классы
-        </Box>
-        <Typography
-          sx={{
-            color: "#0B0B0B",
-            fontFamily: "Calypso",
-            fontSize: "30px",
-            lineHeight: "100%",
-            textAlign: "left",
-            marginTop: "50px",
-            marginBottom: "20px",
-            textTransform: "uppercase",
-          }}
-        >
-          Активности
-        </Typography>
-        <Box>
-          {info.activity.map((activity, index) => (
+      <Box sx={{ backgroundColor: "#C8D399" }}>
+        <Box sx={{ width: "340px", marginX: "auto" }}>
+          <Typography
+            sx={{
+              color: "#0B0B0B",
+              fontFamily: "Calypso",
+              fontSize: "30px",
+              lineHeight: "100%",
+              textAlign: "left",
+              marginBottom: "20px",
+              textTransform: "uppercase",
+            }}
+          >
+            Мастер-классы
+          </Typography>
+          {info.mk.map((activity, index) => (
             <Box sx={{ marginTop: index !== 0 ? "10px" : 0 }}>
               <EventCard
                 event={activity}
                 expanded={expanded === activity.id}
                 onChange={handleChange(activity.id)}
-                buttonText={"Подробнее"}
+                buttonText={"Подробнее о мастер-классе"}
               />
             </Box>
           ))}
+          <Box
+            sx={{
+              width: "340px",
+              paddingY: "14px",
+              borderRadius: "100px",
+              background: "#DBA535",
+              color: "#FFF",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              fontWeight: "700",
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginX: "auto",
+              marginTop: "20px",
+              textTransform: "uppercase",
+            }}
+          >
+            Регистрация на мастер-классы
+          </Box>
+          <Typography
+            sx={{
+              color: "#0B0B0B",
+              fontFamily: "Calypso",
+              fontSize: "30px",
+              lineHeight: "100%",
+              textAlign: "left",
+              marginTop: "50px",
+              marginBottom: "20px",
+              textTransform: "uppercase",
+            }}
+          >
+            Активности
+          </Typography>
+          <Box>
+            {info.activity.map((activity, index) => (
+              <Box sx={{ marginTop: index !== 0 ? "10px" : 0 }}>
+                <EventCard
+                  event={activity}
+                  expanded={expanded === activity.id}
+                  onChange={handleChange(activity.id)}
+                  buttonText={"Подробнее"}
+                />
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Box>
       <Box
@@ -1266,7 +1273,7 @@ const Home = () => {
           height: "40px",
         }}
       ></Box>
-      <Box sx={{ paddingX: "10px" }}>
+      <Box sx={{ width: "340px", marginX: "auto" }}>
         <Typography
           sx={{
             color: "#0B0B0B",
@@ -1340,8 +1347,590 @@ const Home = () => {
           ))}
         </Box>
       </Box>
+      {/* О нас */}
+      <Box sx={{ marginTop: "60px" }}>
+        <img
+          src="/images/home/we_stars.png"
+          alt="stars"
+          width="100%"
+          height="auto"
+        />
+      </Box>
+      <Box sx={{ width: "340px", marginX: "auto" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "40px",
+            alignItems: "start",
+          }}
+        >
+          <Box>
+            <Typography
+              sx={{
+                color: "#0B0B0B",
+                fontFamily: "Calypso",
+                fontSize: "30px",
+                lineHeight: "100%",
+                textAlign: "left",
+                marginTop: "8px",
+                maxWidth: "174px",
+                textTransform: "uppercase",
+              }}
+            >
+              Кто мы?
+            </Typography>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                textAlign: "left",
+                marginTop: "20px",
+                maxWidth: "174px",
+              }}
+            >
+              Мы — небольшой волонтерский проект
+            </Typography>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                textAlign: "left",
+                marginTop: "6px",
+                maxWidth: "174px",
+              }}
+            >
+              Наша главная цель — показать, что делать добро можно легко,
+              красиво и с удовольствием
+            </Typography>
+          </Box>
+          <Box>
+            <img
+              src="images/home/logo.png"
+              alt="murziki"
+              width="152px"
+              height="158px"
+            />
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            marginTop: "50px",
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#0B0B0B",
+              fontFamily: "Calypso",
+              fontSize: "30px",
+              lineHeight: "100%",
+              textAlign: "left",
+              textTransform: "uppercase",
+            }}
+          >
+            Мы рассказываем...
+          </Typography>
+        </Box>
+        <Box sx={{ marginTop: "15px" }}>
+          <Box
+            sx={{
+              background: "url(/images/home/paws_paper.png)",
+              filter: "drop-shadow(-3px 3px 4.7px rgba(0, 0, 0, 0.1))",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "286px",
+              height: "92px",
+            }}
+          >
+            <svg
+              width="13"
+              height="17"
+              viewBox="0 0 13 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                fill="#E1AD41"
+              />
+            </svg>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                textAlign: "center",
+                marginTop: "6px",
+              }}
+            >
+              О том, как можно помогать
+              <br /> приютам и бездомным животным
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "end", marginY: "10px" }}>
+            <Box
+              sx={{
+                background: "url(/images/home/paws_paper.png)",
+                filter: "drop-shadow(-3px 3px 4.7px rgba(0, 0, 0, 0.1))",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "286px",
+                height: "92px",
+              }}
+            >
+              <Box sx={{ display: "flex", gap: "4px" }}>
+                <svg
+                  width="13"
+                  height="17"
+                  viewBox="0 0 13 17"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                    fill="#E1AD41"
+                  />
+                </svg>
+                <svg
+                  width="13"
+                  height="17"
+                  viewBox="0 0 13 17"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                    fill="#E1AD41"
+                  />
+                </svg>
+              </Box>
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "14px",
+                  textAlign: "center",
+                  marginTop: "6px",
+                }}
+              >
+                О том, где познакомиться с<br />
+                пушистыми друзьями и, возможно,
+                <br /> найти того самого
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              background: "url(/images/home/paws_paper.png)",
+              filter: "drop-shadow(-3px 3px 4.7px rgba(0, 0, 0, 0.1))",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "286px",
+              height: "92px",
+            }}
+          >
+            <Box sx={{ display: "flex", gap: "4px" }}>
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+            </Box>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                textAlign: "center",
+                marginTop: "6px",
+              }}
+            >
+              О том, на какие события можно
+              <br />
+              прийти, хорошо провести время и<br />
+              одновременно помочь животным
+            </Typography>
+          </Box>
+        </Box>
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "12px",
+            lineHeight: "14px",
+            textAlign: "center",
+            marginTop: "40px",
+          }}
+        >
+          Мы объединяем людей, творчество, музыку и заботу о животных — и
+          создаём пространство, в котором делать добро легко и приятно
+        </Typography>
+      </Box>
+
+      <Box sx={{ marginTop: "20px" }}>
+        <ImageCarousel folder="paws" isRight={true}></ImageCarousel>
+      </Box>
+      <Box sx={{ width: "340px", marginX: "auto" }}>
+        <Typography
+          sx={{
+            color: "#111111",
+            fontFamily: "Montserrat",
+            fontSize: "18px",
+            textAlign: "left",
+            marginTop: "50px",
+          }}
+        >
+          В этом году мы приглашаем вас <br />
+          стать частью новой истории
+        </Typography>
+      </Box>
+      <Box sx={{ paddingRight: "2vw" }}>
+        <Box
+          sx={{
+            background: "url(/images/home/book3.png)",
+            backgroundPosition: "right",
+            backgroundRepeat: "no-repeat",
+            display: "flex",
+            flexDirection: "column",
+            // justifyContent: "center",
+            alignItems: "end",
+            // width: "350px",
+            position: "relative",
+            height: "463px",
+            paddingRight: "100px",
+          }}
+        >
+          <Box sx={{ position: "relative" }}>
+            <Box sx={{ position: "absolute", right: "30px", top: "15px" }}>
+              <svg
+                width="23"
+                height="22"
+                viewBox="0 0 23 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+                <path
+                  d="M18.0244 22C18.0244 22 18.0244 22 18.0244 22C18.0576 21.4939 18.0545 20.986 18.0025 20.476C17.9015 18.4851 16.4231 16.0828 14.0244 16.123L14.0482 16.8763C16.9955 16.7502 18.676 13.5501 18.5244 11L17.5244 11C17.5244 11 17.5244 11 17.5244 11C17.3728 13.5501 19.0533 16.7502 22.0007 16.8763L22.0244 16.123C19.6258 16.0828 18.1473 18.4851 18.0463 20.476C17.9943 20.986 17.9912 21.4939 18.0244 22C18.0244 22 18.0244 22 18.0244 22C18.0579 21.4939 18.1245 20.9952 18.2339 20.5063C18.6013 18.5411 20.0852 16.704 22.0244 16.877L22.0482 16.1237C19.7027 15.84 18.4266 13.3474 18.5244 11C18.5244 11 18.5244 11 18.5244 11L17.5244 11C17.6222 13.3473 16.3461 15.84 14.0007 16.1237L14.0244 16.877C15.9636 16.704 17.4475 18.5411 17.815 20.5063C17.9243 20.9952 17.991 21.4939 18.0244 22ZM18.0244 22"
+                  fill="#E1AD41"
+                />
+              </svg>
+            </Box>
+            <Box
+              sx={{
+                position: "absolute",
+                left: "50%",
+                transform: "translateX(-50%)",
+                top: "16px",
+              }}
+            >
+              <svg
+                width="259"
+                height="144"
+                viewBox="0 0 259 144"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <mask id="path-1-inside-1_148_8" fill="white">
+                  <ellipse
+                    cx="131.988"
+                    cy="74.4223"
+                    rx="117.807"
+                    ry="44.2259"
+                    transform="rotate(10.7493 131.988 74.4223)"
+                  />
+                </mask>
+                <path
+                  d="M247.728 96.3948C245.922 105.463 237.439 111.043 229.478 114.504C195.78 127.172 158.647 123.674 123.81 117.504C101.925 113.271 80.3659 106.953 60.1819 97.5298C41.5649 87.9235 15.9586 75.8005 16.7399 52.5431C24.5363 30.6175 52.8039 28.7221 73.6462 26.6069C95.8794 25.2361 118.254 27.259 140.167 31.3409C174.842 38.3675 210.674 48.7216 237.384 72.8576C243.523 78.9949 249.371 87.296 247.728 96.3948C249.443 87.3049 243.636 78.9173 237.518 72.7234C210.89 48.3377 175.036 37.777 140.307 30.6041C118.357 26.431 95.9275 24.3363 73.5869 25.6713C52.6392 27.8798 24.1964 29.2032 15.7574 52.3566C15.7574 52.3566 15.7574 52.3566 15.7574 52.3566C15.124 76.9918 41.1029 88.6468 59.7838 98.3786C80.0809 107.808 101.717 114.079 123.67 118.241C158.611 124.294 195.841 127.608 229.554 114.678C237.515 111.157 245.992 105.481 247.728 96.3948ZM247.728 96.3948"
+                  fill="#E1AD41"
+                  mask="url(#path-1-inside-1_148_8)"
+                />
+                <mask id="path-3-inside-2_148_8" fill="white">
+                  <ellipse
+                    cx="122.233"
+                    cy="50.0735"
+                    rx="122.233"
+                    ry="50.0735"
+                    transform="matrix(0.982453 -0.186513 -0.186513 -0.982453 18.6787 143.986)"
+                  />
+                </mask>
+                <path
+                  d="M249.516 49.1949C247.693 39.6923 239.529 33.1161 231.273 28.9561C196.501 13.526 156.849 16.6911 120.158 23.1666C97.0618 27.636 74.3693 34.5436 53.313 45.0813C33.8469 55.608 7.94602 70.1063 9.8306 94.6978C17.0894 118.269 46.5016 122.266 68.4712 124.927C91.9243 127.015 115.57 125.125 138.697 120.819C175.209 113.398 213.261 101.811 239.959 74.7114C246.117 67.8151 251.303 58.7045 249.516 49.1949C251.374 58.6933 246.235 67.8831 240.102 74.8372C213.493 102.188 175.411 113.987 138.837 121.556C115.667 125.954 91.9592 127.916 68.386 125.86C46.317 123.13 16.6288 119.577 8.84815 94.8843C8.84815 94.8843 8.84815 94.8843 8.84815 94.8843C7.03812 69.0581 33.3586 54.8719 52.8916 44.2438C74.0712 33.692 96.8483 26.8291 120.019 22.4297C156.822 16.0688 196.579 13.09 231.359 28.7869C239.615 33.0094 247.764 39.6766 249.516 49.1949ZM249.516 49.1949"
+                  fill="#E1AD41"
+                  mask="url(#path-3-inside-2_148_8)"
+                />
+              </svg>
+            </Box>
+            <Typography
+              sx={{
+                color: "#0B0B0B",
+                fontFamily: "Calypso",
+                fontSize: "30px",
+                lineHeight: "100%",
+                textAlign: "center",
+                marginTop: "74px",
+                maxWidth: "220px",
+                textTransform: "uppercase",
+              }}
+            >
+              Сказочный мир
+            </Typography>
+          </Box>
+          <Box sx={{ width: "216px" }}>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "100%",
+                textAlign: "left",
+                marginTop: "32px",
+              }}
+            >
+              Место, где можно:
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "10px",
+                gap: "8px",
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                  textAlign: "left",
+                  fontStyle: "italic",
+                }}
+              >
+                отвлечься от повседневности
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "10px",
+                gap: "8px",
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                  textAlign: "left",
+                  fontStyle: "italic",
+                }}
+              >
+                поверить в хорошее
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "10px",
+                gap: "8px",
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                  textAlign: "left",
+                  fontStyle: "italic",
+                }}
+              >
+                сделать добрые дела
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "10px",
+                gap: "8px",
+              }}
+            >
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488951 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32653 3.81441 7.62394 8.59633 11.9999 8.87626L12.0244 8.12296C8.44713 8.04147 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.628 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87705C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "100%",
+                  textAlign: "left",
+                  fontStyle: "italic",
+                }}
+              >
+                и почувствовать, что...
+              </Typography>
+            </Box>
+          </Box>
+          <Typography
+            sx={{
+              color: "#0B0B0B",
+              fontFamily: "Calypso",
+              fontSize: "16px",
+              lineHeight: "100%",
+              textAlign: "center",
+              marginTop: "22px",
+              maxWidth: "186px",
+              textTransform: "uppercase",
+            }}
+          >
+            самые настоящие чудеса создаём мы сами
+          </Typography>
+          <Box sx={{ display: "flex", gap: "164px" }}>
+            <svg
+              width="30"
+              height="39"
+              viewBox="0 0 30 39"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M23.0251 17C22.992 16.2269 23.0114 15.4528 23.1008 14.6794C23.3146 11.6636 25.4479 8.04146 29.0251 8.12295L29.0007 8.87625C24.6247 8.59632 22.3273 3.81441 22.5251 -1.42652e-06L23.5251 -1.3391e-06C23.5251 -1.3391e-06 23.5251 -1.3391e-06 23.5251 -1.3391e-06C23.723 3.81441 21.4256 8.59633 17.0496 8.87626L17.0251 8.12296C20.6024 8.04147 22.7357 11.6636 22.9495 14.6794C23.0389 15.4528 23.0583 16.2269 23.0251 17C22.9917 16.2269 22.9087 15.4617 22.7618 14.7085C22.2863 11.7115 20.1149 8.65342 17.0251 8.87705L17.0007 8.12375C20.7406 7.70293 22.6761 3.628 22.5251 -1.42652e-06C22.5251 -1.42652e-06 22.5251 -1.42652e-06 22.5251 -1.42652e-06L23.5251 -1.3391e-06C23.3742 3.628 25.3097 7.70293 29.0496 8.12375L29.0251 8.87705C25.9354 8.65341 23.764 11.7115 23.2885 14.7085C23.1416 15.4617 23.0586 16.2269 23.0251 17ZM23.0251 17"
+                fill="#E1AD41"
+              />
+              <path
+                d="M10.0251 39C9.99209 37.6928 10.0443 36.386 10.2087 35.0854C10.6482 30.0153 14.1072 23.957 20.0251 24.1229L20.0001 24.8762C12.7896 24.2945 9.23142 16.355 9.52515 10C9.52515 10 9.52515 10 9.52515 10L10.5251 10C10.8189 16.355 7.26069 24.2945 0.0502009 24.8762L0.0251478 24.123C5.94312 23.957 9.40214 30.0153 9.84163 35.0854C10.006 36.386 10.0582 37.6928 10.0251 39C9.99156 37.6928 9.87588 36.3946 9.65373 35.1135C8.95686 30.0574 5.43302 24.5609 0.0251477 24.8771L9.46116e-05 24.1238C6.54762 23.4153 9.77772 16.1802 9.52515 10L10.5251 10C10.5251 10 10.5251 10 10.5251 10C10.2726 16.1802 13.5027 23.4153 20.0502 24.1238L20.0251 24.877C14.6173 24.5609 11.0934 30.0574 10.3966 35.1135C10.1744 36.3946 10.0587 37.6928 10.0251 39ZM10.0251 39"
+                fill="#E1AD41"
+              />
+            </svg>
+            <svg
+              width="30"
+              height="39"
+              viewBox="0 0 30 39"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M23.0251 17C22.992 16.2269 23.0114 15.4528 23.1008 14.6794C23.3146 11.6636 25.4479 8.04146 29.0251 8.12295L29.0007 8.87625C24.6247 8.59632 22.3273 3.81441 22.5251 -1.42652e-06L23.5251 -1.3391e-06C23.5251 -1.3391e-06 23.5251 -1.3391e-06 23.5251 -1.3391e-06C23.723 3.81441 21.4256 8.59633 17.0496 8.87626L17.0251 8.12296C20.6024 8.04147 22.7357 11.6636 22.9495 14.6794C23.0389 15.4528 23.0583 16.2269 23.0251 17C22.9917 16.2269 22.9087 15.4617 22.7618 14.7085C22.2863 11.7115 20.1149 8.65342 17.0251 8.87705L17.0007 8.12375C20.7406 7.70293 22.6761 3.628 22.5251 -1.42652e-06C22.5251 -1.42652e-06 22.5251 -1.42652e-06 22.5251 -1.42652e-06L23.5251 -1.3391e-06C23.3742 3.628 25.3097 7.70293 29.0496 8.12375L29.0251 8.87705C25.9354 8.65341 23.764 11.7115 23.2885 14.7085C23.1416 15.4617 23.0586 16.2269 23.0251 17ZM23.0251 17"
+                fill="#E1AD41"
+              />
+              <path
+                d="M10.0251 39C9.99209 37.6928 10.0443 36.386 10.2087 35.0854C10.6482 30.0153 14.1072 23.957 20.0251 24.1229L20.0001 24.8762C12.7896 24.2945 9.23142 16.355 9.52515 10C9.52515 10 9.52515 10 9.52515 10L10.5251 10C10.8189 16.355 7.26069 24.2945 0.0502009 24.8762L0.0251478 24.123C5.94312 23.957 9.40214 30.0153 9.84163 35.0854C10.006 36.386 10.0582 37.6928 10.0251 39C9.99156 37.6928 9.87588 36.3946 9.65373 35.1135C8.95686 30.0574 5.43302 24.5609 0.0251477 24.8771L9.46116e-05 24.1238C6.54762 23.4153 9.77772 16.1802 9.52515 10L10.5251 10C10.5251 10 10.5251 10 10.5251 10C10.2726 16.1802 13.5027 23.4153 20.0502 24.1238L20.0251 24.877C14.6173 24.5609 11.0934 30.0574 10.3966 35.1135C10.1744 36.3946 10.0587 37.6928 10.0251 39ZM10.0251 39"
+                fill="#E1AD41"
+              />
+            </svg>
+          </Box>
+        </Box>
+      </Box>
       {/* кому помогаем */}
-      <Box sx={{ paddingX: "10px" }}>
+      <Box sx={{ width: "340px", marginX: "auto" }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box>
             <Typography
@@ -1504,72 +2093,74 @@ const Home = () => {
             ≈ 50 котов
           </Box>
         </Box>
+      </Box>
+      <Box
+        sx={{
+          overflow: "hidden",
+          marginTop: "30px",
+          width: "100%",
+          position: "relative",
+          "&::before, &::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            width: "60px",
+            zIndex: 2,
+          },
+        }}
+      >
         <Box
           sx={{
-            overflow: "hidden",
-            marginTop: "30px",
-            width: "100%",
-            position: "relative",
-            "&::before, &::after": {
-              content: '""',
-              position: "absolute",
-              top: 0,
-              bottom: 0,
-              width: "60px",
-              zIndex: 2,
+            display: "flex",
+            gap: "12px",
+            width: "fit-content",
+            animation: `scroll 20s linear infinite `,
+            "@keyframes scroll": {
+              "0%": { transform: "translateX(0)" },
+              "100%": { transform: `translateX(-${100 / 2}%)` },
             },
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              gap: "12px",
-              width: "fit-content",
-              animation: `scroll 20s linear infinite `,
-              "@keyframes scroll": {
-                "0%": { transform: "translateX(0)" },
-                "100%": { transform: `translateX(-${100 / 2}%)` },
-              },
-            }}
-          >
-            {colapsePets.map((pet, i) => (
+          {colapsePets.map((pet, i) => (
+            <Box
+              sx={{
+                width: "180px",
+                height: "200px",
+                padding: "10px",
+                backgroundColor: "#C8D399",
+                borderRadius: "10px",
+              }}
+            >
               <Box
+                key={i}
+                component="img"
+                src={`/images/home/pets/${pet.image}.png`}
                 sx={{
-                  width: "180px",
-                  height: "200px",
-                  padding: "10px",
-                  backgroundColor: "#C8D399",
-                  borderRadius: "10px",
+                  height: "158px",
+                  width: "auto",
+                  flexShrink: 0,
+                  mx: 1,
+                  borderRadius: "12px",
+                  objectFit: "cover",
+                }}
+              />
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  fontStyle: "italic",
+                  marginTop: "6px",
                 }}
               >
-                <Box
-                  key={i}
-                  component="img"
-                  src={`/images/home/pets/${pet.image}.png`}
-                  sx={{
-                    height: "158px",
-                    width: "auto",
-                    flexShrink: 0,
-                    mx: 1,
-                    borderRadius: "12px",
-                    objectFit: "cover",
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: "#111111",
-                    fontFamily: "Montserrat",
-                    fontSize: "12px",
-                    fontStyle: "italic",
-                    marginTop: "6px",
-                  }}
-                >
-                  {pet.name}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
+                {pet.name}
+              </Typography>
+            </Box>
+          ))}
         </Box>
+      </Box>
+      <Box sx={{ width: "340px", marginX: "auto" }}>
         <Typography
           sx={{
             color: "#111111",
@@ -1616,7 +2207,7 @@ const Home = () => {
         </Typography>
       </Box>
       {/* Как помогает фестиваль */}
-      <Box sx={{ paddingX: "10px" }}>
+      <Box sx={{ width: "340px", marginX: "auto" }}>
         <Typography
           sx={{
             color: "#0B0B0B",
@@ -1983,20 +2574,517 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ marginTop: "180px", paddingX: "10px" }}>
-        <Typography
+
+      <Box
+        sx={{
+          background: "url(/images/home/pay_start.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          width: "100%",
+          height: "36px",
+          marginTop: "50px",
+        }}
+      ></Box>
+      <Box
+        sx={{
+          background: "#FFEEAC",
+          paddingBottom: "23px",
+        }}
+      >
+        <Box
           sx={{
-            color: "#0B0B0B",
-            fontFamily: "Calypso",
-            fontSize: "30px",
-            lineHeight: "100%",
-            textAlign: "left",
-            marginTop: "50px",
-            textTransform: "uppercase",
+            width: "340px",
+            marginX: "auto",
           }}
         >
-          Помочь прямо сейчас
-        </Typography>
+          <Typography
+            sx={{
+              color: "#0B0B0B",
+              fontFamily: "Calypso",
+              fontSize: "30px",
+              lineHeight: "100%",
+              textAlign: "left",
+              paddingTop: "30px",
+              textTransform: "uppercase",
+            }}
+          >
+            Помочь прямо сейчас
+          </Typography>
+          <Typography
+            sx={{
+              color: "#111111",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              textAlign: "left",
+              marginY: "20px",
+            }}
+          >
+            Даже если вы не сможете прийти на фестиваль,
+            <br />
+            стать частью доброй истории все равно можно!
+          </Typography>
+          <Typography
+            sx={{
+              color: "#111111",
+              fontFamily: "Montserrat",
+              fontSize: "18px",
+              lineHeight: "120%",
+              textAlign: "left",
+            }}
+          >
+            Поддержать «Мурзиков»:
+          </Typography>
+          <Box
+            sx={{
+              background: "#FFFBF4",
+              borderRadius: "10px",
+              paddingLeft: "15px",
+              paddingRight: "16px",
+              paddingBottom: "20px",
+              marginTop: "20px",
+              position: "relative",
+            }}
+          >
+            <Box sx={{ position: "absolute", right: "10px", top: "-30px" }}>
+              <img src="/images/home/star_pay.png" alt="star" />
+            </Box>
+            <Box sx={{ position: "absolute", left: "10px", top: "8px" }}>
+              <svg
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                  fill="#E1AD41"
+                />
+              </svg>
+            </Box>
+            <Typography
+              sx={{
+                color: "#0B0B0B",
+                fontFamily: "Calypso",
+                fontSize: "30px",
+                lineHeight: "100%",
+                textAlign: "left",
+                paddingTop: "30px",
+                paddingLeft: "10px",
+                textTransform: "uppercase",
+              }}
+            >
+              Через ерип
+            </Typography>
+            <Box
+              sx={{
+                marginTop: "20px",
+                display: "flex",
+                gap: "10px",
+                alignItems: "center",
+              }}
+            >
+              <Box>
+                <svg
+                  width="8"
+                  height="128"
+                  viewBox="0 0 8 128"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7.71404 23.9226C7.9636 23.8044 8.07008 23.5062 7.95187 23.2567L6.02548 19.1898C5.90727 18.9403 5.60913 18.8338 5.35957 18.952C5.11001 19.0702 5.00353 19.3684 5.12174 19.6179L6.83409 23.2329L3.21914 24.9452C2.96958 25.0634 2.8631 25.3616 2.98131 25.6111C3.09952 25.8607 3.39766 25.9672 3.64722 25.849L7.71404 23.9226ZM7.5 0.470703C7.33183 -0.000167884 7.33154 -6.44996e-05 7.33123 4.86002e-05C7.33109 9.91449e-05 7.33074 0.000222288 7.33046 0.000323676C7.3299 0.0005266 7.32923 0.000768714 7.32845 0.00105026C7.32689 0.00161331 7.32491 0.00233408 7.32252 0.0032145C7.31772 0.00497531 7.31126 0.00737499 7.30318 0.0104292C7.28701 0.0165371 7.26437 0.0252651 7.23569 0.0367381C7.17833 0.059681 7.09676 0.0936228 6.99442 0.139568C6.78983 0.231425 6.5018 0.371477 6.15818 0.567831C5.47153 0.9602 4.55891 1.57969 3.64645 2.49215C1.81297 4.32562 1.77261e-07 7.32421 4.50993e-07 11.9707L0.5 11.9707L1 11.9707C1 7.61719 2.68703 4.86578 4.35355 3.19926C5.19109 2.36172 6.02847 1.79371 6.65432 1.43607C6.96695 1.25743 7.22579 1.13186 7.40401 1.05184C7.49309 1.01185 7.5619 0.983288 7.60708 0.965215C7.62967 0.95618 7.64634 0.949771 7.65666 0.94587C7.66182 0.943919 7.6654 0.942595 7.66734 0.941884C7.6683 0.941529 7.66886 0.941326 7.669 0.941275C7.66907 0.94125 7.66904 0.941262 7.6689 0.941312C7.66883 0.941337 7.66865 0.941403 7.66861 0.941415C7.6684 0.94149 7.66817 0.941574 7.5 0.470703ZM0.5 11.9707L4.50993e-07 11.9707C7.24726e-07 16.6172 1.81297 19.6158 3.64645 21.4493C4.55891 22.3617 5.47153 22.9812 6.15818 23.3736C6.5018 23.5699 6.78983 23.71 6.99442 23.8018C7.09676 23.8478 7.17833 23.8817 7.23569 23.9047C7.26437 23.9161 7.28701 23.9249 7.30318 23.931C7.31126 23.934 7.31772 23.9364 7.32252 23.9382C7.32491 23.9391 7.32689 23.9398 7.32845 23.9404C7.32922 23.9406 7.3299 23.9409 7.33046 23.9411C7.33074 23.9412 7.33108 23.9413 7.33123 23.9414C7.33154 23.9415 7.33183 23.9416 7.5 23.4707C7.66817 22.9998 7.6684 22.9999 7.66861 23C7.66865 23 7.66883 23.0001 7.6689 23.0001C7.66904 23.0001 7.66907 23.0002 7.669 23.0001C7.66886 23.0001 7.6683 22.9999 7.66733 22.9995C7.6654 22.9988 7.66182 22.9975 7.65666 22.9955C7.64634 22.9916 7.62967 22.9852 7.60708 22.9762C7.5619 22.9581 7.49309 22.9296 7.40401 22.8896C7.22579 22.8096 6.96695 22.684 6.65432 22.5053C6.02846 22.1477 5.19109 21.5797 4.35355 20.7421C2.68703 19.0756 1 16.3242 1 11.9707L0.5 11.9707Z"
+                    fill="#E1AD41"
+                  />
+                  <path
+                    d="M7.71404 57.9226C7.9636 57.8044 8.07008 57.5062 7.95187 57.2567L6.02548 53.1898C5.90727 52.9403 5.60913 52.8338 5.35957 52.952C5.11001 53.0702 5.00353 53.3684 5.12174 53.6179L6.83409 57.2329L3.21914 58.9452C2.96958 59.0634 2.8631 59.3616 2.98131 59.6111C3.09952 59.8607 3.39766 59.9672 3.64722 59.849L7.71404 57.9226ZM7.5 34.4707C7.33183 33.9998 7.33154 33.9999 7.33123 34C7.33109 34.0001 7.33074 34.0002 7.33046 34.0003C7.3299 34.0005 7.32923 34.0008 7.32845 34.0011C7.32689 34.0016 7.32491 34.0023 7.32252 34.0032C7.31772 34.005 7.31126 34.0074 7.30318 34.0104C7.28701 34.0165 7.26437 34.0253 7.23569 34.0367C7.17833 34.0597 7.09676 34.0936 6.99442 34.1396C6.78983 34.2314 6.5018 34.3715 6.15818 34.5678C5.47153 34.9602 4.55891 35.5797 3.64645 36.4921C1.81297 38.3256 1.77261e-07 41.3242 4.50993e-07 45.9707L0.5 45.9707L1 45.9707C1 41.6172 2.68703 38.8658 4.35355 37.1993C5.19109 36.3617 6.02847 35.7937 6.65432 35.4361C6.96695 35.2574 7.22579 35.1319 7.40401 35.0518C7.49309 35.0118 7.5619 34.9833 7.60708 34.9652C7.62967 34.9562 7.64634 34.9498 7.65666 34.9459C7.66182 34.9439 7.6654 34.9426 7.66734 34.9419C7.6683 34.9415 7.66886 34.9413 7.669 34.9413C7.66907 34.9412 7.66904 34.9413 7.6689 34.9413C7.66883 34.9413 7.66865 34.9414 7.66861 34.9414C7.6684 34.9415 7.66817 34.9416 7.5 34.4707ZM0.5 45.9707L4.50993e-07 45.9707C7.24726e-07 50.6172 1.81297 53.6158 3.64645 55.4493C4.55891 56.3617 5.47153 56.9812 6.15818 57.3736C6.5018 57.5699 6.78983 57.71 6.99442 57.8018C7.09676 57.8478 7.17833 57.8817 7.23569 57.9047C7.26437 57.9161 7.28701 57.9249 7.30318 57.931C7.31126 57.934 7.31772 57.9364 7.32252 57.9382C7.32491 57.9391 7.32689 57.9398 7.32845 57.9404C7.32922 57.9406 7.3299 57.9409 7.33046 57.9411C7.33074 57.9412 7.33108 57.9413 7.33123 57.9414C7.33154 57.9415 7.33183 57.9416 7.5 57.4707C7.66817 56.9998 7.6684 56.9999 7.66861 57C7.66865 57 7.66883 57.0001 7.6689 57.0001C7.66904 57.0001 7.66907 57.0002 7.669 57.0001C7.66886 57.0001 7.6683 56.9999 7.66733 56.9995C7.6654 56.9988 7.66182 56.9975 7.65666 56.9955C7.64634 56.9916 7.62967 56.9852 7.60708 56.9762C7.5619 56.9581 7.49309 56.9296 7.40401 56.8896C7.22579 56.8096 6.96695 56.684 6.65432 56.5053C6.02846 56.1477 5.19109 55.5797 4.35355 54.7421C2.68703 53.0756 1 50.3242 1 45.9707L0.5 45.9707Z"
+                    fill="#E1AD41"
+                  />
+                  <path
+                    d="M7.71404 91.9226C7.9636 91.8044 8.07008 91.5062 7.95187 91.2567L6.02548 87.1898C5.90727 86.9403 5.60913 86.8338 5.35957 86.952C5.11001 87.0702 5.00353 87.3684 5.12174 87.6179L6.83409 91.2329L3.21914 92.9452C2.96958 93.0634 2.8631 93.3616 2.98131 93.6111C3.09952 93.8607 3.39766 93.9672 3.64722 93.849L7.71404 91.9226ZM7.5 68.4707C7.33183 67.9998 7.33154 67.9999 7.33123 68C7.33109 68.0001 7.33074 68.0002 7.33046 68.0003C7.3299 68.0005 7.32923 68.0008 7.32845 68.0011C7.32689 68.0016 7.32491 68.0023 7.32252 68.0032C7.31772 68.005 7.31126 68.0074 7.30318 68.0104C7.28701 68.0165 7.26437 68.0253 7.23569 68.0367C7.17833 68.0597 7.09676 68.0936 6.99442 68.1396C6.78983 68.2314 6.5018 68.3715 6.15818 68.5678C5.47153 68.9602 4.55891 69.5797 3.64645 70.4921C1.81297 72.3256 1.77261e-07 75.3242 4.50993e-07 79.9707L0.5 79.9707L1 79.9707C1 75.6172 2.68703 72.8658 4.35355 71.1993C5.19109 70.3617 6.02847 69.7937 6.65432 69.4361C6.96695 69.2574 7.22579 69.1319 7.40401 69.0518C7.49309 69.0118 7.5619 68.9833 7.60708 68.9652C7.62967 68.9562 7.64634 68.9498 7.65666 68.9459C7.66182 68.9439 7.6654 68.9426 7.66734 68.9419C7.6683 68.9415 7.66886 68.9413 7.669 68.9413C7.66907 68.9412 7.66904 68.9413 7.6689 68.9413C7.66883 68.9413 7.66865 68.9414 7.66861 68.9414C7.6684 68.9415 7.66817 68.9416 7.5 68.4707ZM0.5 79.9707L4.50993e-07 79.9707C7.24726e-07 84.6172 1.81297 87.6158 3.64645 89.4493C4.55891 90.3617 5.47153 90.9812 6.15818 91.3736C6.5018 91.5699 6.78983 91.71 6.99442 91.8018C7.09676 91.8478 7.17833 91.8817 7.23569 91.9047C7.26437 91.9161 7.28701 91.9249 7.30318 91.931C7.31126 91.934 7.31772 91.9364 7.32252 91.9382C7.32491 91.9391 7.32689 91.9398 7.32845 91.9404C7.32922 91.9406 7.3299 91.9409 7.33046 91.9411C7.33074 91.9412 7.33108 91.9413 7.33123 91.9414C7.33154 91.9415 7.33183 91.9416 7.5 91.4707C7.66817 90.9998 7.6684 90.9999 7.66861 91C7.66865 91 7.66883 91.0001 7.6689 91.0001C7.66904 91.0001 7.66907 91.0002 7.669 91.0001C7.66886 91.0001 7.6683 90.9999 7.66733 90.9995C7.6654 90.9988 7.66182 90.9975 7.65666 90.9955C7.64634 90.9916 7.62967 90.9852 7.60708 90.9762C7.5619 90.9581 7.49309 90.9296 7.40401 90.8896C7.22579 90.8096 6.96695 90.684 6.65432 90.5053C6.02846 90.1477 5.19109 89.5797 4.35355 88.7421C2.68703 87.0756 1 84.3242 1 79.9707L0.5 79.9707Z"
+                    fill="#E1AD41"
+                  />
+                  <path
+                    d="M7.71404 125.923C7.9636 125.804 8.07008 125.506 7.95187 125.257L6.02548 121.19C5.90727 120.94 5.60913 120.834 5.35957 120.952C5.11001 121.07 5.00353 121.368 5.12174 121.618L6.83409 125.233L3.21914 126.945C2.96958 127.063 2.8631 127.362 2.98131 127.611C3.09952 127.861 3.39766 127.967 3.64722 127.849L7.71404 125.923ZM7.5 102.471C7.33183 102 7.33154 102 7.33123 102C7.33109 102 7.33074 102 7.33046 102C7.3299 102.001 7.32923 102.001 7.32845 102.001C7.32689 102.002 7.32491 102.002 7.32252 102.003C7.31772 102.005 7.31126 102.007 7.30318 102.01C7.28701 102.017 7.26437 102.025 7.23569 102.037C7.17833 102.06 7.09676 102.094 6.99442 102.14C6.78983 102.231 6.5018 102.371 6.15818 102.568C5.47153 102.96 4.55891 103.58 3.64645 104.492C1.81297 106.326 1.77261e-07 109.324 4.50993e-07 113.971L0.5 113.971L1 113.971C1 109.617 2.68703 106.866 4.35355 105.199C5.19109 104.362 6.02847 103.794 6.65432 103.436C6.96695 103.257 7.22579 103.132 7.40401 103.052C7.49309 103.012 7.5619 102.983 7.60708 102.965C7.62967 102.956 7.64634 102.95 7.65666 102.946C7.66182 102.944 7.6654 102.943 7.66734 102.942C7.6683 102.942 7.66886 102.941 7.669 102.941C7.66907 102.941 7.66904 102.941 7.6689 102.941C7.66883 102.941 7.66865 102.941 7.66861 102.941C7.6684 102.941 7.66817 102.942 7.5 102.471ZM0.5 113.971L4.50993e-07 113.971C7.24726e-07 118.617 1.81297 121.616 3.64645 123.449C4.55891 124.362 5.47153 124.981 6.15818 125.374C6.5018 125.57 6.78983 125.71 6.99442 125.802C7.09676 125.848 7.17833 125.882 7.23569 125.905C7.26437 125.916 7.28701 125.925 7.30318 125.931C7.31126 125.934 7.31772 125.936 7.32252 125.938C7.32491 125.939 7.32689 125.94 7.32845 125.94C7.32922 125.941 7.3299 125.941 7.33046 125.941C7.33074 125.941 7.33108 125.941 7.33123 125.941C7.33154 125.941 7.33183 125.942 7.5 125.471C7.66817 125 7.6684 125 7.66861 125C7.66865 125 7.66883 125 7.6689 125C7.66904 125 7.66907 125 7.669 125C7.66886 125 7.6683 125 7.66733 125C7.6654 124.999 7.66182 124.997 7.65666 124.996C7.64634 124.992 7.62967 124.985 7.60708 124.976C7.5619 124.958 7.49309 124.93 7.40401 124.89C7.22579 124.81 6.96695 124.684 6.65432 124.505C6.02846 124.148 5.19109 123.58 4.35355 122.742C2.68703 121.076 1 118.324 1 113.971L0.5 113.971Z"
+                    fill="#E1AD41"
+                  />
+                </svg>
+              </Box>
+              <Box>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    textAlign: "left",
+                  }}
+                >
+                  Банковские, финансовые услуги
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    textAlign: "left",
+                    marginTop: "20px",
+                  }}
+                >
+                  Банки, НКФО
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    textAlign: "left",
+                    marginTop: "20px",
+                  }}
+                >
+                  Альфа-Банк
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    textAlign: "left",
+                    marginTop: "20px",
+                  }}
+                >
+                  Пополнение счета
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    textAlign: "left",
+                    marginTop: "20px",
+                  }}
+                >
+                  Ввести номер телефона:
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                marginTop: "10px",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "18px",
+                  lineHeight: "120%",
+                  textAlign: "left",
+                  paddingLeft: "17px",
+                }}
+              >
+                +375 33 300 99 19
+              </Typography>
+              <Box
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "14px",
+                  textAlign: "center",
+                  background: "#FFEEAC",
+                  borderRadius: "100px",
+                  width: "128px",
+                  height: "24px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                СКОПИРОВАТЬ
+              </Box>
+            </Box>
+            <Typography
+              sx={{
+                color: "#111111",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                textAlign: "left",
+                paddingLeft: "17px",
+                fontStyle: "italic",
+                marginTop: "24px",
+              }}
+            >
+              Любая сумма становится частью ежедневной заботы о животных
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          background: "url(/images/home/pay_end.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          width: "100%",
+          height: "40px",
+        }}
+      ></Box>
+      <Box sx={{ width: "340px", marginX: "auto" }}>
+        <Box>
+          <Typography
+            sx={{
+              color: "#0B0B0B",
+              fontFamily: "Calypso",
+              fontSize: "29px",
+              lineHeight: "100%",
+              textAlign: "center",
+              paddingTop: "30px",
+              textTransform: "uppercase",
+            }}
+          >
+            Давайте вместе создадим немного волшебства
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            background: "url(/images/home/footer_paper.png)",
+            backgroundRepeat: "round",
+            backgroundSize: "cover",
+            filter: "drop-shadow(-3px 3px 4.7px rgba(0, 0, 0, 0.1))",
+            width: "298px",
+            height: "80px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginX: "auto",
+            marginTop: "20px",
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#111111",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              textAlign: "center",
+              maxWidth: "270px",
+            }}
+          >
+            Приходите провести день с музыкой, творчеством, друзьями и теми, кто
+            тоже верит, что добро может быть легким!
+          </Typography>
+        </Box>
+        <Box>
+          <Typography
+            sx={{
+              color: "#0B0B0B",
+              fontFamily: "Calypso",
+              fontSize: "29px",
+              lineHeight: "100%",
+              textAlign: "center",
+              paddingTop: "30px",
+            }}
+          >
+            PawsUp 2026
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "10px",
+            marginTop: "20px",
+          }}
+        >
+          <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
+            <Box>
+              <img src="/images/home/calendar2.png" alt="calendar" />
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "14px",
+                  fontWeight: "700",
+                  textAlign: "left",
+                }}
+              >
+                22 августа
+              </Typography>
+              <Typography
+                sx={{
+                  color: "#111111",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "14px",
+                  textAlign: "left",
+                  marginTop: "2px",
+                }}
+              >
+                ЭХО двор
+              </Typography>
+            </Box>
+          </Box>
+          <Box sx={{ display: "flex", gap: "40px", alignItems: "center" }}>
+            <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
+              <Box>
+                <img src="/images/home/threads.png" alt="threads" />
+              </Box>
+              <Box>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    fontWeight: "700",
+                    textAlign: "left",
+                  }}
+                >
+                  Threads
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    textAlign: "left",
+                    marginTop: "2px",
+                  }}
+                >
+                  @hey.pawsup
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
+              <Box>
+                <img src="/images/home/inst.png" alt="inst" />
+              </Box>
+              <Box>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    fontWeight: "700",
+                    textAlign: "left",
+                  }}
+                >
+                  Instagram
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#111111",
+                    fontFamily: "Montserrat",
+                    fontSize: "12px",
+                    lineHeight: "14px",
+                    textAlign: "left",
+                    marginTop: "2px",
+                  }}
+                >
+                  @hey.pawsup
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          backgroundImage: "url(/images/home/envelope.png)",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          width: "100%",
+          height: "391px",
+        }}
+      >
+        <Box
+          sx={{
+            width: "340px",
+            marginX: "auto",
+            paddingTop: "168px",
+            position: "relative",
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#0B0B0B",
+              fontFamily: "Calypso",
+              fontSize: "25px",
+              lineHeight: "100%",
+              textAlign: "center",
+              textTransform: "uppercase",
+            }}
+          >
+            ведь самые настоящие чудеса создаём мы сами
+          </Typography>
+
+          <Box sx={{ position: "absolute", left: "7px", top: "213px" }}>
+            <svg
+              width="34"
+              height="46"
+              viewBox="0 0 34 46"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M27.278 45.0693C27.3128 44.259 27.2924 43.4477 27.1988 42.637C26.9746 39.476 24.7387 35.6795 20.9891 35.7649L21.0148 36.5545C25.6015 36.2611 28.0095 31.2489 27.8021 27.2508C27.8021 27.2508 27.8021 27.2508 27.8021 27.2508L26.7539 27.2508C26.5465 31.2489 28.9546 36.2611 33.5412 36.5545L33.5669 35.7649C29.8174 35.6795 27.5814 39.476 27.3573 42.637C27.2637 43.4477 27.2433 44.259 27.278 45.0693C27.3131 44.259 27.4001 43.4569 27.5541 42.6675C28.0524 39.5262 30.3284 36.3209 33.5669 36.5553L33.5926 35.7657C29.6726 35.3246 27.6438 31.0535 27.8021 27.2508L26.7539 27.2508C26.7539 27.2508 26.7539 27.2508 26.7539 27.2508C26.9122 31.0535 24.8835 35.3246 20.9635 35.7657L20.9891 36.5553C24.2277 36.3209 26.5036 39.5262 27.002 42.6675C27.156 43.4569 27.2429 44.259 27.278 45.0693ZM27.278 45.0693"
+                fill="#E1AD41"
+              />
+              <path
+                d="M10.5078 30.3965C10.5424 29.0264 10.4877 27.6567 10.3154 26.2934C9.85479 20.9792 6.22924 14.6292 0.0263296 14.8031L0.05259 15.5927C7.61023 14.983 11.3397 6.66119 11.0319 0.000233567L9.98372 0.000233659C9.67585 6.66119 13.4054 14.983 20.963 15.5927L20.9893 14.8032C14.7864 14.6293 11.1608 20.9792 10.7002 26.2934C10.5278 27.6567 10.4732 29.0264 10.5078 30.3965C10.543 29.0264 10.6642 27.6656 10.8971 26.3229C11.6275 21.0233 15.321 15.2622 20.9893 15.5936L21.0155 14.804C14.1528 14.0615 10.7671 6.47801 11.0319 0.000233567C11.0319 0.000233567 11.0319 0.000233567 11.0319 0.000233567L9.98372 0.000233659C10.2485 6.47801 6.86284 14.0615 7.11161e-05 14.804L0.0263297 15.5936C5.69458 15.2622 9.38807 21.0233 10.1185 26.3229C10.3513 27.6656 10.4726 29.0264 10.5078 30.3965ZM10.5078 30.3965"
+                fill="#E1AD41"
+              />
+            </svg>
+          </Box>
+          <Box sx={{ position: "absolute", right: "16px", top: "150px" }}>
+            <svg
+              width="31"
+              height="41"
+              viewBox="0 0 31 41"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.31464 17.8184C6.34937 17.008 6.329 16.1967 6.23538 15.386C6.01126 12.225 3.77528 8.4285 0.0257589 8.51391L0.0514166 9.30348C4.6381 9.01008 7.04613 3.99793 6.83871 -0.000131103C6.83871 -0.000131103 6.83871 -0.00013301 6.83871 -0.00013301L5.79056 -0.000132919C5.58315 3.99793 7.99117 9.01008 12.5779 9.30349L12.6035 8.51392C8.854 8.4285 6.61802 12.225 6.39389 15.386C6.30027 16.1967 6.2799 17.008 6.31464 17.8184C6.34974 17.008 6.43668 16.206 6.59069 15.4165C7.08902 12.2752 9.365 9.06992 12.6035 9.30432L12.6292 8.51475C8.70919 8.07367 6.68046 3.80255 6.83871 -0.00013301L5.79056 -0.000132919C5.79056 -0.000132919 5.79056 -0.000131011 5.79056 -0.000131011C5.94881 3.80255 3.92008 8.07367 0.00010123 8.51475L0.025759 9.30432C3.26427 9.06992 5.54025 12.2752 6.03859 15.4165C6.1926 16.206 6.27953 17.008 6.31464 17.8184ZM6.31464 17.8184"
+                fill="#E1AD41"
+              />
+              <path
+                d="M19.9404 40.8769C19.9751 39.5068 19.9204 38.1371 19.7481 36.7738C19.2874 31.4597 15.6619 25.1097 9.45895 25.2836L9.48521 26.0732C17.0428 25.4634 20.7724 17.1417 20.4645 10.4807L19.4163 10.4807C19.1085 17.1417 22.838 25.4634 30.3956 26.0732L30.4219 25.2836C24.219 25.1097 20.5934 31.4597 20.1328 36.7738C19.9605 38.1371 19.9058 39.5068 19.9404 40.8769C19.9756 39.5069 20.0969 38.1461 20.3297 36.8034C21.0601 31.5038 24.7536 25.7426 30.4219 26.074L30.4481 25.2845C23.5854 24.5419 20.1997 16.9585 20.4645 10.4807C20.4645 10.4807 20.4645 10.4807 20.4645 10.4807L19.4163 10.4807C19.6811 16.9585 16.2955 24.5419 9.43269 25.2845L9.45895 26.074C15.1272 25.7426 18.8207 31.5038 19.5511 36.8034C19.784 38.1461 19.9052 39.5069 19.9404 40.8769ZM19.9404 40.8769"
+                fill="#E1AD41"
+              />
+            </svg>
+          </Box>
+          <Box sx={{ position: "absolute", right: "30px", top: "245px" }}>
+            <svg
+              width="165"
+              height="17"
+              viewBox="0 0 165 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 7.39463C5.63177 6.80876 11.1766 6.25632 16.7256 5.73132C65.8792 1.33989 115.654 -2.49228 164.473 5.70525L164.582 4.66506C163.666 4.62443 162.681 4.58802 161.736 4.55869C133.588 4.03747 105.19 5.34726 77.773 12.1633L77.9162 12.9315C99.9885 10.6171 122.381 10.0504 144.459 12.8497C149.996 13.6063 155.53 14.6408 160.886 16.2193C155.55 14.5737 150.022 13.4723 144.487 12.6525C122.408 9.60153 99.9853 9.97017 77.8271 12.1532L77.9703 12.9214C105.282 6.31023 133.647 5.08519 161.703 5.60633C162.644 5.63554 163.625 5.67169 164.536 5.71189L164.645 4.67169C115.638 -3.54232 65.8042 0.591447 16.7057 5.53317C11.1622 6.12081 5.62412 6.73931 0 7.39463Z"
+                fill="#E1AD41"
+              />
+            </svg>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
