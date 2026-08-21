@@ -14,6 +14,7 @@ import {
 } from "./pages";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/scrollToTop";
 
 const theme = createTheme({
   breakpoints: {
@@ -33,6 +34,7 @@ function App() {
     <Box>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auction/lot/:id" element={<Main />} />

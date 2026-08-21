@@ -311,30 +311,30 @@ const Home = () => {
   const info = {
     scene_1: [
       {
-        time: "11:30 – 13:00",
-        name: "Фильм",
+        time: "12:00 – 13:00",
+        name: "BEAUTY показ",
       },
       {
         time: "13:00 – 14:30",
         name: "Lampa Just Dance",
       },
       {
-        time: "14:30 – 15:30",
-        name: "BEAUTY показ",
+        time: "14:30 – 16:00",
+        name: "Мультфим",
       },
       {
-        time: "15:40 - 16:10",
-        name: "Dj Frukt",
+        time: "16:10 - 16:50",
+        name: "Dj Bravo",
       },
       {
-        time: "16:20 - 17:00",
+        time: "16:50 - 17:30",
         name: "Znichka",
       },
     ],
     scene_2: [
       {
-        time: "17:10 - 18:10",
-        name: "Dj Bravo",
+        time: "17:40 - 18:10",
+        name: "Dj Frukt",
       },
       {
         time: "18:20 - 19:00",
@@ -397,7 +397,7 @@ const Home = () => {
         id: "mk4",
         time: "14:30 – 17:00",
         price: "15 ₽ за 1 чел",
-        name: "Вязание крючком для правшей",
+        name: "Брелоки из бусин",
         preDescription: <span>2 группы: 14:30 – 15:30, 15:45 – 16:45</span>,
         description: (
           <>
@@ -408,7 +408,7 @@ const Home = () => {
       },
       {
         id: "mk5",
-        time: "18:00 – 20:00",
+        time: "17:00 – 20:00",
         price: "15 ₽ за 1 чел",
         name: "Живопись на холстах",
         preDescription: <span>2 группы: 17:00 – 18:30, 18:30 – 20:00</span>,
@@ -423,7 +423,7 @@ const Home = () => {
     activity: [
       {
         id: "ac1",
-        time: "11:00 – 16:00",
+        time: "12:00 – 16:00",
         name: "Деревянные игры",
         description:
           "Попробуйте разные деревянные игры, испытайте ловкость, внимательность и смекалку. Можно играть с друзьями или присоединиться к игре на месте.",
@@ -600,8 +600,27 @@ const Home = () => {
     setExpanded(isExpanded ? id : false);
   };
 
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText("+375 33 300 99 19");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Ошибка копирования:", err);
+    }
+  };
+
   return (
-    <Box sx={{ backgroundColor: "#fff" }}>
+    <Box
+      sx={{
+        backgroundColor: "#fff",
+        a: {
+          textDecoration: "none",
+        },
+      }}
+    >
       <Box
         sx={{
           // height: "1080px",
@@ -756,47 +775,75 @@ const Home = () => {
             </Box>
           </Box>
           <Box sx={{ marginTop: "20px" }}>
-            <Box
-              sx={{
-                width: "340px",
-                paddingY: "14px",
-                borderRadius: "100px",
-                background: "#FFFFFF",
-                color: "#DBA535",
-                fontFamily: "Montserrat",
-                fontSize: "12px",
-                lineHeight: "14px",
-                fontWeight: "700",
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginX: "auto",
-              }}
-            >
-              Смотреть программу
-            </Box>
-            <Box
-              sx={{
-                width: "340px",
-                paddingY: "14px",
-                borderRadius: "100px",
-                background: "#DBA535",
-                color: "#FFFFFF",
-                fontFamily: "Montserrat",
-                fontSize: "12px",
-                lineHeight: "14px",
-                fontWeight: "700",
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginX: "auto",
-                marginTop: "6px",
-              }}
-            >
-              Помочь прямо сейчас
-            </Box>
+            <a href="#program">
+              <Box
+                sx={{
+                  width: "340px",
+                  paddingY: "14px",
+                  borderRadius: "100px",
+                  background: "#FFFFFF",
+                  color: "#DBA535",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "14px",
+                  fontWeight: "700",
+                  textAlign: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginX: "auto",
+                  cursor: "pointer",
+                  userSelect: "none",
+                  transition:
+                    "transform 0.15s ease, background-color 0.2s ease, box-shadow 0.15s ease",
+                  "&:hover": {
+                    background: "#FFF9EA",
+                    boxShadow: "0 2px 8px rgba(219, 165, 53, 0.25)",
+                  },
+                  "&:active": {
+                    transform: "scale(0.95)",
+                    background: "#FFF3D9",
+                  },
+                }}
+              >
+                Смотреть программу
+              </Box>
+            </a>
+            <a href="#help">
+              <Box
+                sx={{
+                  width: "340px",
+                  paddingY: "14px",
+                  borderRadius: "100px",
+                  background: "#DBA535",
+                  color: "#FFFFFF",
+                  fontFamily: "Montserrat",
+                  fontSize: "12px",
+                  lineHeight: "14px",
+                  fontWeight: "700",
+                  textAlign: "center",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginX: "auto",
+                  marginTop: "6px",
+                  cursor: "pointer",
+                  userSelect: "none",
+                  transition:
+                    "transform 0.15s ease, background-color 0.2s ease, box-shadow 0.15s ease",
+                  "&:hover": {
+                    background: "#C9942E",
+                    boxShadow: "0 2px 8px rgba(219, 165, 53, 0.35)",
+                  },
+                  "&:active": {
+                    transform: "scale(0.95)",
+                    background: "#B8862A",
+                  },
+                }}
+              >
+                Помочь прямо сейчас
+              </Box>
+            </a>
           </Box>
           <Box>
             <Box
@@ -979,6 +1026,7 @@ const Home = () => {
           zIndex: 1,
           marginTop: "20px",
         }}
+        id="program"
       >
         <img src="/images/home/map.png" alt="map" width="100%" height="auto" />
       </Box>
@@ -1214,28 +1262,46 @@ const Home = () => {
               />
             </Box>
           ))}
-          <Box
-            sx={{
-              width: "340px",
-              paddingY: "14px",
-              borderRadius: "100px",
-              background: "#DBA535",
-              color: "#FFF",
-              fontFamily: "Montserrat",
-              fontSize: "12px",
-              lineHeight: "14px",
-              fontWeight: "700",
-              textAlign: "center",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginX: "auto",
-              marginTop: "20px",
-              textTransform: "uppercase",
-            }}
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfkN4N51uf7hC_07yjg0ykF4zpIz8_GeW9ntEaHIzxo5LUB9A/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Регистрация на мастер-классы
-          </Box>
+            <Box
+              sx={{
+                width: "340px",
+                paddingY: "14px",
+                borderRadius: "100px",
+                background: "#DBA535",
+                color: "#FFF",
+                fontFamily: "Montserrat",
+                fontSize: "12px",
+                lineHeight: "14px",
+                fontWeight: "700",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginX: "auto",
+                marginTop: "20px",
+                textTransform: "uppercase",
+                cursor: "pointer",
+                userSelect: "none",
+                transition:
+                  "transform 0.15s ease, background-color 0.2s ease, box-shadow 0.15s ease",
+                "&:hover": {
+                  background: "#C9942E",
+                  boxShadow: "0 2px 8px rgba(219, 165, 53, 0.35)",
+                },
+                "&:active": {
+                  transform: "scale(0.95)",
+                  background: "#B8862A",
+                },
+              }}
+            >
+              Регистрация на мастер-классы
+            </Box>
+          </a>
           <Typography
             sx={{
               color: "#0B0B0B",
@@ -1310,28 +1376,42 @@ const Home = () => {
             buttonColor="#111111"
           />
         </Box>
-        <Box
-          sx={{
-            width: "340px",
-            paddingY: "14px",
-            borderRadius: "100px",
-            background: "#DBA535",
-            color: "#FFF",
-            fontFamily: "Montserrat",
-            fontSize: "12px",
-            lineHeight: "14px",
-            fontWeight: "700",
-            textAlign: "center",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginX: "auto",
-            marginTop: "10px",
-            textTransform: "uppercase",
-          }}
-        >
-          Посмотреть лоты аукциона
-        </Box>
+        <Link to="/auction">
+          <Box
+            sx={{
+              width: "340px",
+              paddingY: "14px",
+              borderRadius: "100px",
+              background: "#DBA535",
+              color: "#FFF",
+              fontFamily: "Montserrat",
+              fontSize: "12px",
+              lineHeight: "14px",
+              fontWeight: "700",
+              textAlign: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginX: "auto",
+              marginTop: "10px",
+              textTransform: "uppercase",
+              cursor: "pointer",
+              userSelect: "none",
+              transition:
+                "transform 0.15s ease, background-color 0.2s ease, box-shadow 0.15s ease",
+              "&:hover": {
+                background: "#C9942E",
+                boxShadow: "0 2px 8px rgba(219, 165, 53, 0.35)",
+              },
+              "&:active": {
+                transform: "scale(0.95)",
+                background: "#B8862A",
+              },
+            }}
+          >
+            Посмотреть лоты аукциона
+          </Box>
+        </Link>
         <Box sx={{ marginTop: "10px" }}>
           {info.activity2.map((activity, index) => (
             <Box sx={{ marginTop: index !== 0 ? "10px" : 0 }}>
@@ -1405,7 +1485,7 @@ const Home = () => {
               }}
             >
               Наша главная цель — показать, что делать добро можно легко,
-              красиво и с удовольствием
+              красиво <br />и с удовольствием
             </Typography>
           </Box>
           <Box>
@@ -2003,7 +2083,8 @@ const Home = () => {
               maxWidth: "176px",
             }}
           >
-            Все начиналось с обычного волонтерства
+            Все начиналось
+            <br />с обычного волонтерства
           </Typography>
           <img
             src="images/home/pet_arrow.png"
@@ -2027,7 +2108,7 @@ const Home = () => {
             Постепенно команда брала на себя все больше ответственности, а
             последние 4 года{" "}
             <span>полностью опекает пункт содержания животных</span> и работает
-            с ним по договору с ЖКХ
+            <br />с ним по договору с ЖКХ
           </Typography>
         </Box>
         <Typography
@@ -2596,6 +2677,7 @@ const Home = () => {
             width: "340px",
             marginX: "auto",
           }}
+          id="help"
         >
           <Typography
             sx={{
@@ -2807,9 +2889,22 @@ const Home = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  textTransform: "uppercase",
+                  cursor: "pointer",
+                  userSelect: "none",
+                  transition:
+                    "transform 0.15s ease, background-color 0.2s ease, box-shadow 0.15s ease",
+                  "&:hover": {
+                    background: "#FFE585",
+                  },
+                  "&:active": {
+                    transform: "scale(0.92)",
+                    background: "#FFE070",
+                  },
                 }}
+                onClick={handleCopy}
               >
-                СКОПИРОВАТЬ
+                {copied ? "Скопировано" : "Скопировать"}
               </Box>
             </Box>
             <Typography
