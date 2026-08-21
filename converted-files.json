@@ -1,0 +1,282 @@
+[
+  {
+    "from": "public/images/home/activity/flags.png",
+    "to": "public/images/home/activity/flags.webp"
+  },
+  {
+    "from": "public/images/home/activity/magic.png",
+    "to": "public/images/home/activity/magic.webp"
+  },
+  {
+    "from": "public/images/home/activity/stars.png",
+    "to": "public/images/home/activity/stars.webp"
+  },
+  {
+    "from": "public/images/home/activity/taro.png",
+    "to": "public/images/home/activity/taro.webp"
+  },
+  {
+    "from": "public/images/home/big_paper.png",
+    "to": "public/images/home/big_paper.webp"
+  },
+  {
+    "from": "public/images/home/book.png",
+    "to": "public/images/home/book.webp"
+  },
+  {
+    "from": "public/images/home/book2.png",
+    "to": "public/images/home/book2.webp"
+  },
+  {
+    "from": "public/images/home/book3.png",
+    "to": "public/images/home/book3.webp"
+  },
+  {
+    "from": "public/images/home/book_circle.png",
+    "to": "public/images/home/book_circle.webp"
+  },
+  {
+    "from": "public/images/home/calendar.png",
+    "to": "public/images/home/calendar.webp"
+  },
+  {
+    "from": "public/images/home/calendar2.png",
+    "to": "public/images/home/calendar2.webp"
+  },
+  {
+    "from": "public/images/home/courusel1/1.png",
+    "to": "public/images/home/courusel1/1.webp"
+  },
+  {
+    "from": "public/images/home/courusel1/2.png",
+    "to": "public/images/home/courusel1/2.webp"
+  },
+  {
+    "from": "public/images/home/courusel1/3.png",
+    "to": "public/images/home/courusel1/3.webp"
+  },
+  {
+    "from": "public/images/home/courusel1/4.png",
+    "to": "public/images/home/courusel1/4.webp"
+  },
+  {
+    "from": "public/images/home/courusel1/5.png",
+    "to": "public/images/home/courusel1/5.webp"
+  },
+  {
+    "from": "public/images/home/courusel2/1.png",
+    "to": "public/images/home/courusel2/1.webp"
+  },
+  {
+    "from": "public/images/home/courusel2/2.png",
+    "to": "public/images/home/courusel2/2.webp"
+  },
+  {
+    "from": "public/images/home/courusel2/3.png",
+    "to": "public/images/home/courusel2/3.webp"
+  },
+  {
+    "from": "public/images/home/courusel2/4.png",
+    "to": "public/images/home/courusel2/4.webp"
+  },
+  {
+    "from": "public/images/home/courusel2/5.png",
+    "to": "public/images/home/courusel2/5.webp"
+  },
+  {
+    "from": "public/images/home/desktop/logo.png",
+    "to": "public/images/home/desktop/logo.webp"
+  },
+  {
+    "from": "public/images/home/desktop/murziki.png",
+    "to": "public/images/home/desktop/murziki.webp"
+  },
+  {
+    "from": "public/images/home/desktop/qr.png",
+    "to": "public/images/home/desktop/qr.webp"
+  },
+  {
+    "from": "public/images/home/envelope.png",
+    "to": "public/images/home/envelope.webp"
+  },
+  {
+    "from": "public/images/home/fest_paper.png",
+    "to": "public/images/home/fest_paper.webp"
+  },
+  {
+    "from": "public/images/home/flowLeft.png",
+    "to": "public/images/home/flowLeft.webp"
+  },
+  {
+    "from": "public/images/home/flowRight.png",
+    "to": "public/images/home/flowRight.webp"
+  },
+  {
+    "from": "public/images/home/footer_paper.png",
+    "to": "public/images/home/footer_paper.webp"
+  },
+  {
+    "from": "public/images/home/footer_paperpng.png",
+    "to": "public/images/home/footer_paperpng.webp"
+  },
+  {
+    "from": "public/images/home/green_end.png",
+    "to": "public/images/home/green_end.webp"
+  },
+  {
+    "from": "public/images/home/green_start.png",
+    "to": "public/images/home/green_start.webp"
+  },
+  {
+    "from": "public/images/home/hero.png",
+    "to": "public/images/home/hero.webp"
+  },
+  {
+    "from": "public/images/home/hero_back.png",
+    "to": "public/images/home/hero_back.webp"
+  },
+  {
+    "from": "public/images/home/hero_desc.png",
+    "to": "public/images/home/hero_desc.webp"
+  },
+  {
+    "from": "public/images/home/hero_end.png",
+    "to": "public/images/home/hero_end.webp"
+  },
+  {
+    "from": "public/images/home/hero_headline.png",
+    "to": "public/images/home/hero_headline.webp"
+  },
+  {
+    "from": "public/images/home/image 293.png",
+    "to": "public/images/home/image 293.webp"
+  },
+  {
+    "from": "public/images/home/inst.png",
+    "to": "public/images/home/inst.webp"
+  },
+  {
+    "from": "public/images/home/logo.png",
+    "to": "public/images/home/logo.webp"
+  },
+  {
+    "from": "public/images/home/map.png",
+    "to": "public/images/home/map.webp"
+  },
+  {
+    "from": "public/images/home/murziki.png",
+    "to": "public/images/home/murziki.webp"
+  },
+  {
+    "from": "public/images/home/paper.png",
+    "to": "public/images/home/paper.webp"
+  },
+  {
+    "from": "public/images/home/paws/1.png",
+    "to": "public/images/home/paws/1.webp"
+  },
+  {
+    "from": "public/images/home/paws/2.png",
+    "to": "public/images/home/paws/2.webp"
+  },
+  {
+    "from": "public/images/home/paws/3.png",
+    "to": "public/images/home/paws/3.webp"
+  },
+  {
+    "from": "public/images/home/paws/4.png",
+    "to": "public/images/home/paws/4.webp"
+  },
+  {
+    "from": "public/images/home/paws/5.png",
+    "to": "public/images/home/paws/5.webp"
+  },
+  {
+    "from": "public/images/home/paws_paper.png",
+    "to": "public/images/home/paws_paper.webp"
+  },
+  {
+    "from": "public/images/home/pay_end.png",
+    "to": "public/images/home/pay_end.webp"
+  },
+  {
+    "from": "public/images/home/pay_start.png",
+    "to": "public/images/home/pay_start.webp"
+  },
+  {
+    "from": "public/images/home/pet_arrow.png",
+    "to": "public/images/home/pet_arrow.webp"
+  },
+  {
+    "from": "public/images/home/pet_paper.png",
+    "to": "public/images/home/pet_paper.webp"
+  },
+  {
+    "from": "public/images/home/pets/1.png",
+    "to": "public/images/home/pets/1.webp"
+  },
+  {
+    "from": "public/images/home/pets/2.png",
+    "to": "public/images/home/pets/2.webp"
+  },
+  {
+    "from": "public/images/home/pets/3.png",
+    "to": "public/images/home/pets/3.webp"
+  },
+  {
+    "from": "public/images/home/pets/4.png",
+    "to": "public/images/home/pets/4.webp"
+  },
+  {
+    "from": "public/images/home/pets/5.png",
+    "to": "public/images/home/pets/5.webp"
+  },
+  {
+    "from": "public/images/home/pets/6.png",
+    "to": "public/images/home/pets/6.webp"
+  },
+  {
+    "from": "public/images/home/pets/7.png",
+    "to": "public/images/home/pets/7.webp"
+  },
+  {
+    "from": "public/images/home/pets/8.png",
+    "to": "public/images/home/pets/8.webp"
+  },
+  {
+    "from": "public/images/home/place.png",
+    "to": "public/images/home/place.webp"
+  },
+  {
+    "from": "public/images/home/price_back.png",
+    "to": "public/images/home/price_back.webp"
+  },
+  {
+    "from": "public/images/home/scene_back.png",
+    "to": "public/images/home/scene_back.webp"
+  },
+  {
+    "from": "public/images/home/scene_clip.png",
+    "to": "public/images/home/scene_clip.webp"
+  },
+  {
+    "from": "public/images/home/scene_star.png",
+    "to": "public/images/home/scene_star.webp"
+  },
+  {
+    "from": "public/images/home/star_map.png",
+    "to": "public/images/home/star_map.webp"
+  },
+  {
+    "from": "public/images/home/star_pay.png",
+    "to": "public/images/home/star_pay.webp"
+  },
+  {
+    "from": "public/images/home/threads.png",
+    "to": "public/images/home/threads.webp"
+  },
+  {
+    "from": "public/images/home/we_stars.png",
+    "to": "public/images/home/we_stars.webp"
+  }
+]

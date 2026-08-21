@@ -91,7 +91,7 @@ export function EventCard({
           {event.price && (
             <Box
               sx={{
-                backgroundImage: "url(/images/home/price_back.png)",
+                backgroundImage: "url(/images/home/price_back.webp)",
                 backgroundRepeat: "round",
                 backgroundSize: "cover",
                 height: "28px",
@@ -292,7 +292,7 @@ export function ImageCarousel({ folder, isRight }) {
           <Box
             key={i}
             component="img"
-            src={`/images/home/${folder}/${image}.png`}
+            src={`/images/home/${folder}/${image}.webp`}
             sx={{
               height: 200,
               width: "auto",
@@ -436,7 +436,7 @@ const Home = () => {
         description:
           "Сыграйте партию с друзьями или новым соперником и проверьте, кому сегодня улыбнётся удача. Подходите в любое время работы зоны.",
         image: {
-          src: "/images/home/activity/magic.png",
+          src: "/images/home/activity/magic.webp",
           size: { width: "97px", height: "164px" },
           position: {
             right: 0,
@@ -451,7 +451,7 @@ const Home = () => {
         description:
           "Познакомьтесь со специалистами и задайте вопросы о волосах и коже головы. Получите полезные рекомендации по уходу и узнайте больше о здоровье волос.",
         image: {
-          src: "/images/home/activity/flags.png",
+          src: "/images/home/activity/flags.webp",
           size: { width: "102px", height: "82px" },
           position: {
             right: 0,
@@ -466,7 +466,7 @@ const Home = () => {
         description:
           "Добавьте немного волшебства в свой образ! Выберите сказочного героя, животное или любой другой образ — и превратитесь в него с помощью красок.",
         image: {
-          src: "/images/home/activity/stars.png",
+          src: "/images/home/activity/stars.webp",
           size: { width: "89px", height: "125px" },
           position: {
             right: 0,
@@ -488,7 +488,7 @@ const Home = () => {
         description:
           "Загляните в мир символов и попробуйте посмотреть на волнующие вас вопросы под другим углом. Расклад может подсказать неожиданный взгляд на привычную ситуацию.",
         image: {
-          src: "/images/home/activity/taro.png",
+          src: "/images/home/activity/taro.webp",
           size: { width: "101px", height: "115px" },
           position: {
             right: "22px",
@@ -627,7 +627,7 @@ const Home = () => {
       <Box
         sx={{
           // height: "1080px",
-          backgroundImage: "url(/images/home/hero_back.png)",
+          backgroundImage: "url(/images/home/hero_back.webp)",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           maxHeight: "979px",
@@ -662,13 +662,13 @@ const Home = () => {
                 transform: "translate(-50%)",
               }}
             >
-              <img src={"/images/home/hero_headline.png"} alt="headline" />
+              <img src={"/images/home/hero_headline.webp"} alt="headline" />
             </Box>
           </Box>
           <Box sx={{ paddingX: "42px", marginTop: "26px" }}>
             <Box
               sx={{
-                background: "url(/images/home/hero_desc.png)",
+                background: "url(/images/home/hero_desc.webp)",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 paddingX: "20px",
@@ -717,7 +717,7 @@ const Home = () => {
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
-              <img src={"/images/home/calendar.png"} alt="calendar" />
+              <img src={"/images/home/calendar.webp"} alt="calendar" />
               <Box>
                 <Typography
                   sx={{
@@ -747,7 +747,7 @@ const Home = () => {
               </Box>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
-              <img src={"/images/home/place.png"} alt="calendar" />
+              <img src={"/images/home/place.webp"} alt="calendar" />
               <Box>
                 <Typography
                   sx={{
@@ -860,7 +860,7 @@ const Home = () => {
                 sx={{
                   width: "95px",
                   height: "28px",
-                  background: "url(/images/home/paper.png)",
+                  background: "url(/images/home/paper.webp)",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   fontFamily: "Montserrat",
@@ -889,7 +889,7 @@ const Home = () => {
                 sx={{
                   width: "81px",
                   height: "28px",
-                  background: "url(/images/home/paper.png)",
+                  background: "url(/images/home/paper.webp)",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   fontFamily: "Montserrat",
@@ -918,7 +918,7 @@ const Home = () => {
                 sx={{
                   width: "97px",
                   height: "28px",
-                  background: "url(/images/home/paper.png)",
+                  background: "url(/images/home/paper.webp)",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   fontFamily: "Montserrat",
@@ -947,7 +947,7 @@ const Home = () => {
                 sx={{
                   width: "106px",
                   height: "28px",
-                  background: "url(/images/home/paper.png)",
+                  background: "url(/images/home/paper.webp)",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   fontFamily: "Montserrat",
@@ -977,7 +977,7 @@ const Home = () => {
               sx={{
                 width: "294px",
                 height: "58px",
-                background: "url(/images/home/big_paper.png)",
+                background: "url(/images/home/big_paper.webp)",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 fontFamily: "Montserrat",
@@ -998,7 +998,7 @@ const Home = () => {
         </Box>
         <Box
           sx={{
-            backgroundImage: "url(/images/home/hero_end.png)",
+            backgroundImage: "url(/images/home/hero_end.webp)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: "100%",
@@ -1031,7 +1031,7 @@ const Home = () => {
         }}
         id="program"
       >
-        <img src="/images/home/map.png" alt="map" width="100%" height="auto" />
+        <img src="/images/home/map.webp" alt="map" width="100%" height="auto" />
       </Box>
       <Box
         sx={{
@@ -1057,7 +1057,7 @@ const Home = () => {
         </Typography>
         <Box
           sx={{
-            backgroundImage: "url(/images/home/scene_back.png)",
+            backgroundImage: "url(/images/home/scene_back.webp)",
             backgroundRepeat: "round",
             backgroundSize: "cover",
             paddingLeft: "30px",
@@ -1070,7 +1070,7 @@ const Home = () => {
           <Box
             sx={{
               position: "absolute",
-              backgroundImage: "url(/images/home/scene_clip.png)",
+              backgroundImage: "url(/images/home/scene_clip.webp)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "150px",
@@ -1129,7 +1129,7 @@ const Home = () => {
           <Box
             sx={{
               position: "absolute",
-              backgroundImage: "url(/images/home/scene_star.png)",
+              backgroundImage: "url(/images/home/scene_star.webp)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "144px",
@@ -1141,7 +1141,7 @@ const Home = () => {
         </Box>
         <Box
           sx={{
-            backgroundImage: "url(/images/home/scene_back.png)",
+            backgroundImage: "url(/images/home/scene_back.webp)",
             backgroundRepeat: "round",
             backgroundSize: "cover",
             paddingRight: "30px",
@@ -1154,7 +1154,7 @@ const Home = () => {
           <Box
             sx={{
               position: "absolute",
-              backgroundImage: "url(/images/home/scene_clip.png)",
+              backgroundImage: "url(/images/home/scene_clip.webp)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "150px",
@@ -1214,7 +1214,7 @@ const Home = () => {
           <Box
             sx={{
               position: "absolute",
-              backgroundImage: "url(/images/home/scene_star.png)",
+              backgroundImage: "url(/images/home/scene_star.webp)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               width: "144px",
@@ -1233,7 +1233,7 @@ const Home = () => {
       </Box>
       <Box
         sx={{
-          background: "url(/images/home/green_start.png)",
+          background: "url(/images/home/green_start.webp)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",
@@ -1335,7 +1335,7 @@ const Home = () => {
       </Box>
       <Box
         sx={{
-          background: "url(/images/home/green_end.png)",
+          background: "url(/images/home/green_end.webp)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",
@@ -1433,7 +1433,7 @@ const Home = () => {
       {/* О нас */}
       <Box sx={{ marginTop: "60px" }}>
         <img
-          src="/images/home/we_stars.png"
+          src="/images/home/we_stars.webp"
           alt="stars"
           width="100%"
           height="auto"
@@ -1493,7 +1493,7 @@ const Home = () => {
           </Box>
           <Box>
             <img
-              src="images/home/logo.png"
+              src="images/home/logo.webp"
               alt="murziki"
               width="152px"
               height="158px"
@@ -1521,7 +1521,7 @@ const Home = () => {
         <Box sx={{ marginTop: "15px" }}>
           <Box
             sx={{
-              background: "url(/images/home/paws_paper.png)",
+              background: "url(/images/home/paws_paper.webp)",
               filter: "drop-shadow(-3px 3px 4.7px rgba(0, 0, 0, 0.1))",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
@@ -1562,7 +1562,7 @@ const Home = () => {
           <Box sx={{ display: "flex", justifyContent: "end", marginY: "10px" }}>
             <Box
               sx={{
-                background: "url(/images/home/paws_paper.png)",
+                background: "url(/images/home/paws_paper.webp)",
                 filter: "drop-shadow(-3px 3px 4.7px rgba(0, 0, 0, 0.1))",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
@@ -1618,7 +1618,7 @@ const Home = () => {
           </Box>
           <Box
             sx={{
-              background: "url(/images/home/paws_paper.png)",
+              background: "url(/images/home/paws_paper.webp)",
               filter: "drop-shadow(-3px 3px 4.7px rgba(0, 0, 0, 0.1))",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
@@ -1720,7 +1720,7 @@ const Home = () => {
       <Box sx={{ paddingRight: "2vw" }}>
         <Box
           sx={{
-            background: "url(/images/home/book3.png)",
+            background: "url(/images/home/book3.webp)",
             backgroundPosition: "right",
             backgroundRepeat: "no-repeat",
             display: "flex",
@@ -2060,7 +2060,7 @@ const Home = () => {
           </Box>
           <Box sx={{ marginTop: "54px" }}>
             <img
-              src="images/home/murziki.png"
+              src="images/home/murziki.webp"
               alt="murziki"
               width="142px"
               height="152px"
@@ -2090,7 +2090,7 @@ const Home = () => {
             <br />с обычного волонтерства
           </Typography>
           <img
-            src="images/home/pet_arrow.png"
+            src="images/home/pet_arrow.webp"
             alt="arrow"
             width="208px"
             height="59px"
@@ -2138,7 +2138,7 @@ const Home = () => {
         >
           <Box
             sx={{
-              background: "url(/images/home/paper.png)",
+              background: "url(/images/home/paper.webp)",
               filter: "drop-shadow(3px 3px 2.8px rgba(0, 0, 0, 0.1))",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
@@ -2158,7 +2158,7 @@ const Home = () => {
           </Box>
           <Box
             sx={{
-              background: "url(/images/home/paper.png)",
+              background: "url(/images/home/paper.webp)",
               filter: "drop-shadow(3px 3px 2.8px rgba(0, 0, 0, 0.1))",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
@@ -2219,7 +2219,7 @@ const Home = () => {
               <Box
                 key={i}
                 component="img"
-                src={`/images/home/pets/${pet.image}.png`}
+                src={`/images/home/pets/${pet.image}.webp`}
                 sx={{
                   height: "158px",
                   width: "auto",
@@ -2307,7 +2307,7 @@ const Home = () => {
         </Typography>
         <Box
           sx={{
-            background: "url(/images/home/fest_paper.png)",
+            background: "url(/images/home/fest_paper.webp)",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             width: "340px",
@@ -2362,7 +2362,7 @@ const Home = () => {
           <Box sx={{ display: "flex", justifyContent: "center", gap: "24px" }}>
             <Box
               sx={{
-                background: "url(/images/home/pet_paper.png)",
+                background: "url(/images/home/pet_paper.webp)",
                 backgroundRepeat: "round",
                 backgroundSize: "cover",
                 width: "86px",
@@ -2412,7 +2412,7 @@ const Home = () => {
           >
             <Box
               sx={{
-                background: "url(/images/home/pet_paper.png)",
+                background: "url(/images/home/pet_paper.webp)",
                 backgroundRepeat: "round",
                 backgroundSize: "cover",
                 width: "136px",
@@ -2453,7 +2453,7 @@ const Home = () => {
             </Box>
             <Box
               sx={{
-                background: "url(/images/home/pet_paper.png)",
+                background: "url(/images/home/pet_paper.webp)",
                 backgroundRepeat: "round",
                 backgroundSize: "cover",
                 width: "133px",
@@ -2503,7 +2503,7 @@ const Home = () => {
           >
             <Box
               sx={{
-                background: "url(/images/home/pet_paper.png)",
+                background: "url(/images/home/pet_paper.webp)",
                 backgroundRepeat: "round",
                 backgroundSize: "cover",
                 width: "155px",
@@ -2553,7 +2553,7 @@ const Home = () => {
           >
             <Box
               sx={{
-                background: "url(/images/home/pet_paper.png)",
+                background: "url(/images/home/pet_paper.webp)",
                 backgroundRepeat: "round",
                 backgroundSize: "cover",
                 width: "155px",
@@ -2594,7 +2594,7 @@ const Home = () => {
             </Box>
             <Box
               sx={{
-                background: "url(/images/home/pet_paper.png)",
+                background: "url(/images/home/pet_paper.webp)",
                 backgroundRepeat: "round",
                 backgroundSize: "cover",
                 width: "149px",
@@ -2637,7 +2637,7 @@ const Home = () => {
         </Box>
         <Box sx={{ position: "relative" }}>
           <Box sx={{ position: "absolute", top: "-52px", right: "4px" }}>
-            <img src="images/home/flowRight.png" alt="flower" />
+            <img src="images/home/flowRight.webp" alt="flower" />
           </Box>
           <Typography
             sx={{
@@ -2654,14 +2654,14 @@ const Home = () => {
             Так обычный день на фестивале превращается во что-то большее
           </Typography>
           <Box sx={{ position: "absolute", bottom: "-52px", left: "4px" }}>
-            <img src="images/home/flowLeft.png" alt="flower" />
+            <img src="images/home/flowLeft.webp" alt="flower" />
           </Box>
         </Box>
       </Box>
 
       <Box
         sx={{
-          background: "url(/images/home/pay_start.png)",
+          background: "url(/images/home/pay_start.webp)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",
@@ -2732,7 +2732,7 @@ const Home = () => {
             }}
           >
             <Box sx={{ position: "absolute", right: "10px", top: "-30px" }}>
-              <img src="/images/home/star_pay.png" alt="star" />
+              <img src="/images/home/star_pay.webp" alt="star" />
             </Box>
             <Box sx={{ position: "absolute", left: "10px", top: "8px" }}>
               <svg
@@ -2929,7 +2929,7 @@ const Home = () => {
       </Box>
       <Box
         sx={{
-          background: "url(/images/home/pay_end.png)",
+          background: "url(/images/home/pay_end.webp)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           width: "100%",
@@ -2937,7 +2937,7 @@ const Home = () => {
         }}
       ></Box>
       <Box sx={{ width: "340px", marginX: "auto" }}>
-        <Box>
+        <Box sx={{ position: "relative" }}>
           <Typography
             sx={{
               color: "#0B0B0B",
@@ -2951,10 +2951,38 @@ const Home = () => {
           >
             Давайте вместе создадим немного волшебства
           </Typography>
+          <Box sx={{ position: "absolute", top: "24px", left: "8px" }}>
+            <svg
+              width="13"
+              height="17"
+              viewBox="0 0 13 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                fill="#E1AD41"
+              />
+            </svg>
+          </Box>
+          <Box sx={{ position: "absolute", bottom: "-4px", right: "20px" }}>
+            <svg
+              width="13"
+              height="17"
+              viewBox="0 0 13 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.02442 17C6.05755 16.2269 6.03812 15.4528 5.9488 14.6794C5.73497 11.6636 3.6017 8.04146 0.0244152 8.12295L0.0488942 8.87625C4.42489 8.59632 6.7223 3.81441 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.52441 -1.3391e-06 5.52441 -1.3391e-06 5.52441 -1.3391e-06C5.32652 3.81441 7.62394 8.59632 11.9999 8.87625L12.0244 8.12296C8.44713 8.04146 6.31386 11.6636 6.10003 14.6794C6.01071 15.4528 5.99128 16.2269 6.02442 17C6.05791 16.2269 6.14085 15.4617 6.28779 14.7085C6.76323 11.7115 8.93466 8.65342 12.0244 8.87705L12.0489 8.12375C8.30898 7.70293 6.37344 3.62801 6.52441 -1.42652e-06C6.52441 -1.42652e-06 6.52441 -1.42652e-06 6.52441 -1.42652e-06L5.52441 -1.3391e-06C5.67539 3.628 3.73985 7.70293 -6.46722e-05 8.12375L0.0244153 8.87704C3.11417 8.65341 5.2856 11.7115 5.76104 14.7085C5.90798 15.4617 5.99092 16.2269 6.02442 17ZM6.02442 17"
+                fill="#E1AD41"
+              />
+            </svg>
+          </Box>
         </Box>
         <Box
           sx={{
-            background: "url(/images/home/footer_paper.png)",
+            background: "url(/images/home/footer_paper.webp)",
             backgroundRepeat: "round",
             backgroundSize: "cover",
             filter: "drop-shadow(-3px 3px 4.7px rgba(0, 0, 0, 0.1))",
@@ -3006,7 +3034,7 @@ const Home = () => {
         >
           <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
             <Box>
-              <img src="/images/home/calendar2.png" alt="calendar" />
+              <img src="/images/home/calendar2.webp" alt="calendar" />
             </Box>
             <Box>
               <Typography
@@ -3038,7 +3066,7 @@ const Home = () => {
           <Box sx={{ display: "flex", gap: "40px", alignItems: "center" }}>
             <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
               <Box>
-                <img src="/images/home/threads.png" alt="threads" />
+                <img src="/images/home/threads.webp" alt="threads" />
               </Box>
               <Box>
                 <Typography
@@ -3070,7 +3098,7 @@ const Home = () => {
 
             <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
               <Box>
-                <img src="/images/home/inst.png" alt="inst" />
+                <img src="/images/home/inst.webp" alt="inst" />
               </Box>
               <Box>
                 <Typography
@@ -3104,7 +3132,7 @@ const Home = () => {
       </Box>
       <Box
         sx={{
-          backgroundImage: "url(/images/home/envelope.png)",
+          backgroundImage: "url(/images/home/envelope.webp)",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           width: "100%",
@@ -3189,13 +3217,13 @@ const Home = () => {
     <Box sx={{ paddingTop: "50px" }}>
       <Box sx={{ display: "flex", gap: "30px", justifyContent: "center" }}>
         <img
-          src="/images/home/desktop/logo.png"
+          src="/images/home/desktop/logo.webp"
           alt="logo"
           width="auto"
           height="120px"
         ></img>
         <img
-          src="/images/home/desktop/murziki.png"
+          src="/images/home/desktop/murziki.webp"
           alt="logo"
           width="auto"
           height="120px"
@@ -3339,7 +3367,7 @@ const Home = () => {
           }}
         >
           <img
-            src="/images/home/desktop/qr.png"
+            src="/images/home/desktop/qr.webp"
             alt="qr"
             width="291px"
             height="auto"
@@ -3355,7 +3383,7 @@ const Home = () => {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <img src={"/images/home/calendar.png"} alt="calendar" />
+          <img src={"/images/home/calendar.webp"} alt="calendar" />
           <Box>
             <Typography
               sx={{
@@ -3385,7 +3413,7 @@ const Home = () => {
           </Box>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <img src={"/images/home/place.png"} alt="calendar" />
+          <img src={"/images/home/place.webp"} alt="calendar" />
           <Box>
             <Typography
               sx={{
@@ -3416,7 +3444,7 @@ const Home = () => {
         </Box>
         <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
           <Box>
-            <img src="/images/home/threads.png" alt="threads" />
+            <img src="/images/home/threads.webp" alt="threads" />
           </Box>
           <Box>
             <Typography
@@ -3447,7 +3475,7 @@ const Home = () => {
         </Box>
         <Box sx={{ display: "flex", gap: "6px", alignItems: "center" }}>
           <Box>
-            <img src="/images/home/inst.png" alt="inst" />
+            <img src="/images/home/inst.webp" alt="inst" />
           </Box>
           <Box>
             <Typography
