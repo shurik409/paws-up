@@ -45,11 +45,11 @@ export const LotsInfo = [
     size: "30х30см",
     isVertic: true,
   },
-  // {
-  //   id: 7,
-  //   name: "Я звезда youtube",
-  //   img: paints[6],
-  //   size: "30х40см",
-  //   isVertic: true,
-  // },
+  {
+    id: 7,
+    name: "Ковер Hellfire Club",
+    img: paints[6],
+    size: "117х100см",
+    isVertic: true,
+  },
 ];
