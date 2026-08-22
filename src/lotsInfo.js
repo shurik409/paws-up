@@ -1,4 +1,4 @@
-const paints = Array.from({ length: 6 }, (_, i) =>
+const paints = Array.from({ length: 7 }, (_, i) =>
   require(`../src/img/lots/${i + 1}.jpeg`),
 );
 
